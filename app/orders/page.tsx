@@ -1,6 +1,6 @@
 import Ordercard from "@/components/ordercard";
 
-export default function(){
+export default function Orders(){
     return <div className="bg-gray-200 min-w-[1217px]">
     <div className="font-bold text-3xl p-5  flex justify-center items-center bg-white shadow-sm border-b-2 border-gray-300">Orders</div>
 
