@@ -2,7 +2,7 @@ import ProductCard from "@/components/productCard";
 import { Button } from "@/components/ui/button";
 
 
-export default function(){
+export default function Products(){
     return <div className="bg-gray-200">
         <div className="font-bold text-3xl p-5 flex justify-center items-center bg-white shadow-sm border-b-2 border-gray-300">Products</div>
     <div className="grid grid-cols-5 min-h-screen  ">
@@ -25,3 +25,4 @@ export default function(){
     <Button className="fixed bottom-7 right-7" size={"lg"}> Add product</Button>
     </div>
 }
+Products.displayName = 'Products';

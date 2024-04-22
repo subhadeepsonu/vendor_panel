@@ -1,6 +1,6 @@
 import FeedbackCard from "@/components/feedbackCard";
 
-export default function(){
+export default function Feedbacks(){
     return <div className="bg-gray-200 min-w-[1217px]">
         <div className="font-bold text-3xl p-5  flex justify-center items-center bg-white shadow-sm border-b-2 border-gray-300">Feedbacks</div>
     <div className="flex flex-col justify-center items-center w-[1237px] bg-gray-300 min-h-screen">
@@ -10,7 +10,7 @@ export default function(){
         <FeedbackCard name="Adithya" feedback="This dish was a revelation, challenging my taste buds with its bold flavors and unexpected combinations. It was a culinary adventure, with each bite unveiling a new layer of complexity and intrigue. The chef's creativity knew no bounds, as they fearlessly experimented with ingredients to create a truly unique dining experience. It was a feast for the senses that left me craving more."></FeedbackCard>
         <FeedbackCard name="Vamshi" feedback="From the first bite to the last, every mouthful was a burst of pure bliss. The flavors danced on my palate, leaving me craving more with each savory morsel. The chef's attention to detail was evident in every aspect of the dish, from its vibrant colors to its exquisite presentation. It was a culinary masterpiece that left me feeling both satisfied and longing for another taste"></FeedbackCard>
         <FeedbackCard name="Abijit" feedback="The dish was a symphony of flavors, each ingredient harmonizing perfectly with the next. It was as if the chef had mastered the art of culinary alchemy, transforming ordinary ingredients into a gastronomic masterpiece. The presentation was elegant yet unpretentious, inviting me to indulge in its savory delights. A truly memorable dining experience!"></FeedbackCard>
-        
     </div>
     </div>
 }
+Feedbacks.displayName = 'Feedbacks';
