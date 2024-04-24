@@ -1,11 +1,27 @@
 import ProductCard from "@/components/productCard";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { MagnifyingGlassIcon, TriangleDownIcon } from "@radix-ui/react-icons";
 
 
 export default function Products(){
-    return <div className="bg-gray-200">
-        <div className="font-bold text-3xl p-5 flex justify-center items-center bg-white shadow-sm border-b-2 border-gray-300">Products</div>
-    <div className="grid grid-cols-5 min-h-screen  ">
+    return <div className="bg-gray-100">
+        <div className=" p-5 m-5 rounded-md flex justify-between items-center bg-white shadow-sm border-b-2 border-gray-300">
+        <div className="font-semibold text-xl">Products</div>
+        <div className="flex w-1/3 ">
+        <Input type="text" placeholder="Search" className="w-full mr-2"></Input>
+        <Button className="mr-2">
+            <MagnifyingGlassIcon></MagnifyingGlassIcon>
+        </Button>
+        
+        <Button>
+            Filter
+            <TriangleDownIcon></TriangleDownIcon>
+        </Button>
+        </div>
+        </div>
+   
+    <div className="grid grid-cols-6 min-h-screen  ">
        
         <ProductCard url="https://img.freepik.com/free-photo/tasty-burger-isolated-white-background-fresh-hamburger-fastfood-with-beef-cheese_90220-1063.jpg" name="burger" price="200" />
         <ProductCard url="https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?cs=srgb&dl=pexels-chanwalrus-958545.jpg&fm=jpg" name="burger" price="200" />

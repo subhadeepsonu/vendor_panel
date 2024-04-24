@@ -1,11 +1,24 @@
 import Ordercard from "@/components/ordercard";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 export default function Orders(){
-    return <div className="bg-gray-200 min-w-[1217px]">
-    <div className="font-bold text-3xl p-5  flex justify-center items-center bg-white shadow-sm border-b-2 border-gray-300">Orders</div>
+    return <div className="bg-gray-100 min-w-[1217px]">
+    <div className=" w-[1150px] p-5  mx-5 mt-5 rounded-md flex justify-between items-center bg-white shadow-sm border-b-2 border-gray-300">
+        <div className="font-semibold text-xl">Orders</div>
+        <div className="flex w-1/3 ">
+        <Input type="text" placeholder="Search" className="w-full mr-2"></Input>
+        <Button className="mr-2">
+            <MagnifyingGlassIcon></MagnifyingGlassIcon>
+        </Button>
+        
+     
+        </div>
+        </div>
 
 <div className="flex flex-col justify-center   items-center min-h-screen ">
-<div className="bg-white rounded-sm flex w-9/12 h-16 m-5 justify-around items-center">
+<div className="bg-white rounded-sm flex w-9/12 h-16 mt-10 mb-3 justify-around items-center">
 <div>
     User
 </div>
@@ -44,4 +57,5 @@ Complete bill
 </div>
 
 </div>
+
 }

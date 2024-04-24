@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model products {
+  id         Int         @id @default(autoincrement())
+  stock      Int         @default(0)
+  price      Int
+  name       String      @default("parota")
+  imgurl     String?
+  saleprice  Int
+  isfeatured Boolean     @default(false)
+  brandid    Int
+  brand      Brand       @relation(fields: [brandid], references: [id])
+  category   category
+  productype productypes
+}
+
+enum category {
+  biryani
+  curry
+  breads
+  chinese
+}
+
+enum productypes {
+  single
+  variable
+}
+
+model Brand {
+  id         Int        @id @default(autoincrement())
+  name       String     @unique
+  isopen     Boolean    @default(false)
+  imgurl     String?
+  isfeatured Boolean    @default(false)
+  products   products[]
+}
+
+model orders {
+  orderid     Int         @id @default(autoincrement())
+  orderStatus orderStatus
+  totalamount Int
+  orderedat   DateTime
+  address     String
+}
+
+enum orderStatus {
+  cooking
+  ready
+  delivered
+}
+
+model Banner {
+  id     Int     @id @default(autoincrement())
+  imgurl String?
+  active Boolean
+}
+
+model user {
+  id       Int     @id @default(autoincrement())
+  name     String
+  email    String
+  phoneno  String
+  password String
+  imgurl   String?
+}

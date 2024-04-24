@@ -1,7 +1,7 @@
 import FeedbackCard from "@/components/feedbackCard";
 
 export default function Feedbacks(){
-    return <div className="bg-gray-200 min-w-[1217px]">
+    return <div className="bg-gray-100 min-w-[1217px]">
         <div className="font-bold text-3xl p-5  flex justify-center items-center bg-white shadow-sm border-b-2 border-gray-300">Feedbacks</div>
     <div className="flex flex-col justify-center items-center w-[1237px] bg-gray-300 min-h-screen">
         <FeedbackCard name="Subhadeep" feedback="The dish had a delightful surprise of flavors dancing on my taste buds. It was like a culinary adventure with each bite, never knowing what delicious sensation would come next. The presentation was artfully chaotic, like a masterpiece painted by a playful chef. Overall, it was a delightful culinary journey through the unexpected!"></FeedbackCard>
