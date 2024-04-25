@@ -1,13 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
- export async function GET(req:NextRequest){
+ export async function POST(req:NextRequest){
     try {
-        const {category} = await req.json()
+    
+        const data = await req.json()
+        
+        console.log(data)
         const responce = await prisma.products.findMany(
             {
                 where :{
-                    category:category
+                    category:data.category
                 }
             }
         )
@@ -15,10 +18,10 @@ const prisma = new PrismaClient()
             status:200,
             data:responce  
         })
-    } catch (error) {
+    } catch (error:any) {
         return NextResponse.json({
             status:404,
-            message:"something went wrong"
+            message:error.message
         })
     }
 }
