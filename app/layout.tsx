@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className} >
       <Sidebar></Sidebar>
-        <div className="flex justify-start min-h-screen items-startr pl-[300px] bg-gray-100 ">
+        <div className="flex justify-start min-h-screen items-startr lg:pl-[250px] pl-[100px] bg-gray-100 ">
         {children}
         </div></body>
     </html>

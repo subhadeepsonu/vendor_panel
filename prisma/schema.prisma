@@ -57,9 +57,10 @@ enum orderStatus {
 }
 
 model Banner {
-  id     Int     @id @default(autoincrement())
-  imgurl String?
-  active Boolean
+  id           Int     @id @default(autoincrement())
+  imgurl       String?
+  targetscreen String
+  active       Boolean
 }
 
 model user {

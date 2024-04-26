@@ -1,9 +1,9 @@
 import FeedbackCard from "@/components/feedbackCard";
 
 export default function Feedbacks(){
-    return <div className="bg-gray-100 min-w-[1217px]">
+    return <div className="bg-gray-100 w-full">
         <div className="font-bold text-3xl p-5  flex justify-center items-center bg-white shadow-sm border-b-2 border-gray-300">Feedbacks</div>
-    <div className="flex flex-col justify-center items-center w-[1237px] bg-gray-300 min-h-screen">
+    <div className="flex flex-col justify-center items-center w-full  min-h-screen">
         <FeedbackCard name="Subhadeep" feedback="The dish had a delightful surprise of flavors dancing on my taste buds. It was like a culinary adventure with each bite, never knowing what delicious sensation would come next. The presentation was artfully chaotic, like a masterpiece painted by a playful chef. Overall, it was a delightful culinary journey through the unexpected!"></FeedbackCard>
         <FeedbackCard name="Achyut" feedback="This dish was a culinary tour de force, a testament to the chef's expertise and creativity. It was a symphony of flavors, with each element meticulously crafted to perfection. From its tantalizing aroma to its decadent taste, every aspect of the dish was pure perfection. It was a culinary experience unlike any other, leaving me in awe of the chef's talent and skill"></FeedbackCard>
         <FeedbackCard name="Wildan" feedback="I was transported to food heaven with every bite of this divine dish. It was a celebration of flavors, with each ingredient perfectly complementing the next. The chef's skill was evident in every aspect of the meal, from its flawless presentation to its impeccable execution. It was a culinary masterpiece that left me feeling both satisfied and deeply grateful for the culinary journey"></FeedbackCard>
