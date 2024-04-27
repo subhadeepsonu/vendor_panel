@@ -3,7 +3,8 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
  export async function GET(){
     try {
-        const responce = await prisma.products.findMany()
+        const responce = await prisma.products.findMany({
+        })
         return NextResponse.json({
             status:200,
             data:responce
