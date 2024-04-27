@@ -21,13 +21,14 @@ export async function POST(req:NextRequest){
         const data = await req.json()
         const responce = await prisma.products.create({
            data:{
-            category:data.category,
-            price:data.price,
-            productype:data.productype,
-            saleprice:data.saleprice,
-            brandid:data.brandid,
-            isfeatured:false,
-            imgurl:data.imgurl
+                category:data.category,
+                price:data.price,
+                productype:data.productype,
+                saleprice:data.saleprice,
+                brandid:data.brandid,
+                isfeatured:false,
+                imgurl:data.imgurl,
+                name:data.name
            }
         })
         return NextResponse.json({
@@ -72,11 +73,11 @@ export async function PATCH(req:NextRequest){
 }
 export async function DELETE(req:NextRequest){
     try {
-    const data = await req.json()
-    const responce = await prisma.products.delete({
-        where:{
-            id:data.id
-        }
+    // const data = await req.json()
+    const responce = await prisma.products.deleteMany({
+        // where:{
+        //     id:data.id
+        // }
     })
     return NextResponse.json({
         status:200,
