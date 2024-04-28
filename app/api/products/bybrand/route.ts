@@ -4,9 +4,10 @@ const prisma = new PrismaClient()
 export async function POST(req:NextRequest){
     try {
         const data = await req.json()
+        const brandid = parseInt(data.brandid)
         const responce = await prisma.products.findMany({
             where:{
-                brandid:data.brandid
+                brandid:brandid
             }
         })
         return NextResponse.json({
