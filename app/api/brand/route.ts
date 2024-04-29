@@ -15,28 +15,27 @@ export async function GET(){
         })
     }
 }
-// export async function POST(req:NextRequest){
-//     try {
-//         const data = await req.json()
-//         const responce = await prisma.brand.create({
-//             data:{
-//                 name:data.name,
-//                 imgurl:data.imgurl,
-
-
-//             }
-//         })
-//         return NextResponse.json({
-//             status:200,
-//             data:responce
-//         })
-//     } catch (error) {
-//         NextResponse.json({
-//             status:404,
-//             message:"something went wrong"
-//         })
-//     }
-// }
+export async function POST(req:NextRequest){
+    try {
+        const data = await req.json()
+        const responce = await prisma.brand.create({
+            data:{
+                name:data.name,
+                imgurl:data.imgurl,
+                adminname:data.adminname
+            }
+        })
+        return NextResponse.json({
+            status:200,
+            data:responce
+        })
+    } catch (error) {
+        NextResponse.json({
+            status:404,
+            message:"something went wrong"
+        })
+    }
+}
 export async function PATCH(req:NextRequest){
     try {
         const data = await req.json()

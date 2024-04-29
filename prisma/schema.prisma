@@ -18,7 +18,7 @@ model products {
   brandid           Int
   brand             Brand               @relation(fields: [brandid], references: [id])
   category          category
-  nonveg            Boolean             @default(true)
+  nonveg            Boolean
   productype        productypes
   description       String?
   rating            rating[]
@@ -47,20 +47,19 @@ enum productypes {
 }
 
 model Brand {
-  id            Int        @id @default(autoincrement())
-  name          String     @unique
-  isopen        Boolean    @default(false)
-  imgurl        String?
-  isfeatured    Boolean    @default(false)
-  products      products[]
-  adminname     String
-  admin         admin      @relation(fields: [adminname], references: [username])
-  adminUsername String
+  id         Int        @id @default(autoincrement())
+  name       String     @unique
+  isopen     Boolean    @default(false)
+  imgurl     String?
+  isfeatured Boolean    @default(false)
+  products   products[]
+  adminname  String     @default("ha")
+  admin      admin      @relation(fields: [adminname], references: [username])
 }
 
 model orders {
   orderid     Int         @id @default(autoincrement())
-  orderStatus orderStatus
+  orderStatus orderStatus @default(cooking)
   totalamount Int
   orderedat   DateTime    @default(now())
   address     String
@@ -96,10 +95,12 @@ model Banner {
 model user {
   id                Int                 @id @default(autoincrement())
   name              String              @unique
-  email             String
-  phoneno           String
+  email             String              @unique
+  phoneno           String              @unique
   password          String
   imgurl            String?
+  verified          Boolean             @default(false)
+  verifytoken       String              @default(uuid())
   order             orders[]
   feedbacks         feedback[]
   rating            rating[]
@@ -110,6 +111,7 @@ model user {
 model admin {
   username String  @id @unique
   password String
+  phoneno  String
   brands   Brand[]
 }
 

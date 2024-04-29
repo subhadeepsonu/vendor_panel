@@ -1,9 +1,15 @@
+import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from '@prisma/client'
-import { NextResponse } from 'next/server'
 const prisma = new PrismaClient()
- export async function GET(){
+export async function POST(req:NextRequest){
     try {
-        const responce = await prisma.products.findMany({
+        const data = await req.json()
+        const responce = await prisma.user.findUnique({
+            where:{
+                email:data.email,
+                password:data.password,
+                
+            }
         })
         return NextResponse.json({
             status:200,

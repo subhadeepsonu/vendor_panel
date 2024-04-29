@@ -28,7 +28,10 @@ export async function POST(req:NextRequest){
                 brandid:data.brandid,
                 isfeatured:false,
                 imgurl:data.imgurl,
-                name:data.name
+                name:data.name,
+                nonveg:data.nonveg,
+                description:data.description
+
            }
         })
         return NextResponse.json({
@@ -57,6 +60,9 @@ export async function PATCH(req:NextRequest){
                 brandid:data.brandid,
                 isfeatured:data.isfeatured,
                 imgurl:data.imgurl,
+                name:data.name,
+                nonveg:data.nonveg,
+                description:data.description,
                 stock:data.stock
             }
         })
@@ -73,11 +79,11 @@ export async function PATCH(req:NextRequest){
 }
 export async function DELETE(req:NextRequest){
     try {
-    // const data = await req.json()
+    const data = await req.json()
     const responce = await prisma.products.deleteMany({
-        // where:{
-        //     id:data.id
-        // }
+        where:{
+            id:data.id
+        }
     })
     return NextResponse.json({
         status:200,
