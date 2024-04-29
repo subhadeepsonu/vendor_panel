@@ -8,17 +8,19 @@ datasource db {
 }
 
 model products {
-  id         Int         @id @default(autoincrement())
-  stock      Int         @default(0)
-  price      Int
-  name       String      @default("parota")
-  imgurl     String      @default("https://www.foodandwine.com/thmb/Wd4lBRZz3X_8qBr69UOu2m7I2iw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/classic-cheese-pizza-FT-RECIPE0422-31a2c938fc2546c9a07b7011658cfd05.jpg")
-  saleprice  Int
-  isfeatured Boolean     @default(false)
-  brandid    Int
-  brand      Brand       @relation(fields: [brandid], references: [id])
-  category   category
-  productype productypes
+  id          Int         @id @default(autoincrement())
+  stock       Int         @default(0)
+  price       Int
+  name        String
+  imgurl      String      @default("https://www.foodandwine.com/thmb/Wd4lBRZz3X_8qBr69UOu2m7I2iw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/classic-cheese-pizza-FT-RECIPE0422-31a2c938fc2546c9a07b7011658cfd05.jpg")
+  saleprice   Int
+  isfeatured  Boolean     @default(false)
+  brandid     Int
+  brand       Brand       @relation(fields: [brandid], references: [id])
+  category    category
+  productype  productypes
+  description String
+  rating      rating[]
 }
 
 enum category {
@@ -34,12 +36,15 @@ enum productypes {
 }
 
 model Brand {
-  id         Int        @id @default(autoincrement())
-  name       String     @unique
-  isopen     Boolean    @default(false)
-  imgurl     String?
-  isfeatured Boolean    @default(false)
-  products   products[]
+  id            Int        @id @default(autoincrement())
+  name          String     @unique
+  isopen        Boolean    @default(false)
+  imgurl        String?
+  isfeatured    Boolean    @default(false)
+  products      products[]
+  adminname     String
+  admin         admin      @relation(fields: [adminname], references: [username])
+  adminUsername String
 }
 
 model orders {
@@ -48,6 +53,20 @@ model orders {
   totalamount Int
   orderedat   DateTime
   address     String
+  feedbackid  Int         @unique
+  feedback    feedback?
+  user        user        @relation(fields: [userId], references: [id])
+  userId      Int
+}
+
+model feedback {
+  id      Int    @id @default(autoincrement())
+  review  String
+  userid  Int
+  rating  Int
+  orderid Int    @unique
+  order   orders @relation(fields: [orderid], references: [orderid])
+  user    user   @relation(fields: [userid], references: [id])
 }
 
 enum orderStatus {
@@ -64,10 +83,28 @@ model Banner {
 }
 
 model user {
-  id       Int     @id @default(autoincrement())
-  name     String
-  email    String
-  phoneno  String
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  email     String
+  phoneno   String
+  password  String
+  imgurl    String?
+  order     orders[]
+  feedbacks feedback[]
+  rating    rating[]
+}
+
+model admin {
+  username String  @id @unique
   password String
-  imgurl   String?
+  brands   Brand[]
+}
+
+model rating {
+  id       Int      @id @default(autoincrement())
+  userid   Int
+  desp     String
+  prductid Int
+  user     user     @relation(fields: [userid], references: [id])
+  product  products @relation(fields: [prductid], references: [id])
 }
