@@ -1,4 +1,4 @@
-import { FaTruckLoading } from "react-icons/fa";
+
 
 export default function(){
     return <div className="flex justify-center bg-white items-center h-screen w-full text-xl">
