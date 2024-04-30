@@ -1,12 +1,11 @@
     "use client"
     
     import { Button } from "@/components/ui/button";
-    import { Input } from "@/components/ui/input";
-    import { MagnifyingGlassIcon, TriangleDownIcon } from "@radix-ui/react-icons";
     import { useEffect, useState } from "react";
-    import axios, {Axios} from "axios"
+    import axios from "axios"
 import Link from "next/link";
 import ProductCard from "@/components/productcard";
+
 
     export  default  function Products(){
         const [products,setproducts] = useState<any>([])
