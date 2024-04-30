@@ -1,39 +1,25 @@
 import { Button } from "./ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
-import { ArrowRightIcon, ListBulletIcon } from "@radix-ui/react-icons";
-export default function Ordercard(props:any){
-        return <div className="bg-white w-9/12 flex">
-        <div className="bg-white rounded-sm flex w-full p-2 h-16 border-b-2 border-gray-300 justify-around items-center">
-            <div className="flex justify-center items-center w-1/6 ">
-                <div className="">
-       
-            </div>
-            <div >
-                {props.name}
-            </div>
-            </div>
-                <div className="w-1/6 flex justify-center items-center">  
-                {props.date}
+export default function Ordercard(){
+    return <div className="h-40 w-96  rounded-sm shadow-md border-2 border-gray-200 flex justify-between items-center">
+        <div className="h-full w-2/3 bg-red-200 ">
+            <div className="h-1/2 w-full bg-green-200 flex flex-col justify-around items-start pl-2">
+                <div className="font-bold text-lg">
+                    #orderid
                 </div>
-                <div className="w-1/6 flex justify-center items-center">
- 
-                {props.time}
+                <div>
+                    name
                 </div>
-                
-        
-            <div className="w-1/6 flex justify-center items-center">
-                
-                {props.billno}
             </div>
-            <div className="w-1/6 flex justify-center items-center">   
-            Rs. {props.price}
-            </div>
-            <div className="flex justify-center items-center w-1/6">
-            
-            <Button variant={"link"} className="">View bill</Button>
-            <ArrowRightIcon></ArrowRightIcon>
+            <div className="flex justify-start items-center h-1/2 pl-2 font-bold ">
+                price
             </div>
         </div>
+        <div className="h-full w-1/3 bg-gray-300 flex flex-col justify-center items-center">
+        <div className="h-1/2 w-full flex justify-center items-center font-bold ">
+            order status
         </div>
+        <Button variant={"outline"}>View order</Button>
+        </div>
+    </div>
 }

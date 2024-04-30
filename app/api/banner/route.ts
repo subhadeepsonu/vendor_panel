@@ -19,25 +19,25 @@ export async function GET(){
         })
     }
 }
-// export async function POST(req:NextRequest){
+export async function POST(req:NextRequest){
     
-//     try {
-//         const data = await req.json()
-//         const responce = await prisma.banner.create({
-//             data:{
-//                 active:data.active,
-//                 imgurl:data.imgurl,
-//                 targetscreen:data.
+    try {
+        const data = await req.json()
+        const responce = await prisma.banner.create({
+            data:{
+                active:data.active,
+                imgurl:data.imgurl,
+                targetscreen:data.targetscreen
 
-//             }
-//         })
-//     } catch (error) {
-//         return NextResponse.json({
-//             status:404,
-//             data:"something went wrong"
-//         })
-//     }
-// }
+            }
+        })
+    } catch (error) {
+        return NextResponse.json({
+            status:404,
+            data:"something went wrong"
+        })
+    }
+}
 export async function PATCH(req:NextRequest) {
     try {
         const data = await req.json()

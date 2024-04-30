@@ -1,12 +1,19 @@
+import { Button } from "./ui/button";
+
 export default function Productcard(props:any){
-    return <div className="h-60  w-64 border-2 border-gray-200  bg-white mx-5 rounded-sm shadow-sm flex-col justify-start items-start hover:scale-105 duration-150 cursor-pointer ">
-        <div className="flex  justify-center items-center h-44 bg-gray-200">
-        <img src={props.url} className="h-40 w-48  rounded-t-sm"></img>
+    return <div className="w-96 h-96  rounded-sm border-2 border-gray-100 shadow-sm hover:scale-105 duration-150">
+        <img className="h-60 w-full  rounded-t-sm object-cover" src={props.imgurl} alt="image"></img>
+        <div className="flex flex-col justify-around items-center h-36 w-full p-2">
+        <div className="w-full pl-2 text-lg font-bold">
+            {props.name}
         </div>
-        <div className="pl-4">{props.name}</div>
-        <div className="flex justify-between items-center px-4" >
-            <div>items in stock: {props.stock}</div>
-            <div>5⭐</div>
+        <div className="w-full pl-2 font-light text-sm">
+            {props.description}
+        </div>
+        <div className="flex justify-between items-center w-full px-2 ">  
+            <div className="font-semibold ">Rs.{props.price}</div>
+            <Button>Edit item</Button>
+        </div>
         </div>
     </div>
 }
