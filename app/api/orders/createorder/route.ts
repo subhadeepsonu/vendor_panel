@@ -4,14 +4,12 @@ const prisma = new PrismaClient()
 export async function POST(req:NextRequest){
     try {
         const data = await req.json()
-        console.log(data)
-        const responce = await prisma.user.create({
+        const responce = await prisma.orders.create({
             data:{
-                email:data.email,
-                name:data.name,
-                password:data.password,
-                phoneno:data.phoneno,
-                imgurl:data.imgurl,
+                address:data.address,
+                totalamount:data.totalamount,
+                userId:data.userId,
+                products:data.products
             }
         })
         return NextResponse.json({

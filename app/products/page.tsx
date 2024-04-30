@@ -33,7 +33,6 @@ import ProductCard from "@/components/productcard";
             ))}
             
             
-            
         </div>
         </div>
         <Link href={"/products/addproduct"}>

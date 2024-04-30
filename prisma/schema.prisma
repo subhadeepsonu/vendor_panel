@@ -24,6 +24,8 @@ model products {
   rating            rating[]
   wishlist          wishlist[]
   productonwishlist productonwishlist[]
+
+  ordersOrderid Int?
 }
 
 model productonwishlist {
@@ -63,7 +65,8 @@ model orders {
   totalamount Int
   orderedat   DateTime    @default(now())
   address     String
-  feedbackid  Int         @unique
+  feedbackid  Int?        @unique
+  products    String[]
   feedback    feedback?
   user        user        @relation(fields: [userId], references: [id])
   userId      Int
