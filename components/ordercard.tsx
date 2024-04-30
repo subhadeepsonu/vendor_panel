@@ -1,7 +1,7 @@
 import { Button } from "./ui/button";
 
 export default function Ordercard(props:any){
-    return <div className="h-32 w-96  rounded-sm shadow-sm border-2 border-gray-100 flex justify-between items-center">
+    return <div className="h-32 w-96  rounded-sm shadow-sm border-2 border-gray-100 flex justify-between items-center bg-white">
         <div className="h-full w-2/3  py-2">
             <div className="h-2/3 w-full  flex flex-col justify-around items-start pl-2 ">
                 <div className="font-bold text-lg">

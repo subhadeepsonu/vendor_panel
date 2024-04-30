@@ -1,10 +1,9 @@
-
-import Image from "next/image";
+import Homedash from "@/components/HomeDash";
 
 export default function Home() {
   return (
-    <div>
-      Home
+    <div className=" w-full min-h-screen">
+      <Homedash></Homedash>
     </div>
   );
 }
