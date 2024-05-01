@@ -24,8 +24,7 @@ model products {
   rating            rating[]
   wishlist          wishlist[]
   productonwishlist productonwishlist[]
-
-  ordersOrderid Int?
+  ordersOrderid     Int?
 }
 
 model productonwishlist {
