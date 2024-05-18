@@ -9,7 +9,14 @@ export async function POST(req:NextRequest){
                 address:data.address,
                 totalamount:data.totalamount,
                 userId:data.userId,
-                products:data.products
+                orderproduct:{
+                    create:data.products.map((items:{productId:number,quantity:number})=>({
+                        quantity: items.quantity,
+                        product: {
+                            connect: { id: items.productId }
+                        }
+                    }))
+                }
             }
         })
         return NextResponse.json({
