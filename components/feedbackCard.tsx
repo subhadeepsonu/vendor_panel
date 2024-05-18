@@ -1,7 +1,10 @@
+'use client'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Fade } from "react-awesome-reveal"
 import { FaStar } from "react-icons/fa"
 export default function FeedbackCard(props:any){
-    return <div className="h-40 w-96  rounded-sm shadow-sm border-2 border-gray-100 flex flex-col justify-between items-center ">
+    return <Fade>
+    <div className="h-40 w-96  rounded-sm shadow-sm border-2 border-gray-100 flex flex-col justify-between items-center ">
         <div className="flex h-1/3 justify-between w-full items-center px-4 font-bold">
             <div>
             {props.name}
@@ -16,4 +19,5 @@ export default function FeedbackCard(props:any){
         </div>
         
     </div>
+    </Fade>
 }

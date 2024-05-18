@@ -1,53 +1,58 @@
-import { NextRequest, NextResponse } from "next/server";
+import { auth } from '@/auth'
 import { PrismaClient } from '@prisma/client'
+import { NextRequest, NextResponse } from 'next/server'
 const prisma = new PrismaClient()
 export async function GET(){
     try {
-        const responce = prisma.user.findMany({})
+        const responce = await prisma.brand.findMany()
         return NextResponse.json({
             status:200,
             data:responce
         })
     } catch (error) {
-        return NextResponse.json({
+        NextResponse.json({
             status:404,
             message:"something went wrong"
         })
     }
 }
-
 export async function POST(req:NextRequest){
     try {
-        const data = await req.json()
-        const responce = await prisma.user.findUnique({
-            where:{
-                name:data.name
+        console.log("haha")
+        const data = await req.json()   
+        console.log(data)     
+        const responce = await prisma.brand.create({
+            data:{
+                name:data.name,
+                adminname:data.adminname
             }
-        })
+        });
+        console.log(responce)
         return NextResponse.json({
             status:200,
-            data:responce   
+            data:responce
         })
     } catch (error) {
-        return NextResponse.json({
+        NextResponse.json({
             status:404,
             message:error
         })
     }
 }
+
 export async function PATCH(req:NextRequest){
     try {
         const data = await req.json()
-        const responce = await prisma.user.update({
+        const responce = await prisma.brand.update({
             where:{
                 id:data.id
             },
             data:{
-                email:data.email,
                 imgurl:data.imgurl,
+                isfeatured:data.isfeatured,
+                isopen:data.isopen,
                 name:data.name,
-                phoneno:data.phoneno,
-                password:data.password,
+                
             }
         })
         return NextResponse.json({
@@ -55,30 +60,28 @@ export async function PATCH(req:NextRequest){
             data:responce
         })
     } catch (error) {
-        return NextResponse.json({
+        NextResponse.json({
             status:404,
-            message:error
+            message:"something went wrong"
         })
-        
     }
-
 }
 export async function DELETE(req:NextRequest){
-    try { 
+    try {
         const data = await req.json()
-        const responce = await prisma.user.delete({
+        const responce = await prisma.brand.delete({
             where:{
                 id:data.id
             }
         })
         return NextResponse.json({
             status:200,
-            data:responce
+            message:responce
         })
     } catch (error) {
-        return NextResponse.json({
+        NextResponse.json({
             status:404,
-            message:error
+            message:"something went wrong"
         })
     }
 }

@@ -1,10 +1,12 @@
+'use client'
+import { Fade } from "react-awesome-reveal";
 import Link from "next/link";
 import Ordercard from "./ordercard";
 import { Button } from "./ui/button";
 import { FaHotjar, FaRupeeSign, FaSadCry, FaShoppingBag } from "react-icons/fa";
 
 export default function Homedash(){
-    return <div className="w-full flex flex-col">
+    return <Fade className="w-full flex flex-col">
          
      <div className="flex justify-around items-center pt-2 gap-5 px-16 my-16">
        
@@ -14,7 +16,6 @@ export default function Homedash(){
                 Total Orders
             </div>
             <div className="text-2xl">
-                
                 <FaShoppingBag></FaShoppingBag>
             </div>
       </div>
@@ -72,10 +73,10 @@ export default function Homedash(){
       <Link href={"orders"}>View All </Link>
       </div>
       <div className="flex justify-around items-center w-full">
-        <Ordercard></Ordercard>
-        <Ordercard></Ordercard>
-        <Ordercard></Ordercard>
+      <Ordercard orderstatus="cooking"></Ordercard>
+        <Ordercard orderstatus="cooking"></Ordercard>
+        <Ordercard orderstatus="delivered"></Ordercard>
 
       </div>
-    </div>
+    </Fade>
 }

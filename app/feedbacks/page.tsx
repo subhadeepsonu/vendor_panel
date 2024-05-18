@@ -10,8 +10,6 @@ export default function Feedbacks(){
     <FeedbackCard name="Sonu" rating="5" description="The presentation was impeccable, with vibrant colors and enticing aromas wafting from the plate. Each ingredient was thoughtfully chosen, and the flavors harmonized beautifully."></FeedbackCard>
     <FeedbackCard name="Sonu" rating="5" description="The presentation was impeccable, with vibrant colors and enticing aromas wafting from the plate. Each ingredient was thoughtfully chosen, and the flavors harmonized beautifully."></FeedbackCard>
     <FeedbackCard name="Sonu" rating="5" description="The presentation was impeccable, with vibrant colors and enticing aromas wafting from the plate. Each ingredient was thoughtfully chosen, and the flavors harmonized beautifully."></FeedbackCard>
-    
-    
         </div>
     </div>
 }

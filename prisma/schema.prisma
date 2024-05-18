@@ -7,6 +7,27 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model user {
+  id                Int                 @id @default(autoincrement())
+  name              String              @unique
+  email             String              @unique
+  phoneno           String?             @unique
+  imgurl            String?
+  order             orders[]
+  feedbacks         feedback[]
+  rating            rating[]
+  wishlist          wishlist?
+  productonwishlist productonwishlist[]
+}
+
+model admin {
+  email    String  @id @unique
+  username String  @unique
+  imgurl   String?
+  phoneno  String?
+  brands   Brand[]
+}
+
 model products {
   id                Int                 @id @default(autoincrement())
   stock             Int                 @default(0)
@@ -16,15 +37,15 @@ model products {
   saleprice         Int
   isfeatured        Boolean             @default(false)
   brandid           Int
-  brand             Brand               @relation(fields: [brandid], references: [id])
-  category          category
   nonveg            Boolean
-  productype        productypes
   description       String?
+  category          category
+  productype        productypes
+  brand             Brand               @relation(fields: [brandid], references: [id])
   rating            rating[]
   wishlist          wishlist[]
   productonwishlist productonwishlist[]
-  ordersOrderid     Int?
+  OrderProduct      OrderProduct[]
 }
 
 model productonwishlist {
@@ -33,6 +54,14 @@ model productonwishlist {
   productid Int
   user      user     @relation(fields: [userid], references: [id])
   product   products @relation(fields: [productid], references: [id])
+}
+
+model OrderProduct {
+  id        Int      @id @default(autoincrement())
+  orderid   Int
+  productid Int
+  product   products @relation(fields: [productid], references: [id])
+  order     orders   @relation(fields: [orderid], references: [orderid])
 }
 
 enum category {
@@ -59,16 +88,16 @@ model Brand {
 }
 
 model orders {
-  orderid     Int         @id @default(autoincrement())
-  orderStatus orderStatus @default(cooking)
-  totalamount Int
-  orderedat   DateTime    @default(now())
-  address     String
-  feedbackid  Int?        @unique
-  products    String[]
-  feedback    feedback?
-  user        user        @relation(fields: [userId], references: [id])
-  userId      Int
+  orderid      Int            @id @default(autoincrement())
+  orderStatus  orderStatus    @default(cooking)
+  totalamount  Int
+  orderedat    DateTime       @default(now())
+  address      String
+  feedbackid   Int?           @unique
+  feedback     feedback?
+  user         user           @relation(fields: [userId], references: [id])
+  userId       Int
+  orderproduct OrderProduct[]
 }
 
 model feedback {
@@ -94,29 +123,6 @@ model Banner {
   active       Boolean
 }
 
-model user {
-  id                Int                 @id @default(autoincrement())
-  name              String              @unique
-  email             String              @unique
-  phoneno           String              @unique
-  password          String
-  imgurl            String?
-  verified          Boolean             @default(false)
-  verifytoken       String              @default(uuid())
-  order             orders[]
-  feedbacks         feedback[]
-  rating            rating[]
-  wishlist          wishlist?
-  productonwishlist productonwishlist[]
-}
-
-model admin {
-  username String  @id @unique
-  password String
-  phoneno  String
-  brands   Brand[]
-}
-
 model wishlist {
   id       Int        @id @default(autoincrement())
   userid   Int        @unique
@@ -127,7 +133,7 @@ model wishlist {
 model rating {
   id       Int      @id @default(autoincrement())
   userid   Int
-  desp     String
+  rating   Int
   prductid Int
   user     user     @relation(fields: [userid], references: [id])
   product  products @relation(fields: [prductid], references: [id])

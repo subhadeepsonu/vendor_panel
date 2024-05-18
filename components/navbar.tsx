@@ -10,7 +10,6 @@ export default function Navbar(){
             Cheez E Choice
         </div>
         </div>
-        
         <div className="w-1/3 flex justify-around items-center">
             <Navbarcomp name="Home" href="/" check=""></Navbarcomp>
             <Navbarcomp name="Menu" href="/products" check="products"></Navbarcomp>
