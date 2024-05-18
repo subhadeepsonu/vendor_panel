@@ -60,6 +60,7 @@ model OrderProduct {
   id        Int      @id @default(autoincrement())
   orderid   Int
   productid Int
+  quantity  Int
   product   products @relation(fields: [productid], references: [id])
   order     orders   @relation(fields: [orderid], references: [orderid])
 }
