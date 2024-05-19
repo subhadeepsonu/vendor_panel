@@ -11,11 +11,22 @@ const prisma = new PrismaClient()
                 const responce = await prisma.products.findMany({
                     where:{
                         id:parseInt(productId)
+                    },
+                
+                    
+                })
+                const avgRating = await prisma.rating.aggregate({
+                    _avg:{
+                        rating:true
+                    },
+                    where:{
+                        productid:parseInt(productId!)
                     }
                 })
                 return NextResponse.json({
                     status:200,
-                    data:responce
+                    data:responce,
+                    avgrating:avgRating
                 })
             
             } catch (error) {
@@ -84,7 +95,7 @@ const prisma = new PrismaClient()
                 })
             }
 
-        }
+        }   
         else{
            try {
             const responce = await prisma.products.findMany({

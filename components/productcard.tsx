@@ -12,7 +12,7 @@ export default function ProductCard(props:any){
             console.error("Error navigating:", error);
         }
     };
-    return <Fade  className="w-96 h-36  rounded-sm border-2 border-gray-100 shadow-sm  duration-150">
+    return <Fade duration={500} delay={0}  className="w-96 h-36  rounded-sm border-2 border-gray-100 shadow-sm  duration-150">
         <div className="flex flex-col justify-around items-center h-36 w-full p-2">
         <div className="w-full pl-2 text-lg font-bold">
             {props.name}

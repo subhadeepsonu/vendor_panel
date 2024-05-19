@@ -16,7 +16,7 @@ model user {
   order             orders[]
   feedbacks         feedback[]
   rating            rating[]
-  wishlist          wishlist?
+  wishlist          wishlist[]
   productonwishlist productonwishlist[]
 }
 
@@ -95,7 +95,7 @@ model orders {
   orderedat    DateTime       @default(now())
   address      String
   feedbackid   Int?           @unique
-  feedback     feedback?
+  feedback     feedback[]
   user         user           @relation(fields: [userId], references: [id])
   userId       Int
   orderproduct OrderProduct[]
@@ -106,7 +106,7 @@ model feedback {
   review  String
   userid  Int
   rating  Int
-  orderid Int    @unique
+  orderid Int
   order   orders @relation(fields: [orderid], references: [orderid])
   user    user   @relation(fields: [userid], references: [id])
 }
@@ -125,17 +125,18 @@ model Banner {
 }
 
 model wishlist {
-  id       Int        @id @default(autoincrement())
-  userid   Int        @unique
-  user     user       @relation(fields: [userid], references: [id])
-  products products[]
+  id        Int        @id @default(autoincrement())
+  userid    Int
+  productid Int
+  user      user       @relation(fields: [userid], references: [id])
+  products  products[]
 }
 
 model rating {
-  id       Int      @id @default(autoincrement())
-  userid   Int
-  rating   Int
-  prductid Int
-  user     user     @relation(fields: [userid], references: [id])
-  product  products @relation(fields: [prductid], references: [id])
+  id        Int      @id @default(autoincrement())
+  userid    Int
+  rating    Int
+  productid Int
+  user      user     @relation(fields: [userid], references: [id])
+  product   products @relation(fields: [productid], references: [id])
 }

@@ -14,7 +14,7 @@ export default function FeedbackCard(props:any){
             </div>
 
         </div>
-        <div className=" h-2/3 w-full flex justify-start items-center text-center pl-2 text-sm overflow-y-auto font-light">
+        <div className="text-clip overflow-hidden h-2/3 w-full flex justify-start items-center text-center pl-2 text-sm  font-light">
         {props.description}
         </div>
         
