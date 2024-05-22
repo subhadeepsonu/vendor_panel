@@ -1,8 +1,15 @@
+import { auth } from '@/auth'
 import { PrismaClient } from '@prisma/client'
 import { NextRequest, NextResponse } from 'next/server'
 const prisma = new PrismaClient()
 export async function GET(){
     try {
+        const data = await  auth()
+        if(!data){
+            return NextResponse.json({
+                message:"not authorized"
+            })
+        }
         const responce = await prisma.banner.findMany({
             where:{
                 active:true

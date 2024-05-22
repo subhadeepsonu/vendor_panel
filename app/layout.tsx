@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-
+import { SessionProvider } from "next-auth/react";
+import { Toaster, toast } from 'sonner'
 import Navbar from "@/components/navbar";
+import RecoilContextProvider from "@/lib/recoilContextProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -18,10 +20,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className} >
-      
         <div className="flex flex-col  min-h-screen  bg-white dark:bg-gray-900 ">
           <Navbar></Navbar>
+          <SessionProvider>
+          <Toaster richColors />
+          <RecoilContextProvider>
         {children}
+        </RecoilContextProvider>
+        </SessionProvider>
         </div></body>
     </html>
   );

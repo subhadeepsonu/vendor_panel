@@ -4,7 +4,10 @@ import { useEffect, useState } from "react";
 import axios from "axios"
 import Link from "next/link";
 import ProductCard from "@/components/productcard";
+import { useRecoilValue } from "recoil";
+import { checkProductAtom } from "@/store/atoms/checkatom";
     export  default  function Products(){
+        const check = useRecoilValue(checkProductAtom)
         const [products,setproducts] = useState<any>([])
         useEffect(()=>{
             const fetchproducts = async ()=>{
@@ -19,7 +22,7 @@ import ProductCard from "@/components/productcard";
             }
             fetchproducts()
         }
-            ,[])
+            ,[check])
         return <div className=" w-full">
        
     <div className="flex justify-center items-center w-full">
@@ -29,9 +32,7 @@ import ProductCard from "@/components/productcard";
             ))}
         </div>
         </div>
-        <Link href={"/products/addproduct"}>
-        <Button className="fixed bottom-7 right-7" size={"lg"}> Add item</Button>
-        </Link>
+        
         </div>
     }
     Products.displayName = 'Products';

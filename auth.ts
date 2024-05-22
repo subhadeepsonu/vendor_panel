@@ -14,6 +14,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       try {
         if (account?.provider === "google") {
           const { name, image, email } = user;
+          
           const data = await  prisma.admin.findUnique({
             where:{
               email:email!
@@ -42,6 +43,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         console.error("Error during sign-in:", error);
         return Promise.resolve('/signin');
       }
+    },
+    async session({ session, user, token }) {
+      
+      return session
+    },
+    async jwt({ token, user, account, profile, isNewUser }) {
+      
+      return token
     }
+   
   }
 });

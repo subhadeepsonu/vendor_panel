@@ -7,6 +7,7 @@ export async function GET(req:NextRequest){
         const orderId = await req.nextUrl.searchParams.get('id')
         if(orderId){
             const responce =  await prisma.orders.findMany({
+                
                 where:{
                     orderid:parseInt(orderId)
                 },
@@ -20,10 +21,12 @@ export async function GET(req:NextRequest){
                     }
                 }
             },
+            
         )
             return NextResponse.json({
                 status:200,
-                data:responce
+                data:responce,
+                
             })
 
         }
@@ -51,6 +54,11 @@ export async function GET(req:NextRequest){
         }
         else{
         const responce =  await prisma.orders.findMany({
+            orderBy:[
+                {
+                    orderid:'asc'
+                }
+            ],
             include:{
                 orderproduct:{
                     include:{
@@ -106,7 +114,7 @@ export async function POST(req:NextRequest){
 }
 export async function PATCH(req:NextRequest){
     try {
-        const data:any = await req.json()
+        const data = await req.json()
         const responce = await prisma.orders.update({
             where:{
                 orderid:data.orderid
@@ -114,7 +122,7 @@ export async function PATCH(req:NextRequest){
             data:{
                 orderStatus:data.status
             }
-        }) 
+        })
         return NextResponse.json({
             status:200,
             data:responce

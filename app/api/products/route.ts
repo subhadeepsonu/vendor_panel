@@ -12,8 +12,6 @@ const prisma = new PrismaClient()
                     where:{
                         id:parseInt(productId)
                     },
-                
-                    
                 })
                 const avgRating = await prisma.rating.aggregate({
                     _avg:{
@@ -39,6 +37,11 @@ const prisma = new PrismaClient()
         else if(BrandId&&Category){
             try {
                 const responce = await prisma.products.findMany({
+                    orderBy:[
+                        {
+                            id:'asc'
+                        }
+                    ],
                     where:{
                         brandid:parseInt(BrandId),
                         category:Category
@@ -59,6 +62,11 @@ const prisma = new PrismaClient()
         else if(BrandId){
             try {
                 const responce = await prisma.products.findMany({
+                    orderBy:[
+                        {
+                            id:'asc'
+                        }
+                    ],
                     where:{
                         brandid:parseInt(BrandId)
                     }
@@ -78,7 +86,13 @@ const prisma = new PrismaClient()
         }
         else if(Category){
             try {
+
                 const responce = await prisma.products.findMany({
+                    orderBy:[
+                        {
+                            id:'asc'
+                        }
+                    ],
                     where:{
                         brandid:parseInt(Category)
                     }
@@ -99,6 +113,11 @@ const prisma = new PrismaClient()
         else{
            try {
             const responce = await prisma.products.findMany({
+                orderBy:[
+                    {
+                        id:'asc'
+                    }
+                ],
             })
             return NextResponse.json({
                 status:200,
@@ -145,6 +164,28 @@ export async function POST(req:NextRequest){
         })
     } catch (error) {
         console.log(error)
+        return NextResponse.json({
+            status:404,
+            message:"something went wrong"
+        })
+    }
+}
+export async function PATCH(req:NextRequest){
+    try {
+        const body = await req.json()
+        const responce = await prisma.products.update({
+            where:{
+                id:body.id
+            },
+            data:{
+                stock:body.stock
+            }
+        })
+        return NextResponse.json({
+            status:200,
+            data:responce
+        })
+    } catch (error) {
         return NextResponse.json({
             status:404,
             message:"something went wrong"

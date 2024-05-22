@@ -1,8 +1,10 @@
 import Link from "next/link";
 import Navbarcomp from "./navbarcomp";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { auth } from "@/auth";
 
-export default function Navbar(){
+export default async function Navbar(){
+    const data = await auth()
     return <div className="h-16 w-full border-gray-300 border-b-2 shadow-md mb-2 flex justify-between items-center">
         <div className=" flex justify-center items-center">
         <img src="https://utfs.io/f/795065b3-e04f-4d76-9f93-99c13e9673a2-1m0e46.png" className="h-16"></img>
@@ -18,7 +20,7 @@ export default function Navbar(){
             <Navbarcomp name="Contact" href="/contactus" check="contactus"></Navbarcomp>
             <Link href="profile" className=" h-12">
                 <Avatar className="ml-2 h-12 w-12">
-                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarImage src={data?.user?.image!} />
                 <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
             </Link>
