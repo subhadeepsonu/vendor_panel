@@ -20,7 +20,7 @@ export const productListSelector = selector({
     key:"productListSelector",
         get: async ({get})=>{
             get(checkProductAtom)
-            const response = await axios.get('https://vendor-panel-iota.vercel.app/products')
+            const response = await axios.get('https://vendor-panel-iota.vercel.app/api/products')
             return response.data.data
         }
 })
