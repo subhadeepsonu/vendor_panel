@@ -3,10 +3,16 @@ import ProductCard from "@/components/productcard";
 import { useRecoilValue } from "recoil";
 import { productListSelector } from "@/store/atoms/checkatom";
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+import { useEffect } from "react";
 export  default  function Products(){
-    const data  = useSession()
-    if(data.status==="unauthenticated") return redirect('/api/auth/signin')
+    const { data, status } = useSession();
+    const router = useRouter();
+    useEffect(() => {
+        if (status === "unauthenticated") {
+          router.push('/api/auth/signin');
+        }
+      }, [status, router]);
         const products = useRecoilValue(productListSelector)
         return <div className=" w-full">
         <div className="flex justify-center items-center w-full">
