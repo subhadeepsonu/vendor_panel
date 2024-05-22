@@ -35,7 +35,7 @@ export default function Ordercard(props: any) {
           </div>
           <div className="w-full min-h-32 flex flex-col justify-around items-center">
             {props.orderproduct.map((orderproduct:any,index:number)=>{
-              return <div className="flex  w-full justify-between  px-10 items-center">
+              return <div key={index} className="flex  w-full justify-between  px-10 items-center">
                 <div>
                 {orderproduct.product.name}
                 </div>
