@@ -13,7 +13,7 @@ export default function Orders(){
         const fetchorders = async ()=>{
             try {
                 console.log("haha")
-                const responce = await axios.get('http://localhost:3000/api/orders')
+                const responce = await axios.get('https://vendor-panel-iota.vercel.app/api/orders')
                 setOrders(responce.data.data)
                 console.log(responce.data.data)
             } catch (error) {
@@ -32,6 +32,7 @@ export default function Orders(){
               orderid={order.orderid} 
               price={order.totalamount} 
               orderproduct={order.orderproduct}
+              
             />
           ))
           

@@ -13,7 +13,7 @@ import { checkProductAtom } from "@/store/atoms/checkatom";
             const fetchproducts = async ()=>{
                 try {
                     console.log("haha")
-                    const responce = await axios.get("http://localhost:3000/api/products")
+                    const responce = await axios.get("https://vendor-panel-iota.vercel.app/api/products")
                     console.log(responce.data.data)
                     setproducts(responce.data.data)
                 } catch (error) {
