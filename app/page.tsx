@@ -9,8 +9,7 @@ export default  function Home() {
   if(data.status==="unauthenticated") return redirect('/api/auth/signin')
   const setUser = useSetRecoilState(userAtom)
   console.log(data)
-
-  setUser(data.data?.user.email? data.data.user.email : "")
+  setUser(data.data?.user.email!)
   return (
     <div className=" w-full min-h-screen">
       <Homedash></Homedash>
