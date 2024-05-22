@@ -20,7 +20,7 @@ export const productListSelector = selector({
     key:"productListSelector",
         get: async ({get})=>{
             get(checkProductAtom)
-            const response = await axios.get('http://localhost:3000/api/products')
+            const response = await axios.get('https://vendor-panel-iota.vercel.app/products')
             return response.data.data
         }
 })
@@ -50,7 +50,7 @@ export const orderListSelector=selector({
     key:"orderListSelector",
     get:async ({get})=>{
         get(checkOrderAtom)
-        const response = await axios.get('http://localhost:3000/api/orders')
+        const response = await axios.get('https://vendor-panel-iota.vercel.app/api/orders')
         return response.data.data
     }
 })
@@ -61,7 +61,7 @@ export const orderList =atom({
 export const feedbackListSelector= selector({
     key:"feedbackListSelector",
     get:async ({get})=>{
-        const response = await axios.get('http://localhost:3000/api/feedback')
+        const response = await axios.get('https://vendor-panel-iota.vercel.app/api/feedback')
         return response.data.data
     }
 })
