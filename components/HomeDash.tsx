@@ -1,14 +1,11 @@
-'use client'
+
 import { Fade } from "react-awesome-reveal";
 import Link from "next/link";
-import Ordercard from "./ordercard";
-import { Button } from "./ui/button";
 import { FaHotjar, FaRupeeSign, FaSadCry, FaShoppingBag } from "react-icons/fa";
-import { auth } from "@/auth";
 
 export default  function Homedash(){
   
-    return <Fade className="w-full flex flex-col">
+    return <div className="w-full flex flex-col">
          
      <div className="flex justify-around items-center pt-2 gap-5 px-16 my-16">
        
@@ -80,5 +77,5 @@ export default  function Homedash(){
         <Ordercard orderstatus="delivered"></Ordercard> */}
 
       </div>
-    </Fade>
+    </div>
 }

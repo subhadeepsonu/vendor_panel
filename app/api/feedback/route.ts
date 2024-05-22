@@ -28,7 +28,15 @@ export async function GET(req:NextRequest){
             })
         }
         else{
-            const responce = await prisma.feedback.findMany({})
+            const responce = await prisma.feedback.findMany({
+                include:{
+                    user:{
+                        select:{
+                            name:true
+                        }
+                    }
+                }
+            })
             return NextResponse.json({
                 status:200,
                 data:responce

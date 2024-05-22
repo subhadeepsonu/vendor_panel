@@ -1,15 +1,15 @@
+"use client"
 import FeedbackCard from "@/components/feedbackCard";
+import { feedbackList } from "@/store/atoms/checkatom";
+import { useRecoilValue } from "recoil";
 
 export default function Feedbacks(){
+    const feedbacks = useRecoilValue(feedbackList)
     return <div className="flex justify-center items-start min-h-screen w-full">
         <div className="grid grid-cols-3 gap-5">
-    <FeedbackCard name="Sonu" rating="5" description="The presentation was impeccable, with vibrant colors and enticing aromas wafting from the plate. Each ingredient was thoughtfully chosen, and the flavors harmonized beautifully."></FeedbackCard>
-    <FeedbackCard name="Sonu" rating="5" description="The presentation was impeccable, with vibrant colors and enticing aromas wafting from the plate. Each ingredient was thoughtfully chosen, and the flavors harmonized beautifully."></FeedbackCard>
-    <FeedbackCard name="Sonu" rating="5" description="The presentation was impeccable, with vibrant colors and enticing aromas wafting from the plate. Each ingredient was thoughtfully chosen, and the flavors harmonized beautifully."></FeedbackCard>
-    <FeedbackCard name="Sonu" rating="5" description="The presentation was impeccable, with vibrant colors and enticing aromas wafting from the plate. Each ingredient was thoughtfully chosen, and the flavors harmonized beautifully dddd ddd s s ad d  daadadad aaa."></FeedbackCard>
-    <FeedbackCard name="Sonu" rating="5" description="The presentation was impeccable, with vibrant colors and enticing aromas wafting from the plate. Each ingredient was thoughtfully chosen, and the flavors harmonized beautifully."></FeedbackCard>
-    <FeedbackCard name="Sonu" rating="5" description="The presentation was impeccable, with vibrant colors and enticing aromas wafting from the plate. Each ingredient was thoughtfully chosen, and the flavors harmonized beautifully."></FeedbackCard>
-    <FeedbackCard name="Sonu" rating="5" description="The presentation was impeccable, with vibrant colors and enticing aromas wafting from the plate. Each ingredient was thoughtfully chosen, and the flavors harmonized beautifully."></FeedbackCard>
+        {feedbacks.map((feedback:any,index:number)=>{
+            return <FeedbackCard key={index} name={feedback.user.name} rating={feedback.rating} description={feedback.review}  ></FeedbackCard>
+        })}
         </div>
     </div>
 }

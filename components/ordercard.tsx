@@ -2,13 +2,13 @@
 import React from "react";
 import { Button } from "./ui/button";
 import { Fade } from "react-awesome-reveal";
-import { Toaster, toast } from 'sonner';
+import {  toast } from 'sonner';
 import { updateOrder } from "./actions/updateorder";
 import { useRecoilState } from "recoil";
-import { checkAtom } from "@/store/atoms/checkatom";
+import { checkOrderAtom } from "@/store/atoms/checkatom";
 
 export default function Ordercard(props: any) {
-  const [check,setCheck] = useRecoilState(checkAtom)
+  const [check,setCheck] = useRecoilState(checkOrderAtom)
   const handleUpdateOrder = async (status: string) => {
     try {
       await updateOrder(status, props.orderid);
