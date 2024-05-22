@@ -27,8 +27,8 @@ import { checkProductAtom } from "@/store/atoms/checkatom";
        
     <div className="flex justify-center items-center w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3  gap-5  min-h-screen w-10/12 ">
-            {products.map((product:any,index:number) =>(
-                <ProductCard key={index} imgurl={product.imgurl} name={product.name} price={product.price} description={product.description} stock={product.stock} id = {product.id}  ></ProductCard>
+            {products.map((product:any) =>(
+                <ProductCard key={product.id} imgurl={product.imgurl} name={product.name} price={product.price} description={product.description} stock={product.stock} id = {product.id}  ></ProductCard>
             ))}
         </div>
         </div>
