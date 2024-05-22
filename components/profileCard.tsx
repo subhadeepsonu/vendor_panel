@@ -1,12 +1,18 @@
-import Image from "next/image";
-export default function Profilecard(props:any){
+"use client"
+import { userAtom } from "@/store/atoms/checkatom"
+import { useSession } from "next-auth/react"
+import { useSetRecoilState } from "recoil"
+export default async function Profilecard(){ 
+    const data  = useSession()
+    const setUser = useSetRecoilState(userAtom)
+    setUser(data.data?.user.email? data.data.user.email : "")   
     return  <div className="w-10/12 bg-white border-2 border-gray-200 rounded-sm shadow-sm h-2/3 flex ">
         <div className=" w-1/3 flex flex-col justify-center items-center border-r border-gray-200">
     <div className="border-2 border-gray-200 m-2">
         <img src="https://content.jdmagicbox.com/comp/remote/w4/0141px141.x141.180918191436.x9w4/catalogue/bits-n-bites-tripolia-bazar-jaipur-fast-food-k10y2fbkcj.jpg" alt="logo"></img>
     </div>
     <div className=" flex justify-center items-center text-2xl font-bold">
-        Bits and Bites
+        
     </div>
     </div>
     <div className="bg-white w-2/3">

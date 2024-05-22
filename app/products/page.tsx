@@ -1,12 +1,12 @@
 "use client"
-import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
-import axios from "axios"
-import Link from "next/link";
 import ProductCard from "@/components/productcard";
 import { useRecoilValue } from "recoil";
-import { checkProductAtom, productList, productListSelector } from "@/store/atoms/checkatom";
+import { productListSelector } from "@/store/atoms/checkatom";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 export  default  function Products(){
+    const data  = useSession()
+    if(data.status==="unauthenticated") return redirect('/api/auth/signin')
         const products = useRecoilValue(productListSelector)
         return <div className=" w-full">
         <div className="flex justify-center items-center w-full">

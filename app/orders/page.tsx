@@ -5,7 +5,11 @@ import { filteredList } from "@/store/atoms/checkatom";
 import { useSetRecoilState } from "recoil"
 import { Button } from "@/components/ui/button"
 import { categoryAtom } from "@/store/atoms/checkatom"
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 export default function Orders(){
+  const data  = useSession()
+  if(data.status==="unauthenticated") return redirect('/api/auth/signin')
     const orders = useRecoilValue(filteredList)
     const setCategory = useSetRecoilState(categoryAtom)
     return <div className=" flex flex-col justify-start items-center w-full min-h-screen ">

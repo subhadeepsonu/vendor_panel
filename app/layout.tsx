@@ -25,7 +25,9 @@ export default function RootLayout({
           <SessionProvider>
           <Toaster richColors />
           <RecoilContextProvider>
+          <SessionProvider> 
         {children}
+        </SessionProvider>
         </RecoilContextProvider>
         </SessionProvider>
         </div></body>

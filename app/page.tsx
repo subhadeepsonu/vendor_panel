@@ -1,14 +1,16 @@
+"use client"
 import Homedash from "@/components/HomeDash";
 import { redirect } from "next/navigation";
-import { auth } from "@/auth";
-import { useSetRecoilState } from "recoil";
+import {  useSetRecoilState} from "recoil";
 import { userAtom } from "@/store/atoms/checkatom";
-export default async  function Home() {
-  const session = await auth()
-  const name = session?.user.name
-  // const setUser = useSetRecoilState(userAtom)
-  // setUser(name!)
-  if(!session) return redirect('/api/auth/signin')
+import { useSession } from "next-auth/react";
+export default  function Home() {
+  const data  = useSession()
+  if(data.status==="unauthenticated") return redirect('/api/auth/signin')
+  const setUser = useSetRecoilState(userAtom)
+  console.log(data)
+
+  setUser(data.data?.user.email? data.data.user.email : "")
   return (
     <div className=" w-full min-h-screen">
       <Homedash></Homedash>
