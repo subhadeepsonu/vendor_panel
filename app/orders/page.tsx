@@ -1,14 +1,33 @@
 "use client"
 import { useRecoilValue} from "recoil"
 import Ordercard from "@/components/ordercard";
-import Loading from "./loading";
-
-import { checkOrderAtom, orderList } from "@/store/atoms/checkatom";
+import { filteredList } from "@/store/atoms/checkatom";
+import { useSetRecoilState } from "recoil"
+import { Button } from "@/components/ui/button"
+import { categoryAtom } from "@/store/atoms/checkatom"
 export default function Orders(){
-    const orders = useRecoilValue(orderList)
-    
-    return <div className=" flex justify-center items-start w-full min-h-screen ">
-     <div className="grid grid-cols-3 gap-5">
+    const orders = useRecoilValue(filteredList)
+    const setCategory = useSetRecoilState(categoryAtom)
+    return <div className=" flex flex-col justify-start items-center w-full min-h-screen ">
+      
+      <div className="w-1/2 h-20 flex items-center justify-around">
+    <Button onClick={()=>{
+      setCategory("all")
+    }}>All</Button>
+    <Button onClick={()=>{
+      setCategory("cooking")
+    }}>Cooking</Button>
+    <Button onClick={()=>{
+      setCategory("ready")
+    }}>Ready</Button>
+    <Button onClick={()=>{
+      setCategory("delivered")
+    }}>Delivered</Button>
+    </div>
+      
+      
+     <div className="grid grid-cols-3 gap-5 ">
+      
      {orders.map((order:any, index:number) => (
             <Ordercard 
               key={index} 

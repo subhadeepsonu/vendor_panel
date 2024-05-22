@@ -1,9 +1,9 @@
 "use client"
 import React from "react";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { Fade } from "react-awesome-reveal";
 import {  toast } from 'sonner';
-import { updateOrder } from "./actions/updateorder";
+import { updateOrder } from "@/components/actions/updateorder";
 import { useRecoilState } from "recoil";
 import { checkOrderAtom } from "@/store/atoms/checkatom";
 
@@ -52,7 +52,9 @@ export default function Ordercard(props: any) {
             <Button variant={"ready"} onClick={() => handleUpdateOrder("ready")}>
               Ready
             </Button>
-            <Button variant={"outline"}>View order</Button>
+            <Button variant={"outline"}onClick={()=>{
+              handleUpdateOrder("cooking")
+            }}>Cooking</Button>
           </div>
         </div>
       </div>

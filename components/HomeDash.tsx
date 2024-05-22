@@ -1,10 +1,6 @@
-
-import { Fade } from "react-awesome-reveal";
 import Link from "next/link";
 import { FaHotjar, FaRupeeSign, FaSadCry, FaShoppingBag } from "react-icons/fa";
-
-export default  function Homedash(){
-  
+export default  function Homedash(props:any){
     return <div className="w-full flex flex-col">
          
      <div className="flex justify-around items-center pt-2 gap-5 px-16 my-16">

@@ -1,6 +1,13 @@
 import axios from "axios";
 import { atom, selector } from "recoil";
-
+export const categoryAtom = atom({
+    key:"categoryAtom",
+    default:"all"
+})
+export const userAtom =atom({
+    key:"userAtom",
+    default:''
+})
 export const checkOrderAtom= atom({
     key:"checkorderAtom",
     default:0
@@ -13,19 +20,37 @@ export const productListSelector = selector({
     key:"productListSelector",
         get: async ({get})=>{
             get(checkProductAtom)
-            const response = await axios.get('https://vendor-panel-iota.vercel.app/api/products')
+            const response = await axios.get('http://localhost:3000/api/products')
             return response.data.data
         }
 })
+
 export const productList = atom({
     key:"productList",
     default: productListSelector
+})
+export const filteredList = atom({
+    key:"filteredlist",
+    default:selector({
+        key:"filteredListSelector",
+        get:({get})=>{
+            {
+                const cat = get(categoryAtom)
+                const data = get(orderList)
+                if(cat === "all"){
+                    return data
+                }else{
+                    return data.filter((product:any) => product.orderStatus===cat)
+                }
+            }
+        }
+    })
 })
 export const orderListSelector=selector({
     key:"orderListSelector",
     get:async ({get})=>{
         get(checkOrderAtom)
-        const response = await axios.get('https://vendor-panel-iota.vercel.app/api/orders')
+        const response = await axios.get('http://localhost:3000/api/orders')
         return response.data.data
     }
 })
@@ -36,7 +61,7 @@ export const orderList =atom({
 export const feedbackListSelector= selector({
     key:"feedbackListSelector",
     get:async ({get})=>{
-        const response = await axios.get('https://vendor-panel-iota.vercel.app/api/feedback')
+        const response = await axios.get('http://localhost:3000/api/feedback')
         return response.data.data
     }
 })
