@@ -27,7 +27,7 @@ export default function Orders(){
      {orders.length > 0 ? (
           orders.map((order:any, index:number) => (
             <Ordercard 
-              key={order.orderid} 
+              key={index} 
               orderstatus={order.orderStatus} 
               orderid={order.orderid} 
               price={order.totalamount} 
