@@ -44,14 +44,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         return Promise.resolve('/signin');
       }
     },
-    async session({ session, user, token }) {
-      
-      return session
-    },
-    async jwt({ token, user, account, profile, isNewUser }) {
-      
-      return token
-    }
-   
   }
 });

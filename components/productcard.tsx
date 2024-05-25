@@ -1,7 +1,6 @@
     'use client'
     import { Button } from "./ui/button";
     import { Fade } from "react-awesome-reveal";
-    import { useRouter } from "next/navigation";
     import { Input } from "./ui/input";
     import { toast } from "sonner";
     import { updateStock } from "./actions/updatestock";

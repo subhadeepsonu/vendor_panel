@@ -14,8 +14,7 @@ export default  function Home() {
       }
     }, [status, router]);
   const setUser = useSetRecoilState(userAtom)
-  
-  setUser(data?.user.email!)
+  setUser(data?.user.name!)
   return (
     <div className=" w-full min-h-screen">
       <Homedash></Homedash>

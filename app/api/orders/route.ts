@@ -5,9 +5,20 @@ export async function GET(req:NextRequest){
     try {
         const status:any = await req.nextUrl.searchParams.get('status')
         const orderId = await req.nextUrl.searchParams.get('id')
+        const brandId = await req.nextUrl.searchParams.get('brandid')
+        if(brandId){
+            const response = await prisma.orders.findMany({
+                where:{
+                    brandId:parseInt(brandId)
+                }
+            })
+            return NextResponse.json({
+                status:200,
+                data:response
+            })
+        }
         if(orderId){
             const responce =  await prisma.orders.findMany({
-                
                 where:{
                     orderid:parseInt(orderId)
                 },
@@ -56,7 +67,7 @@ export async function GET(req:NextRequest){
         const responce =  await prisma.orders.findMany({
             orderBy:[
                 {
-                    orderid:'asc'
+                    orderid:'desc'
                 }
             ],
             include:{
@@ -91,6 +102,7 @@ export async function POST(req:NextRequest){
                 address:data.address,
                 totalamount:data.totalamount,
                 userId:data.userId,
+                brandId:data.brandId,
                 orderproduct:{
                     create:data.products.map((items:{productId:number,quantity:number})=>({
                         quantity: items.quantity,

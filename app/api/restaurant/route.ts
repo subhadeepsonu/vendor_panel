@@ -1,9 +1,20 @@
-import { auth } from '@/auth'
 import { PrismaClient } from '@prisma/client'
 import { NextRequest, NextResponse } from 'next/server'
 const prisma = new PrismaClient()
-export async function GET(){
+export async function GET(req:NextRequest){
     try {
+        const data = await req.nextUrl.searchParams.get('name')
+        if(data){
+            const response = await prisma.brand.findUnique({
+                where:{
+                    adminname:data
+                }
+            })
+            return NextResponse.json({
+                status:200,
+                data:response
+            })
+        }
         const responce = await prisma.brand.findMany()
         return NextResponse.json({
             status:200,

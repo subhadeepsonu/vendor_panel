@@ -25,7 +25,7 @@ model admin {
   username String  @unique
   imgurl   String?
   phoneno  String?
-  brands   Brand[]
+  brands   Brand?
 }
 
 model products {
@@ -84,7 +84,8 @@ model Brand {
   imgurl     String?
   isfeatured Boolean    @default(false)
   products   products[]
-  adminname  String     @default("ha")
+  orders     orders[]
+  adminname  String     @unique @default("ha")
   admin      admin      @relation(fields: [adminname], references: [username])
 }
 
@@ -98,6 +99,8 @@ model orders {
   feedback     feedback[]
   user         user           @relation(fields: [userId], references: [id])
   userId       Int
+  brandId      Int            @default(10)
+  brand        Brand          @relation(fields: [brandId], references: [id])
   orderproduct OrderProduct[]
 }
 

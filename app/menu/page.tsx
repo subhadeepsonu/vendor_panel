@@ -14,7 +14,7 @@ export  default  function Products(){
         }
       }, [status, router]);
         const products = useRecoilValue(productListSelector)
-        return <div className=" w-full">
+        return <div className=" w-full ">
         <div className="flex justify-center items-center w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3  gap-5  min-h-screen w-10/12 ">
             {products.map((product:any) =>(

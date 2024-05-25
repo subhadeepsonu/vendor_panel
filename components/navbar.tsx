@@ -15,7 +15,7 @@ export default async function Navbar(){
         </div>
         <div className="w-1/3 flex justify-around items-center">
             <Navbarcomp name="Home" href="/" check=""></Navbarcomp>
-            <Navbarcomp name="Menu" href="/products" check="products"></Navbarcomp>
+            <Navbarcomp name="Menu" href="/menu" check="products"></Navbarcomp>
             <Navbarcomp name="Orders" href="/orders" check="orders"></Navbarcomp>
             <Navbarcomp name="Feedbacks" href="/feedbacks" check="feedbacks"></Navbarcomp>            
             <Avatar className="ml-2 h-12 w-12">
