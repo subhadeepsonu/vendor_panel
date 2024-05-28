@@ -55,8 +55,9 @@ export const orderListSelector=selector({
     key:"orderListSelector",
     get:async ({get})=>{
         get(checkOrderAtom)
+        const brand = get(brandAtom)
         try {
-            const response = await axios.get(`https://vendor-panel-delta.vercel.app/api/orders?brandid=${brandAtom}`)
+            const response = await axios.get(`https://vendor-panel-delta.vercel.app/api/orders?brandId=${brand}`)
         return response.data
         } catch (error) {
             return null

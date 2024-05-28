@@ -20,6 +20,7 @@ export default function Orders(){
     const orders = useRecoilValueLoadable(filteredList)
     const setCategory = useSetRecoilState(categoryAtom)
     if(orders.state=="hasValue"){
+      console.log(orders)
       if(orders.contents.data.length==0){
         return <div>
           empty

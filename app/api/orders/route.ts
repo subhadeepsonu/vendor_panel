@@ -23,7 +23,7 @@ export async function GET(req:NextRequest){
             })
             return NextResponse.json({
                 status:200,
-                h:"h",
+                h:brandId,
                 data:response
             })
         }
