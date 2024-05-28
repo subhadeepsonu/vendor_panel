@@ -95,7 +95,7 @@ const prisma = new PrismaClient()
                         }
                     ],
                     where:{
-                        brandid:parseInt(Category)
+                        category:Category
                     }
                 })
                 return NextResponse.json({

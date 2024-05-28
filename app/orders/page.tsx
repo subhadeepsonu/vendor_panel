@@ -20,7 +20,11 @@ export default function Orders(){
     const orders = useRecoilValueLoadable(filteredList)
     const setCategory = useSetRecoilState(categoryAtom)
     if(orders.state=="hasValue"){
-      console.log(orders.contents)
+      if(orders.contents.data.length==0){
+        return <div>
+          empty
+        </div>
+      }
     return <div className=" flex flex-col justify-start items-center w-full min-h-screen ">
       
       <div className="w-1/2 h-20 flex items-center justify-around">
