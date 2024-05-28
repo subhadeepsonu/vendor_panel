@@ -4,6 +4,18 @@ const prisma = new PrismaClient()
 export async function GET(req:NextRequest){
     try {
         const data = await req.nextUrl.searchParams.get('name')
+        const uni = await req.nextUrl.searchParams.get('uniName')
+        if(uni){
+            const responce = await prisma.brand.findMany({
+                where:{
+                    uniname:uni
+                }
+            })
+            return NextResponse.json({
+                status:200,
+                data: responce
+            })
+        }
         if(data){
             const response = await prisma.brand.findUnique({
                 where:{
