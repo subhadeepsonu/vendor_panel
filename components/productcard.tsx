@@ -44,6 +44,11 @@
                     setValue(0)
                     handleUpdateStock(value)
                 }} >Update stock</Button>
+                <Button onClick={()=>{
+                    handleUpdateStock(0)
+                }}>
+                    Out Of stock
+                </Button>
                 </div>
                 </div>
             </div>

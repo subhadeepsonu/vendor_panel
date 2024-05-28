@@ -12,12 +12,14 @@ export async function GET(req:NextRequest){
             })
             return NextResponse.json({
                 status:200,
+                ha:data,
                 data:response
             })
         }
         const responce = await prisma.brand.findMany()
         return NextResponse.json({
             status:200,
+            
             data:responce
         })
     } catch (error) {

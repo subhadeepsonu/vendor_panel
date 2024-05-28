@@ -83,8 +83,10 @@ model Brand {
   isopen     Boolean    @default(false)
   imgurl     String?
   isfeatured Boolean    @default(false)
+  address    String?    @default("")
   products   products[]
   orders     orders[]
+  uniname    String?
   adminname  String     @unique @default("ha")
   admin      admin      @relation(fields: [adminname], references: [username])
 }

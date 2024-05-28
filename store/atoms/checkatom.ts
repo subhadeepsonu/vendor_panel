@@ -19,9 +19,14 @@ export const checkProductAtom =atom({
 export const productListSelector = selector({
     key:"productListSelector",
         get: async ({get})=>{
+            const brand = get(brandAtom)
             get(checkProductAtom)
-            const response = await axios.get('http://localhost:3000/api/products?brandid='+brandAtom)
-            return response.data.data
+            try {
+                const response = await axios.get(`http://localhost:3000/api/products?brandid=${brand}`)
+            return response.data
+            } catch (error) {
+                return null
+            }
         }
 })
 
@@ -50,8 +55,13 @@ export const orderListSelector=selector({
     key:"orderListSelector",
     get:async ({get})=>{
         get(checkOrderAtom)
-        const response = await axios.get('http://localhost:3000/api/orders?brandid='+brandAtom)
-        return response.data.data
+        try {
+            const response = await axios.get(`http://localhost:3000/api/orders?brandid=${brandAtom}`)
+        return response.data
+        } catch (error) {
+            return null
+        }
+        
     }
 })
 export const orderList =atom({
@@ -61,8 +71,13 @@ export const orderList =atom({
 export const feedbackListSelector= selector({
     key:"feedbackListSelector",
     get:async ({get})=>{
-        const response = await axios.get('http://localhost:3000/api/feedback')
+        try {
+            const response = await axios.get('http://localhost:3000/api/feedback')
         return response.data.data
+        } catch (error) {
+            return null
+        }
+        
     }
 })
 export const feedbackList=atom({
@@ -70,13 +85,21 @@ export const feedbackList=atom({
     default:feedbackListSelector
 })
 export const brandAtom=atom({
-    key:"brand",
-    default:selector({
-        key:"",
-        get:async ({get})=>{
-            get(userAtom)
-            const data = await axios.get('http://localhost:3000/api/restaurant?name='+userAtom)
-            return data.data.id
-        }
-    })
+    key:"brandAtom",
+    default:0
 })
+export const brandSelector = selector({
+    key: "brand",
+    get: async ({ get }) => {
+      const user = get(userAtom);
+      try {
+        const response = await axios.get(`http://localhost:3000/api/restaurant?name=${user}`);
+        console.log("API response:", response.data);
+        return response.data;
+      } catch (error) {
+        console.error("Error fetching brand data:", error);
+        return null; 
+      }
+    }
+  });
+  

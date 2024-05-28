@@ -73,6 +73,7 @@ const prisma = new PrismaClient()
                 })
                 return NextResponse.json({
                     status:200,
+                    h:BrandId,
                     data:responce
                 })
                 

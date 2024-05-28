@@ -5,15 +5,25 @@ export async function GET(req:NextRequest){
     try {
         const status:any = await req.nextUrl.searchParams.get('status')
         const orderId = await req.nextUrl.searchParams.get('id')
-        const brandId = await req.nextUrl.searchParams.get('brandid')
+        const brandId = await req.nextUrl.searchParams.get('brandId')
         if(brandId){
             const response = await prisma.orders.findMany({
                 where:{
                     brandId:parseInt(brandId)
+                },
+                include:{
+                    orderproduct:{
+                        include:{
+                            product:{
+                                
+                            }
+                        }
+                    }
                 }
             })
             return NextResponse.json({
                 status:200,
+                h:"h",
                 data:response
             })
         }
@@ -94,34 +104,57 @@ export async function GET(req:NextRequest){
         })
     }
 }
-export async function POST(req:NextRequest){
+
+export async function POST(req: NextRequest) {
     try {
-        const data = await req.json()
-        const responce = await prisma.orders.create({
-            data:{
-                address:data.address,
-                totalamount:data.totalamount,
-                userId:data.userId,
-                brandId:data.brandId,
-                orderproduct:{
-                    create:data.products.map((items:{productId:number,quantity:number})=>({
-                        quantity: items.quantity,
-                        product: {
-                            connect: { id: items.productId }
-                        }
-                    }))
-                }
+        const data = await req.json();
+
+        if (!data || !data.brandId || !data.address || !data.totalamount || !data.userId || !data.products) {
+            return NextResponse.json({
+                status: 400,
+                message: "Invalid request data"
+            });
+        }
+
+        const check = await prisma.brand.findUnique({
+            where: {
+                id: data.brandId
             }
-        })
-        return NextResponse.json({
-            status:200,
-            data:responce
-        })
+        });
+
+        if (check?.isfeatured) {
+            const response = await prisma.orders.create({
+                data: {
+                    address: data.address,
+                    totalamount: data.totalamount,
+                    userId: data.userId,
+                    brandId: data.brandId,
+                    orderproduct: {
+                        create: data.products.map((item: { productId: number, quantity: number }) => ({
+                            quantity: item.quantity,
+                            product: {
+                                connect: { id: item.productId }
+                            }
+                        }))
+                    }
+                }
+            });
+
+            return NextResponse.json({
+                status: 200,
+                data: response
+            });
+        } else {
+            return NextResponse.json({
+                status: 200,
+                message: "Shop is closed"
+            });
+        }
     } catch (error) {
         return NextResponse.json({
-            status:404,
-            message:error
-        })
+            status: 500,
+            message: error || "Internal Server Error"
+        });
     }
 }
 export async function PATCH(req:NextRequest){

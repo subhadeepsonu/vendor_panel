@@ -1,5 +1,5 @@
 "use client"
-import { useRecoilValue} from "recoil"
+import { useRecoilValue, useRecoilValueLoadable} from "recoil"
 import Ordercard from "@/components/ordercard";
 import { filteredList } from "@/store/atoms/checkatom";
 import { useSetRecoilState } from "recoil"
@@ -8,6 +8,7 @@ import { categoryAtom } from "@/store/atoms/checkatom"
 import { useSession } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
 import { useEffect } from "react";
+import Loading from "../menu/loading";
 export default function Orders(){
   const { data, status } = useSession();
     const router = useRouter();
@@ -16,8 +17,10 @@ export default function Orders(){
           router.push('/api/auth/signin');
         }
       }, [status, router]);
-    const orders = useRecoilValue(filteredList)
+    const orders = useRecoilValueLoadable(filteredList)
     const setCategory = useSetRecoilState(categoryAtom)
+    if(orders.state=="hasValue"){
+      console.log(orders.contents)
     return <div className=" flex flex-col justify-start items-center w-full min-h-screen ">
       
       <div className="w-1/2 h-20 flex items-center justify-around">
@@ -38,7 +41,7 @@ export default function Orders(){
       
      <div className="grid grid-cols-3 gap-5 ">
       
-     {orders.map((order:any, index:number) => (
+     {orders.contents.data.map((order:any, index:number) => (
             <Ordercard 
               key={index} 
               orderstatus={order.orderStatus} 
@@ -50,5 +53,14 @@ export default function Orders(){
           ))}
     </div>
     </div>
+    }
+    if(orders.state=="loading"){
+      return <Loading></Loading>
+    }
+    if(orders.state=="hasError"){
+      return <div>
+        error
+      </div>
+    }
 
 }

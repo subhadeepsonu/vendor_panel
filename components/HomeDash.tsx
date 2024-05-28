@@ -1,8 +1,11 @@
+
+import { brandAtom, brandSelector } from "@/store/atoms/checkatom";
 import Link from "next/link";
 import { FaHotjar, FaRupeeSign, FaSadCry, FaShoppingBag } from "react-icons/fa";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 export default  function Homedash(props:any){
+  
     return <div className="w-full flex flex-col">
-         
      <div className="flex justify-around items-center pt-2 gap-5 px-16 my-16">
        
       <div className="w-80 h-52 bg-white border-2 border-gray-100 shadow-sm rounded-sm">
