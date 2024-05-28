@@ -22,7 +22,7 @@ export const productListSelector = selector({
             const brand = get(brandAtom)
             get(checkProductAtom)
             try {
-                const response = await axios.get(`http://localhost:3000/api/products?brandid=${brand}`)
+                const response = await axios.get(`https://vendor-panel-delta.vercel.app/api/products?brandid=${brand}`)
             return response.data
             } catch (error) {
                 return null
@@ -56,7 +56,7 @@ export const orderListSelector=selector({
     get:async ({get})=>{
         get(checkOrderAtom)
         try {
-            const response = await axios.get(`http://localhost:3000/api/orders?brandid=${brandAtom}`)
+            const response = await axios.get(`https://vendor-panel-delta.vercel.app/api/orders?brandid=${brandAtom}`)
         return response.data
         } catch (error) {
             return null
@@ -72,7 +72,7 @@ export const feedbackListSelector= selector({
     key:"feedbackListSelector",
     get:async ({get})=>{
         try {
-            const response = await axios.get('http://localhost:3000/api/feedback')
+            const response = await axios.get('https://vendor-panel-delta.vercel.app/api/feedback')
         return response.data.data
         } catch (error) {
             return null
@@ -93,7 +93,7 @@ export const brandSelector = selector({
     get: async ({ get }) => {
       const user = get(userAtom);
       try {
-        const response = await axios.get(`http://localhost:3000/api/restaurant?name=${user}`);
+        const response = await axios.get(`https://vendor-panel-delta.vercel.app/api/restaurant?name=${user}`);
         console.log("API response:", response.data);
         return response.data;
       } catch (error) {
