@@ -5,6 +5,8 @@ const prisma = new PrismaClient()
 export  async function GET(req:NextRequest){
     try {
         const productid = await req.nextUrl.searchParams.get('productid')
+        const limit = await req.nextUrl.searchParams.get('limit')
+        if(productid){
         const responce =  await prisma.rating.aggregate({
             where:{
                 productid:parseInt(productid!)
@@ -18,8 +20,32 @@ export  async function GET(req:NextRequest){
             status:200,
             data:responce
         })
+    }
+    if(limit){
+        const response = await prisma.rating.groupBy({
+            by:['productid'],
+            _avg:{
+                rating:true
+            },
+            orderBy:{
+                _avg:{
+                    rating:'desc'
+                }
+            },
+            take:parseInt(limit!)
+        })
+        return NextResponse.json({
+            status:200,
+            data:response
+        })
+    }
+    
+
     } catch (error) {
-        
+        return NextResponse.json({
+            status:404,
+            message:"something went wrong"
+        })
     }
 
 }

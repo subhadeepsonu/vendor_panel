@@ -5,7 +5,6 @@ import { useRecoilValueLoadable, useSetRecoilState } from "recoil";
 import { brandAtom, brandSelector, userAtom } from "@/store/atoms/checkatom";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
-import Loading from "./feedbacks/loading";
 export default function Home() {
   const { data, status } = useSession();
   const router = useRouter();
@@ -17,6 +16,7 @@ export default function Home() {
       router.push('/api/auth/signin');
     } else if (status === "authenticated" && data?.user?.name) {
       console.log(data.user.name);
+      window.localStorage.setItem("user data",data.user.name)
       setUser(data.user.name);
     }
   }, [status, router, data, setUser]);

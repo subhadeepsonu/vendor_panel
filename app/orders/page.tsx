@@ -22,8 +22,24 @@ export default function Orders(){
     if(orders.state=="hasValue"){
       console.log(orders)
       if(orders.contents.data.length==0){
-        return <div>
-          empty
+        return <div className="w-full flex flex-col justify-start items-center h-screen">
+          <div className="w-1/2 h-20 flex items-center justify-around">
+    <Button onClick={()=>{
+      setCategory("all")
+    }}>All</Button>
+    <Button onClick={()=>{
+      setCategory("cooking")
+    }}>Cooking</Button>
+    <Button onClick={()=>{
+      setCategory("ready")
+    }}>Ready</Button>
+    <Button onClick={()=>{
+      setCategory("delivered")
+    }}>Delivered</Button>
+    </div>
+    <div className="h-full w-full flex justify-center items-center text-5xl font-semibold">
+      No Orders Found 🥹
+    </div>
         </div>
       }
     return <div className=" flex flex-col justify-start items-center w-full min-h-screen ">
@@ -42,7 +58,7 @@ export default function Orders(){
       setCategory("delivered")
     }}>Delivered</Button>
     </div>
-      
+
       
      <div className="grid grid-cols-3 gap-5 ">
       
@@ -63,7 +79,7 @@ export default function Orders(){
       return <Loading></Loading>
     }
     if(orders.state=="hasError"){
-      return <div>
+      return <div className="flex justify-center items-center">
         error
       </div>
     }
