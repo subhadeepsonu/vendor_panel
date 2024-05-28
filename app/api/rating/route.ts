@@ -39,6 +39,21 @@ export  async function GET(req:NextRequest){
             data:response
         })
     }
+    const response = await prisma.rating.groupBy({
+        by:['productid'],
+        _avg:{
+            rating:true
+        },
+        orderBy:{
+            _avg:{
+                rating:'desc'
+            }
+        },
+    })
+    return NextResponse.json({
+        status:200,
+        data:response
+    })
     
 
     } catch (error) {
