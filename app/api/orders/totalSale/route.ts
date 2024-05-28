@@ -18,7 +18,7 @@ export  async function GET(req:NextRequest){
         })
         
     } catch (error) {
-        NextResponse.json({
+        return NextResponse.json({
             status:200,
             message:"something went wrong"
         })
