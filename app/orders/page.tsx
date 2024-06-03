@@ -1,7 +1,7 @@
 "use client"
-import { useRecoilValue, useRecoilValueLoadable} from "recoil"
+import { useRecoilValue,} from "recoil"
 import Ordercard from "@/components/ordercard";
-import { orderList } from "@/store/atoms/checkatom";
+import { filteredList, } from "@/store/atoms/checkatom";
 import { useSetRecoilState } from "recoil"
 import { Button } from "@/components/ui/button"
 import { categoryAtom } from "@/store/atoms/checkatom"
@@ -9,18 +9,17 @@ import { useSession } from "next-auth/react";
 import {  useRouter } from "next/navigation";
 import { useEffect } from "react";
 export default function Orders(){
-  const { data, status } = useSession();
+  const { status } = useSession();
     const router = useRouter();
     useEffect(() => {
         if (status === "unauthenticated") {
           router.push('/api/auth/signin');
         }
       }, [status, router]);
-    const orders = useRecoilValue(orderList)
+    let orders = useRecoilValue(filteredList)
     console.log(orders)
     const setCategory = useSetRecoilState(categoryAtom)
     return <div className=" flex flex-col justify-start items-center w-full min-h-screen ">
-      
       <div className="w-1/2 h-20 flex items-center justify-around">
     <Button onClick={()=>{
       setCategory("all")
@@ -36,7 +35,7 @@ export default function Orders(){
     }}>Delivered</Button>
     </div>
      <div className="grid grid-cols-3 gap-5 ">
-     {orders.data.map((order:any, index:number) => (
+     {orders.map((order:any, index:number) => (
             <Ordercard 
               key={index} 
               orderstatus={order.orderStatus} 
