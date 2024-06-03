@@ -6,7 +6,7 @@ export const productList = atom({
         key:'productListSelector',
         get: async ({get})=>{
             get(checkProductAtom)
-            const response = await axios.get(`http://localhost:3000/api/products`)
+            const response = await axios.get(`https://vendor-panel-delta.vercel.app/api/products`)
             return response.data
         }
     })
@@ -49,7 +49,7 @@ export const orderList = selector({
     key: 'orderListSelector',
     get: async ({get}) => {
         get(checkOrderAtom)
-      const resp = await axios.get(`http://localhost:3000/api/orders`);
+      const resp = await axios.get(`https://vendor-panel-delta.vercel.app/api/orders`);
       return resp.data;
     },
   });
@@ -57,7 +57,7 @@ export const feedbackListSelector= selector({
     key:"feedbackListSelector",
     get:async ({get})=>{
         try {
-            const response = await axios.get('http://localhost:3000/api/feedback')
+            const response = await axios.get('https://vendor-panel-delta.vercel.app/api/feedback')
         return response.data.data
         } catch (error) {
             return null
