@@ -10,7 +10,6 @@ export default function Home() {
     if (status === "unauthenticated") {
       router.push('/api/auth/signin');
     } else if (status === "authenticated" && data?.user?.name) {
-      console.log(data.user);
       window.localStorage.setItem("user data",data.user.name)
     }
   }, [status, router, data]);
