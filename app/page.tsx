@@ -1,8 +1,6 @@
 "use client";
 import Homedash from "@/components/HomeDash";
 import { useRouter } from "next/navigation";
-import { useRecoilValueLoadable, useSetRecoilState } from "recoil";
-import {  userAtom } from "@/store/atoms/checkatom";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 export default function Home() {
