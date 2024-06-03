@@ -1,7 +1,4 @@
 "use client"
-import { userAtom } from "@/store/atoms/checkatom"
-import { useSession } from "next-auth/react"
-import { useSetRecoilState } from "recoil"
 export default async function Profilecard(){ 
    
     return  <div className="w-10/12 bg-white border-2 border-gray-200 rounded-sm shadow-sm h-2/3 flex ">
