@@ -6,6 +6,7 @@ declare module "next-auth" {
         user :User & DefaultSession
     }
     interface User {
-        role : String | null
+        role : String | null,
+        brandid: number | null
     }
 }

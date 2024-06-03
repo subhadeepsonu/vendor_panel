@@ -1,8 +1,10 @@
 import { PrismaClient } from '@prisma/client'
+import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 const prisma = new PrismaClient()
 export async function GET(req:NextRequest){
     try {
+        const data = cookies().get('brandId')
         const status:any = await req.nextUrl.searchParams.get('status')
         const orderId = await req.nextUrl.searchParams.get('id')
         const brandId = await req.nextUrl.searchParams.get('brandId')
@@ -80,6 +82,9 @@ export async function GET(req:NextRequest){
                     orderid:'desc'
                 }
             ],
+            where:{
+                brandId:parseInt(data?.value!)
+            },
             include:{
                 orderproduct:{
                     include:{

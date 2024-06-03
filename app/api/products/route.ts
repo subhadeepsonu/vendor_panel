@@ -1,8 +1,10 @@
 import { PrismaClient } from '@prisma/client'
+import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 const prisma = new PrismaClient()
  export async function GET(req:NextRequest){
     try {
+        const data:any = cookies().get('brandId')
         const productId = req.nextUrl.searchParams.get('id')
         const BrandId = req.nextUrl.searchParams.get('brandid')
         const Category:any = req.nextUrl.searchParams.get('category')
@@ -80,6 +82,7 @@ const prisma = new PrismaClient()
             } catch (error) {
                 return NextResponse.json({
                     status:404,
+                    h:BrandId ,
                     "message":"something went wrong"
                 })
             }
@@ -119,9 +122,14 @@ const prisma = new PrismaClient()
                         id:'asc'
                     }
                 ],
+                where:{
+                    brandid:parseInt(data.value)
+                }
+
             })
             return NextResponse.json({
                 status:200,
+                v:data,
                 data:responce
             })
             

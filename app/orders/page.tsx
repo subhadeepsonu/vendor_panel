@@ -1,14 +1,13 @@
 "use client"
 import { useRecoilValue, useRecoilValueLoadable} from "recoil"
 import Ordercard from "@/components/ordercard";
-import { filteredList } from "@/store/atoms/checkatom";
+import { orderList } from "@/store/atoms/checkatom";
 import { useSetRecoilState } from "recoil"
 import { Button } from "@/components/ui/button"
 import { categoryAtom } from "@/store/atoms/checkatom"
 import { useSession } from "next-auth/react";
-import { redirect, useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 import { useEffect } from "react";
-import Loading from "../menu/loading";
 export default function Orders(){
   const { data, status } = useSession();
     const router = useRouter();
@@ -17,31 +16,9 @@ export default function Orders(){
           router.push('/api/auth/signin');
         }
       }, [status, router]);
-    const orders = useRecoilValueLoadable(filteredList)
+    const orders = useRecoilValue(orderList)
+    console.log(orders)
     const setCategory = useSetRecoilState(categoryAtom)
-    if(orders.state=="hasValue"){
-      console.log(orders)
-      if(orders.contents.data.length==0){
-        return <div className="w-full flex flex-col justify-start items-center h-screen">
-          <div className="w-1/2 h-20 flex items-center justify-around">
-    <Button onClick={()=>{
-      setCategory("all")
-    }}>All</Button>
-    <Button onClick={()=>{
-      setCategory("cooking")
-    }}>Cooking</Button>
-    <Button onClick={()=>{
-      setCategory("ready")
-    }}>Ready</Button>
-    <Button onClick={()=>{
-      setCategory("delivered")
-    }}>Delivered</Button>
-    </div>
-    <div className="h-full w-full flex justify-center items-center text-5xl font-semibold">
-      No Orders Found 🥹
-    </div>
-        </div>
-      }
     return <div className=" flex flex-col justify-start items-center w-full min-h-screen ">
       
       <div className="w-1/2 h-20 flex items-center justify-around">
@@ -58,11 +35,8 @@ export default function Orders(){
       setCategory("delivered")
     }}>Delivered</Button>
     </div>
-
-      
      <div className="grid grid-cols-3 gap-5 ">
-      
-     {orders.contents.data.map((order:any, index:number) => (
+     {orders.data.map((order:any, index:number) => (
             <Ordercard 
               key={index} 
               orderstatus={order.orderStatus} 
@@ -75,13 +49,4 @@ export default function Orders(){
     </div>
     </div>
     }
-    if(orders.state=="loading"){
-      return <Loading></Loading>
-    }
-    if(orders.state=="hasError"){
-      return <div className="flex justify-center items-center">
-        error
-      </div>
-    }
 
-}

@@ -1,6 +1,7 @@
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import { PrismaClient } from '@prisma/client'
+import { cookies } from "next/headers";
 const prisma = new PrismaClient()
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -9,27 +10,34 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientSecret: process.env.Google_Client_secret
     })
   ],
+  pages:{
+    signOut:"/signout"
+  }
+  ,
   callbacks: {
     async signIn({ user, account }) {
       try {
         if (account?.provider === "google") {
-          const { name, image, email } = user;
-          
-          const data = await  prisma.admin.findUnique({
+          const data:any = await  prisma.admin.findUnique({
             where:{
-              email:email!
+              email:user.email!
+            },
+            include:{
+              brands:true
             }
           })
+          console.log(data)
           if(data){
+            cookies().set('brandId',`${data.brands.id}`,{httpOnly:true})
             return true
           }
           else{
             try {
               const resp = await prisma.admin.create({
                 data:{
-                  email:email!,
-                  username:name!,
-                  imgurl:image!
+                  email:user.email!,
+                  username:user.name!,
+                  imgurl:user.image!
                 }
               })
               return true
@@ -44,5 +52,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         return Promise.resolve('/signin');
       }
     },
+    
   }
 });
