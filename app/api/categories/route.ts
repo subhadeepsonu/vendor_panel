@@ -8,12 +8,12 @@ export function GET(){
                 {
                     id:1,
                     category:"Biryani",
-                    imgurl:"https://sai.madhuram.xyz/wp-content/uploads/2024/06/biriyani_No-bg-e1717429298886.png"
+                    imgurl:"https://sai.madhuram.xyz/wp-content/uploads/2024/06/biriyani_No-bg-min.png"
                 },
                 {
                     id:2,
-                    category:"Tiffins",
-                    imgurl:"https://sai.madhuram.xyz/wp-content/uploads/2024/06/dosa_No-bg-e1717429795370.png"
+                    category:"Chicken",
+                    imgurl:"https://sai.madhuram.xyz/wp-content/uploads/2024/06/Fried-lollipop.png"
                 },
                 {
                     id:3,
@@ -22,19 +22,19 @@ export function GET(){
                 },
                 {
                     id:4,
-                    category:"Chinese",
-                    imgurl:"https://sai.madhuram.xyz/wp-content/uploads/2024/06/Noodels-No-bg-e1717429885762.png"
+                    category:"Fries",
+                    imgurl:"https://sai.madhuram.xyz/wp-content/uploads/2024/06/French-Fries.png"
                 },
                 // {
                 //     id:5,
                 //     category:"PaniPuri",
                 //     imgurl:"https://images.herzindagi.info/image/2020/Oct/chole-bhature-calories-one-plate.jpg"
                 // },
-                // {
-                //     id:6,
-                //     category:"Sweets",
-                //     imgurl:"https://images.herzindagi.info/image/2020/Oct/chole-bhature-calories-one-plate.jpg"
-                // },
+                {
+                    id:6,
+                    category:"Pizza",
+                    imgurl:"https://sai.madhuram.xyz/wp-content/uploads/2024/06/bbq-chicken-pizza-1.png"
+                },
                 // {
                 //     id:7,
                 //     category:"IceCream",
@@ -60,11 +60,11 @@ export function GET(){
                 //     category:"Momo's",
                 //     imgurl:"https://images.herzindagi.info/image/2020/Oct/chole-bhature-calories-one-plate.jpg"
                 // },
-                // {
-                //     id:12,
-                //     category:"Sandwiche's",
-                //     imgurl:"https://images.herzindagi.info/image/2020/Oct/chole-bhature-calories-one-plate.jpg"
-                // },
+                {
+                    id:12,
+                    category:"Sandwiche's",
+                    imgurl:"https://sai.madhuram.xyz/wp-content/uploads/2024/06/chicken-sandwich.png"
+                },
                 // },
             ]
                 

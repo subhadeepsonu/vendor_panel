@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+import { signIn } from 'next-auth/react'
 import { NextRequest, NextResponse } from 'next/server'
 const prisma = new PrismaClient()
 export  async function GET(){

@@ -1,8 +1,7 @@
+"use  client"
 import Navbarcomp from "./navbarcomp";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { auth } from "@/auth";
-import { Button } from "./ui/button";
-import { signOut } from "next-auth/react";
 import SignOutButton from "./signoutButton";
 export default async function Navbar(){
     const data = await auth()
@@ -14,10 +13,10 @@ export default async function Navbar(){
         </div>
         </div>
         <div className="w-1/3 flex justify-around items-center">
-            <Navbarcomp name="Home" href="/" check=""></Navbarcomp>
-            <Navbarcomp name="Menu" href="/menu" check="products"></Navbarcomp>
-            <Navbarcomp name="Orders" href="/orders" check="orders"></Navbarcomp>
-            <Navbarcomp name="Feedbacks" href="/feedbacks" check="feedbacks"></Navbarcomp>            
+            <Navbarcomp name="Home" href="/" ></Navbarcomp>
+            <Navbarcomp name="Menu" href="/menu" ></Navbarcomp>
+            <Navbarcomp name="Orders" href="/orders" ></Navbarcomp>
+            <Navbarcomp name="Feedbacks" href="/feedbacks" ></Navbarcomp>            
             <Avatar className="ml-2 h-12 w-12">
             <AvatarImage src={data?.user?.image!} />
             <AvatarFallback>CN</AvatarFallback>
