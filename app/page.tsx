@@ -5,7 +5,9 @@ import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 export default function Home() {
   const { data, status } = useSession();
+
   const router = useRouter();
+  console.log(data)
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push('/api/auth/signin');
@@ -15,7 +17,6 @@ export default function Home() {
   }, [status, router, data]);
   return (
     <div className="w-full min-h-screen">
-      
       <Homedash />
     </div>
   );

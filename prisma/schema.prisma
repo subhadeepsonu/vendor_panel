@@ -7,141 +7,172 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
-  id                Int                 @id @default(autoincrement())
-  name              String              @unique
-  email             String              @unique
-  phoneno           String?             @unique
-  imgurl            String?
-  order             orders[]
-  feedbacks         feedback[]
-  rating            rating[]
-  wishlist          wishlist[]
-  productonwishlist productonwishlist[]
+model User {
+  id                 Int                 @id @default(autoincrement())
+  name               String?
+  email              String?             @unique
+  emailVerified      DateTime?
+  image              String?
+  phoneno            String?             @unique
+  role               String?
+  brand              Brand?              @relation(fields: [brandId], references: [id])
+  orders             Order[]
+  feedbacks          Feedback[]
+  ratings            Rating[]
+  wishlists          Wishlist[]
+  productOnWishlists ProductOnWishlist[]
+  accounts           Account[]
+  sessions           Session[]
+  brandId            Int?                @unique
 }
 
-model admin {
-  email    String  @id @unique
-  username String  @unique
-  imgurl   String?
-  phoneno  String?
-  brands   Brand?
+model Account {
+  id                Int     @id @default(autoincrement())
+  userId            Int
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
 }
 
-model products {
-  id                Int                 @id @default(autoincrement())
-  stock             Int                 @default(0)
-  price             Int
-  name              String
-  imgurl            String              @default("https://www.foodandwine.com/thmb/Wd4lBRZz3X_8qBr69UOu2m7I2iw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/classic-cheese-pizza-FT-RECIPE0422-31a2c938fc2546c9a07b7011658cfd05.jpg")
-  saleprice         Int
-  isfeatured        Boolean             @default(false)
-  brandid           Int
-  nonveg            Boolean
-  description       String?
-  category          category
-  productype        productypes
-  brand             Brand               @relation(fields: [brandid], references: [id])
-  rating            rating[]
-  wishlist          wishlist[]
-  productonwishlist productonwishlist[]
-  OrderProduct      OrderProduct[]
+model Session {
+  id           Int      @id @default(autoincrement())
+  sessionToken String   @unique
+  userId       Int
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model productonwishlist {
-  id        Int      @id @default(autoincrement())
-  userid    Int
-  productid Int
-  user      user     @relation(fields: [userid], references: [id])
-  product   products @relation(fields: [productid], references: [id])
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Product {
+  id                 Int                 @id @default(autoincrement())
+  stock              Int                 @default(0)
+  price              Int
+  name               String
+  imgurl             String              @default("https://www.foodandwine.com/thmb/Wd4lBRZz3X_8qBr69UOu2m7I2iw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc=/classic-cheese-pizza-FT-RECIPE0422-31a2c938fc2546c9a07b7011658cfd05.jpg")
+  salePrice          Int
+  isFeatured         Boolean             @default(false)
+  brandId            Int
+  nonVeg             Boolean
+  description        String?
+  category           Category
+  productType        ProductType
+  brand              Brand               @relation(fields: [brandId], references: [id])
+  ratings            Rating[]
+  wishlists          Wishlist[]
+  productOnWishlists ProductOnWishlist[]
+  orderProducts      OrderProduct[]
+}
+
+model ProductOnWishlist {
+  id        Int     @id @default(autoincrement())
+  userId    Int
+  productId Int
+  user      User    @relation(fields: [userId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
 }
 
 model OrderProduct {
-  id        Int      @id @default(autoincrement())
-  orderid   Int
-  productid Int
+  id        Int     @id @default(autoincrement())
+  orderId   Int
+  productId Int
   quantity  Int
-  product   products @relation(fields: [productid], references: [id])
-  order     orders   @relation(fields: [orderid], references: [orderid])
+  product   Product @relation(fields: [productId], references: [id])
+  order     Order   @relation(fields: [orderId], references: [orderId])
 }
 
-enum category {
-  biryani
-  curry
-  breads
-  chinese
+enum Category {
+  BIRYANI
+  CURRY
+  BREADS
+  CHINESE
 }
 
-enum productypes {
-  single
-  variable
+enum ProductType {
+  SINGLE
+  VARIABLE
 }
 
 model Brand {
-  id         Int        @id @default(autoincrement())
-  name       String     @unique
-  isopen     Boolean    @default(false)
+  id         Int       @id @default(autoincrement())
+  name       String    @unique
+  isOpen     Boolean   @default(false)
   imgurl     String?
-  isfeatured Boolean    @default(false)
-  address    String?    @default("")
-  products   products[]
-  orders     orders[]
-  uniname    String?
-  adminname  String     @unique @default("ha")
-  admin      admin      @relation(fields: [adminname], references: [username])
+  isFeatured Boolean   @default(false)
+  address    String?   @default("")
+  products   Product[]
+  orders     Order[]
+  adminName  String    @unique @default("ha")
+  User       User?
 }
 
-model orders {
-  orderid      Int            @id @default(autoincrement())
-  orderStatus  orderStatus    @default(cooking)
-  totalamount  Int
-  orderedat    DateTime       @default(now())
-  address      String
-  feedbackid   Int?           @unique
-  feedback     feedback[]
-  user         user           @relation(fields: [userId], references: [id])
-  userId       Int
-  brandId      Int            @default(10)
-  brand        Brand          @relation(fields: [brandId], references: [id])
-  orderproduct OrderProduct[]
+model Order {
+  orderId       Int            @id @default(autoincrement())
+  orderStatus   OrderStatus    @default(COOKING)
+  totalAmount   Int
+  orderedAt     DateTime       @default(now())
+  address       String
+  feedbackId    Int?           @unique
+  feedback      Feedback[]
+  user          User           @relation(fields: [userId], references: [id])
+  userId        Int
+  brandId       Int            @default(10)
+  brand         Brand          @relation(fields: [brandId], references: [id])
+  orderProducts OrderProduct[]
 }
 
-model feedback {
+model Feedback {
   id      Int    @id @default(autoincrement())
   review  String
-  userid  Int
+  userId  Int
   rating  Int
-  orderid Int
-  order   orders @relation(fields: [orderid], references: [orderid])
-  user    user   @relation(fields: [userid], references: [id])
+  orderId Int
+  order   Order  @relation(fields: [orderId], references: [orderId])
+  user    User   @relation(fields: [userId], references: [id])
 }
 
-enum orderStatus {
-  cooking
-  ready
-  delivered
+enum OrderStatus {
+  COOKING
+  READY
+  DELIVERED
 }
 
 model Banner {
   id           Int     @id @default(autoincrement())
   imgurl       String?
-  targetscreen String
+  targetScreen String
   active       Boolean
 }
 
-model wishlist {
-  id        Int        @id @default(autoincrement())
-  userid    Int
-  productid Int
-  user      user       @relation(fields: [userid], references: [id])
-  products  products[]
+model Wishlist {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  productId Int
+  user      User      @relation(fields: [userId], references: [id])
+  products  Product[]
 }
 
-model rating {
-  id        Int      @id @default(autoincrement())
-  userid    Int
+model Rating {
+  id        Int     @id @default(autoincrement())
+  userId    Int
   rating    Int
-  productid Int
-  user      user     @relation(fields: [userid], references: [id])
-  product   products @relation(fields: [productid], references: [id])
+  productId Int
+  user      User    @relation(fields: [userId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
 }
