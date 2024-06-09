@@ -6,9 +6,11 @@ import {  toast } from 'sonner';
 import { updateOrder } from "@/components/actions/updateorder";
 import { useRecoilState } from "recoil";
 import { checkOrderAtom } from "@/store/atoms/checkatom";
+import { QueryClient } from "@tanstack/react-query";
 
 export default function Ordercard(props: any) {
   const [check,setCheck] = useRecoilState(checkOrderAtom)
+  const queryClient = new QueryClient()
   const handleUpdateOrder = async (status: string) => {
     try {
       await updateOrder(status, props.orderid);
@@ -46,14 +48,14 @@ export default function Ordercard(props: any) {
             })}
           </div>
           <div className="flex justify-around items-center h-16 pl-2 font-bold">
-            <Button variant={"delivered"} onClick={() => handleUpdateOrder("delivered")}>
+            <Button variant={"delivered"} onClick={() => handleUpdateOrder("DELIVERED")}>
               Delivered
             </Button>
-            <Button variant={"ready"} onClick={() => handleUpdateOrder("ready")}>
+            <Button variant={"ready"} onClick={() => handleUpdateOrder("READY")}>
               Ready
             </Button>
             <Button variant={"outline"}onClick={()=>{
-              handleUpdateOrder("cooking")
+              handleUpdateOrder("COOKING")
             }}>Cooking</Button>
           </div>
         </div>

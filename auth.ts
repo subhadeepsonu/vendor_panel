@@ -3,6 +3,7 @@ import GoogleProvider from "next-auth/providers/google"
 import { PrismaClient } from '@prisma/client'
 import { cookies } from "next/headers";
 import { PrismaAdapter } from "@auth/prisma-adapter"
+import { use } from "react";
 const prisma = new PrismaClient()
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter:PrismaAdapter(prisma),
@@ -22,22 +23,26 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
   )
   ],
-  pages:{
-    signOut:"/signout"
-  }
-  ,
   callbacks: {
-    async signIn({ user, account }) {
+    async signIn({ user }) {
+      const response = await prisma.user.findUnique({
+        where:{
+          email:user.email!
+        }
+      })
+      user.role=response?.role
+      user.brandId=response?.brandId
     return true
     },
     jwt({token,user}){
+      token.role = user.role
+      token.brandId = user.brandId
         return token
     },
-    session({ session, token}) {
-      
+    session({ session,user}) {
+      session.user.role= user.role
+      session.user.brandId = user.brandId
       return session
     }
-
-    
   }
 });

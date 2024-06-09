@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 const prisma = new PrismaClient()
 export async function GET(){
     try {
-        const responce = await prisma.products.findMany({
+        const responce = await prisma.product.findMany({
             take:10,
             orderBy:{
                 price:'desc'

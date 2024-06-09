@@ -8,7 +8,7 @@ export async function GET(req:NextRequest){
         if(uni){
             const responce = await prisma.brand.findMany({
                 where:{
-                    uniname:uni
+                    
                 }
             })
             return NextResponse.json({
@@ -19,7 +19,7 @@ export async function GET(req:NextRequest){
         if(data){
             const response = await prisma.brand.findUnique({
                 where:{
-                    adminname:data
+                    adminName:data
                 }
             })
             return NextResponse.json({
@@ -49,7 +49,7 @@ export async function POST(req:NextRequest){
         const responce = await prisma.brand.create({
             data:{
                 name:data.name,
-                adminname:data.adminname
+                adminName:data.adminname
             }
         });
         console.log(responce)
@@ -74,8 +74,8 @@ export async function PATCH(req:NextRequest){
             },
             data:{
                 imgurl:data.imgurl,
-                isfeatured:data.isfeatured,
-                isopen:data.isopen,
+                isFeatured:data.isfeatured,
+                isOpen:data.isopen,
                 name:data.name,
                 
             }

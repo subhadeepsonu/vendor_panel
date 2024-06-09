@@ -4,13 +4,12 @@ import { NextRequest, NextResponse } from 'next/server'
 const prisma = new PrismaClient()
  export async function GET(req:NextRequest){
     try {
-        const data:any = cookies().get('brandId')
         const productId = req.nextUrl.searchParams.get('id')
         const BrandId = req.nextUrl.searchParams.get('brandid')
         const Category:any = req.nextUrl.searchParams.get('category')
         if(productId){
             try {
-                const responce = await prisma.products.findMany({
+                const responce = await prisma.product.findMany({
                     where:{
                         id:parseInt(productId)
                     },
@@ -20,7 +19,7 @@ const prisma = new PrismaClient()
                         rating:true
                     },
                     where:{
-                        productid:parseInt(productId!)
+                        productId:parseInt(productId!)
                     }
                 })
                 return NextResponse.json({
@@ -38,14 +37,14 @@ const prisma = new PrismaClient()
         }
         else if(BrandId&&Category){
             try {
-                const responce = await prisma.products.findMany({
+                const responce = await prisma.product.findMany({
                     orderBy:[
                         {
                             id:'asc'
                         }
                     ],
                     where:{
-                        brandid:parseInt(BrandId),
+                        brandId:parseInt(BrandId),
                         category:Category
                     }
                 }) 
@@ -63,14 +62,14 @@ const prisma = new PrismaClient()
         }
         else if(BrandId){
             try {
-                const responce = await prisma.products.findMany({
+                const responce = await prisma.product.findMany({
                     orderBy:[
                         {
                             id:'asc'
                         }
                     ],
                     where:{
-                        brandid:parseInt(BrandId)
+                        brandId:parseInt(BrandId)
                     }
                 })
                 return NextResponse.json({
@@ -91,7 +90,7 @@ const prisma = new PrismaClient()
         else if(Category){
             try {
 
-                const responce = await prisma.products.findMany({
+                const responce = await prisma.product.findMany({
                     orderBy:[
                         {
                             id:'asc'
@@ -116,20 +115,15 @@ const prisma = new PrismaClient()
         }   
         else{
            try {
-            const responce = await prisma.products.findMany({
+            const responce = await prisma.product.findMany({
                 orderBy:[
                     {
                         id:'asc'
                     }
                 ],
-                where:{
-                    brandid:parseInt(data.value)
-                }
-
             })
             return NextResponse.json({
                 status:200,
-                v:data,
                 data:responce
             })
             
@@ -153,17 +147,17 @@ export async function POST(req:NextRequest){
         const data = await req.json()
         console.log("hehe")
         console.log(data)
-        const responce = await prisma.products.create({
+        const responce = await prisma.product.create({
            data:{
                 category:data.category,
                 price:data.price,
-                productype:data.productype,
-                saleprice:data.saleprice,
-                brandid:data.brandid,
-                isfeatured:false,
+                productType:data.productype,
+                salePrice:data.saleprice,
+                brandId:data.brandid,
+                isFeatured:false,
                 imgurl:data.imgurl,
                 name:data.name,
-                nonveg:data.nonveg,
+                nonVeg:data.nonveg,
                 description:data.description
            }
         })
@@ -182,7 +176,7 @@ export async function POST(req:NextRequest){
 export async function PATCH(req:NextRequest){
     try {
         const body = await req.json()
-        const responce = await prisma.products.update({
+        const responce = await prisma.product.update({
             where:{
                 id:body.id
             },
@@ -204,7 +198,7 @@ export async function PATCH(req:NextRequest){
 export async function DELETE(){
     try {
         
-        const res = await prisma.products.deleteMany()
+        const res = await prisma.product.deleteMany()
         return NextResponse.json({
             "message":"succes"
         })

@@ -1,10 +1,11 @@
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import { Toaster, toast } from 'sonner'
 import Navbar from "@/components/navbar";
-import RecoilContextProvider from "@/lib/recoilContextProvider";
+import RecoilContextProvider, { ReactQuearyProvider } from "@/lib/recoilContextProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -17,7 +18,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  
   return (
     <html lang="en">
       <body className={inter.className} >
@@ -27,7 +27,11 @@ export default function RootLayout({
           <Toaster richColors />
           <RecoilContextProvider>
           <SessionProvider> 
+            <ReactQuearyProvider>
         {children}
+        <ReactQueryDevtools />
+        {/* </ReactQueryDevtools> */}
+        </ReactQuearyProvider>
         </SessionProvider>
         </RecoilContextProvider>
         </SessionProvider>

@@ -1,30 +1,23 @@
-"use client"
-import ProductCard from "@/components/productcard";
-import { useRecoilValue} from "recoil";
-import { productList, } from "@/store/atoms/checkatom";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-export default function Products() {
-  const { data, status } = useSession();
-  const router = useRouter();
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push('/api/auth/signin');
-    }
-  }, [status, router]);
-  const fetchdata:any = useRecoilValue(productList)
-  console.log(fetchdata)
-  return (
-    <div className="w-full">
-      <div className="flex justify-center items-center w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 min-h-screen w-10/12">
-          { fetchdata.data.map((product: any) => (
-              <ProductCard key={product.id} imgurl={product.imgurl} name={product.name} price={product.price} description={product.description} stock={product.stock} id={product.id} />
-            ))}
-        </div>
+import { auth } from "@/auth";
+import Menu from "@/components/pages/menu";
+import SignOutButton from "@/components/signoutButton";
+import { redirect } from "next/navigation";
+export default async function Home() {
+  const session = await auth()
+  if(!session){
+    redirect('/api/auth/signin')
+  }
+  else{
+    if(!session.user.brandId){
+      return <div className="h-screen flex justify-center flex-col items-center">
+        <p className="m-5 text-xl">looks like u dont have restaurant to ur name 🥺 login with currect mail id</p>
+        <SignOutButton></SignOutButton>
       </div>
+    }
+  }
+  return (
+    <div className="w-full min-h-screen">
+      <Menu></Menu>
     </div>
   );
 }
-Products.displayName = 'Products';

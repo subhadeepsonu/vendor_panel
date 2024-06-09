@@ -9,7 +9,7 @@ export  async function GET(req:NextRequest){
         if(productid){
         const responce =  await prisma.rating.aggregate({
             where:{
-                productid:parseInt(productid!)
+                productId:parseInt(productid!)
 
             },
             _avg:{
@@ -23,7 +23,7 @@ export  async function GET(req:NextRequest){
     }
     if(limit){
         const response = await prisma.rating.groupBy({
-            by:['productid'],
+            by:['productId'],
             _avg:{
                 rating:true
             },
@@ -40,7 +40,7 @@ export  async function GET(req:NextRequest){
         })
     }
     const response = await prisma.rating.groupBy({
-        by:['productid'],
+        by:['productId'],
         _avg:{
             rating:true
         },
@@ -71,8 +71,8 @@ export async function POST(req:NextRequest){
         const responce = await prisma.rating.create({
             data:{
                rating:data.rating,
-               productid:data.productid,
-               userid:data.userid
+               productId:data.productid,
+               userId:data.userid
             }
         })
         console.log("haha")

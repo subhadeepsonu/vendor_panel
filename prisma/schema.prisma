@@ -14,8 +14,9 @@ model User {
   emailVerified      DateTime?
   image              String?
   phoneno            String?             @unique
-  role               String?
+  role               String?             @default("user")
   brand              Brand?              @relation(fields: [brandId], references: [id])
+  brandId            Int?                @unique
   orders             Order[]
   feedbacks          Feedback[]
   ratings            Rating[]
@@ -23,7 +24,6 @@ model User {
   productOnWishlists ProductOnWishlist[]
   accounts           Account[]
   sessions           Session[]
-  brandId            Int?                @unique
 }
 
 model Account {
@@ -110,21 +110,22 @@ enum ProductType {
 }
 
 model Brand {
-  id         Int       @id @default(autoincrement())
-  name       String    @unique
-  isOpen     Boolean   @default(false)
+  id         Int        @id @default(autoincrement())
+  name       String     @unique
+  isOpen     Boolean    @default(false)
   imgurl     String?
-  isFeatured Boolean   @default(false)
-  address    String?   @default("")
+  isFeatured Boolean    @default(false)
+  address    String?    @default("")
   products   Product[]
   orders     Order[]
-  adminName  String    @unique @default("ha")
+  feedbacks  Feedback[]
+  adminName  String     @unique @default("ha")
   User       User?
 }
 
 model Order {
   orderId       Int            @id @default(autoincrement())
-  orderStatus   OrderStatus    @default(COOKING)
+  orderStatus   String         @default("COOKING")
   totalAmount   Int
   orderedAt     DateTime       @default(now())
   address       String
@@ -143,14 +144,10 @@ model Feedback {
   userId  Int
   rating  Int
   orderId Int
+  brandId Int?
   order   Order  @relation(fields: [orderId], references: [orderId])
   user    User   @relation(fields: [userId], references: [id])
-}
-
-enum OrderStatus {
-  COOKING
-  READY
-  DELIVERED
+  Brand   Brand? @relation(fields: [brandId], references: [id])
 }
 
 model Banner {

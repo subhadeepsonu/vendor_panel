@@ -8,7 +8,7 @@ export async function GET(req:NextRequest){
         if(orderId){
         const responce = await prisma.feedback.findMany({
             where:{
-                orderid:parseInt(orderId)
+                orderId:parseInt(orderId)
             }
         })
         return NextResponse.json({
@@ -19,7 +19,7 @@ export async function GET(req:NextRequest){
         else if(userId){
             const responce = await prisma.feedback.findMany({
                 where:{
-                    userid:parseInt(userId)
+                    userId:parseInt(userId)
                 }
             })
             return NextResponse.json({
@@ -59,8 +59,8 @@ export async function POST(req:NextRequest){
             data:{
                 rating:data.rating,
                 review:data.review,
-                orderid:data.orderId,
-                userid:data.userId
+                orderId:data.orderId,
+                userId:data.userId
             }
 
         })

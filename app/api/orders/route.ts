@@ -4,17 +4,16 @@ import { NextRequest, NextResponse } from 'next/server'
 const prisma = new PrismaClient()
 export async function GET(req:NextRequest){
     try {
-        const data = cookies().get('brandId')
         const status:any = await req.nextUrl.searchParams.get('status')
         const orderId = await req.nextUrl.searchParams.get('id')
         const brandId = await req.nextUrl.searchParams.get('brandId')
         if(brandId){
-            const response = await prisma.orders.findMany({
+            const response = await prisma.order.findMany({
                 where:{
                     brandId:parseInt(brandId)
                 },
                 include:{
-                    orderproduct:{
+                    orderProducts:{
                         include:{
                             product:{
                                 
@@ -30,12 +29,12 @@ export async function GET(req:NextRequest){
             })
         }
         if(orderId){
-            const responce =  await prisma.orders.findMany({
+            const responce =  await prisma.order.findMany({
                 where:{
-                    orderid:parseInt(orderId)
+                    orderId:parseInt(orderId)
                 },
                 include:{
-                    orderproduct:{
+                    orderProducts:{
                         include:{
                             product:{
                                 
@@ -54,12 +53,12 @@ export async function GET(req:NextRequest){
 
         }
         else if(status){
-                const responce =  await prisma.orders.findMany({
+                const responce =  await prisma.order.findMany({
                     where:{
                         orderStatus:status!
                     },
                     include:{
-                        orderproduct:{
+                        orderProducts:{
                             include:{
                                 product:{
                                     
@@ -76,17 +75,14 @@ export async function GET(req:NextRequest){
             
         }
         else{
-        const responce =  await prisma.orders.findMany({
+        const responce =  await prisma.order.findMany({
             orderBy:[
                 {
-                    orderid:'desc'
+                    orderId:'desc'
                 }
             ],
-            where:{
-                brandId:parseInt(data?.value!)
-            },
             include:{
-                orderproduct:{
+                orderProducts:{
                     include:{
                         product:{
                             
@@ -127,14 +123,14 @@ export async function POST(req: NextRequest) {
             }
         });
 
-        if (check?.isfeatured) {
-            const response = await prisma.orders.create({
+        if (check?.isFeatured) {
+            const response = await prisma.order.create({
                 data: {
                     address: data.address,
-                    totalamount: data.totalamount,
+                    totalAmount: data.totalamount,
                     userId: data.userId,
                     brandId: data.brandId,
-                    orderproduct: {
+                    orderProducts: {
                         create: data.products.map((item: { productId: number, quantity: number }) => ({
                             quantity: item.quantity,
                             product: {
@@ -165,9 +161,9 @@ export async function POST(req: NextRequest) {
 export async function PATCH(req:NextRequest){
     try {
         const data = await req.json()
-        const responce = await prisma.orders.update({
+        const responce = await prisma.order.update({
             where:{
-                orderid:data.orderid
+                orderId:data.orderid
             },
             data:{
                 orderStatus:data.status

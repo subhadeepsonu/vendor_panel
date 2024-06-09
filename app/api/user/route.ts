@@ -25,7 +25,7 @@ export  async function POST(req:NextRequest){
             data:{
                 email:body.email,
                 name:body.name,
-                imgurl:body.imgurl
+                image:body.image
             }
         })
         

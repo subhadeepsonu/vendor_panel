@@ -1,4 +1,3 @@
-"use  client"
 import Navbarcomp from "./navbarcomp";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { auth } from "@/auth";

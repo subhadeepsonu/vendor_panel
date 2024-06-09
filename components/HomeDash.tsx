@@ -1,8 +1,8 @@
-
 import Link from "next/link";
 import { FaHotjar, FaRupeeSign, FaSadCry, FaShoppingBag } from "react-icons/fa";
+import HomePageOrders from "./homePageOrders";
 export default  function Homedash(props:any){
-  
+
     return <div className="w-full flex flex-col">
      <div className="flex justify-around items-center pt-2 gap-5 px-16 my-16">
        
@@ -69,10 +69,8 @@ export default  function Homedash(props:any){
       <Link href={"orders"}>View All </Link>
       </div>
       <div className="flex justify-around items-center w-full">
-      {/* <Ordercard orderstatus="cooking"></Ordercard>
-        <Ordercard orderstatus="cooking"></Ordercard>
-        <Ordercard orderstatus="delivered"></Ordercard> */}
 
+  <HomePageOrders></HomePageOrders>
       </div>
     </div>
 }
