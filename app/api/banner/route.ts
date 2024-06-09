@@ -34,9 +34,11 @@ export async function POST(req:NextRequest){
             data:{
                 active:data.active,
                 imgurl:data.imgurl,
-                targetscreen:data.targetscreen
-
+                targetScreen:data.targetscreen
             }
+        })
+        return NextResponse.json({
+            data:responce
         })
     } catch (error) {
         return NextResponse.json({
@@ -55,6 +57,9 @@ export async function PATCH(req:NextRequest) {
             data: {
                 active:data.active
             }
+        })
+        return NextResponse.json({
+            data:responce
         })
     } catch (error) {
         return NextResponse.json({
