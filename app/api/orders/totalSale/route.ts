@@ -4,12 +4,12 @@ const prisma = new PrismaClient()
 export  async function GET(req:NextRequest){
     try {
         const data = await req.nextUrl.searchParams.get('brandId')
-        const response = await prisma.orders.aggregate({
+        const response = await prisma.order.aggregate({
             where:{
                 brandId:parseInt(data!)
             },
             _sum:{
-                totalamount:true
+                totalAmount:true
             }
         })
         return NextResponse.json({
