@@ -6,7 +6,7 @@ export async function GET(req:NextRequest){
         const userId = await req.nextUrl.searchParams.get('id')
         const responce = await prisma.wishlist.findMany({
             where:{
-                userid:parseInt(userId!)
+                userId:parseInt(userId!)
             }
         })
         return NextResponse.json({
@@ -25,7 +25,7 @@ export async function POST(req:NextRequest){
         const data = await req.json()
         const check = await prisma.wishlist.findMany({
             where:{
-                productid:data.productid
+                productId:data.productid
             }
         })
         if(check){
@@ -38,8 +38,8 @@ export async function POST(req:NextRequest){
         else{
         const responce = await prisma.wishlist.create({
             data:{
-                userid:data.userid,
-                productid:data.productid
+                userId:data.userid,
+                productId:data.productid
             }
         })
         return NextResponse.json({
