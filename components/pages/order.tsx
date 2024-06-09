@@ -6,15 +6,19 @@ import { categoryAtom, checkOrderAtom } from "@/store/atoms/checkatom"
 import {  useQuery } from "@tanstack/react-query";
 import GetAllOrders from "@/components/actions/getAllOrders";
 import { useSession } from "next-auth/react";
+import Loading from "@/app/menu/loading";
 export default function Orders(){
   const session = useSession()
   const [category,setCategory] = useRecoilState(categoryAtom)
   const check = useRecoilValue(checkOrderAtom)
-  const {data,error}= useQuery({
+  const {data,error,isLoading}= useQuery({
     queryKey:["orders",category,check],
     queryFn:()=>GetAllOrders(session.data?.user.brandId!)
   })
   console.log(data)
+  if(isLoading){
+    return <Loading></Loading>
+  }
   if(error){
     return <div className="h-screen flex justify-center items-center">Error: {error.message}</div>
   }

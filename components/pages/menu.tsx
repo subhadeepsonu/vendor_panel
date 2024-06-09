@@ -4,14 +4,18 @@ import {useQuery} from "@tanstack/react-query"
 import {getProductBrandId} from  "@/components/actions/getProductBrandid"
 import { useRecoilValue } from "recoil";
 import { checkProductAtom } from "@/store/atoms/checkatom";
+import Loading from "@/app/feedbacks/loading";
 export default function Menu() {
   const check = useRecoilValue(checkProductAtom)
-  const {data: value,error} = useQuery({
+  const {data: value,error,isLoading} = useQuery({
     queryKey:["menu",check],
     queryFn: ()=>getProductBrandId(),
     staleTime:2000
   })
   console.log("usequery",value)
+  if(isLoading){
+    return <Loading></Loading>
+  }
   if (error) {
     return <div>Error: {error.message}</div>;
   }

@@ -1,7 +1,10 @@
+import { auth } from '@/auth'
 import { PrismaClient } from '@prisma/client'
+import { useSession } from 'next-auth/react'
 import { NextRequest, NextResponse } from 'next/server'
 const prisma = new PrismaClient()
 export async function GET(req:NextRequest){
+    
     try {
         const orderId = await req.nextUrl.searchParams.get('orderId')
         const userId = await req.nextUrl.searchParams.get('userId')
@@ -62,7 +65,6 @@ export async function POST(req:NextRequest){
                 orderId:data.orderId,
                 userId:data.userId
             }
-
         })
         console.log("haha")
         return NextResponse.json({

@@ -1,14 +1,18 @@
 "use client"
+import Loading from "@/app/feedbacks/loading";
 import GetFeedback from "@/components/actions/getFeedback";
 import FeedbackCard from "@/components/feedbackCard";
 import { useQuery } from "@tanstack/react-query";
 export default function Feedbacks(brandId:any){
-    const {data,error} = useQuery({
+    const {data,error,isLoading} = useQuery({
       queryKey:["feedback",brandId],
       queryFn:()=>GetFeedback()
     },
   )
   console.log(data)
+  if(isLoading){
+    return <Loading></Loading>
+  }
     if(error){
       return <div className="h-screen flex justify-center items-center">Error: {error.message}</div>;
     }
