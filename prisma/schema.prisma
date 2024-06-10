@@ -72,7 +72,7 @@ model Product {
   nonVeg             Boolean
   description        String?
   category           Category
-  productType        ProductType
+  productType        ProductType?
   brand              Brand               @relation(fields: [brandId], references: [id])
   ratings            Rating[]
   wishlists          Wishlist[]

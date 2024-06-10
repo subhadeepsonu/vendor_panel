@@ -5,6 +5,8 @@ import {getProductBrandId} from  "@/components/actions/getProductBrandid"
 import { useRecoilValue } from "recoil";
 import { checkProductAtom } from "@/store/atoms/checkatom";
 import Loading from "@/app/feedbacks/loading";
+import { Button } from "../ui/button";
+import Link from "next/link";
 export default function Menu() {
   const check = useRecoilValue(checkProductAtom)
   const {data: value,error,isLoading} = useQuery({
@@ -34,6 +36,9 @@ export default function Menu() {
                 <ProductCard key={product.id} imgurl={product.imgurl} name={product.name} price={product.price} description={product.description} stock={product.stock} id={product.id} />
               ))}
           </div>
+          <Link href={"/menu/addProduct"}>
+          <Button className="fixed right-5 bottom-5" size={"lg"}>Add Product</Button>
+          </Link>
         </div>
       </div>
     );

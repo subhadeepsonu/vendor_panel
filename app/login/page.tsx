@@ -1,14 +1,20 @@
 "use client"
-import { useState } from "react";
-function App(){
-    const [count,setcount]=useState(0);
-  return <div> <CustomButton count={count}  setcount={setcount} ></CustomButton>
-</div>
+import { UploadButton } from "@/utils/uploadthing"
+import { useState } from "react"
+import Image from "next/image"
+export default function (){
+  const [imgurl,setimgurl] = useState("")
+  return <div className="h-screen w-full flex-col flex justify-center items-center">
+    {imgurl.length ? (
+       <Image src={imgurl} alt="image" width={500} height={500}></Image>
+    ) :null}
+    <UploadButton endpoint="imageUploader"
+      onClientUploadComplete={(res) => {
+        setimgurl(res[0].url)
+      }}
+      onUploadError={(error: Error) => {
+        alert(`ERROR! ${error.message}`);
+      }}
+    ></UploadButton>
+  </div>
 }
-function CustomButton(props:any){
-  function Counthandler(){
-    props.setcount(props.count+1);
-  }
-  return <button onClick={Counthandler}> count is {props.count} </button>
-}
-export default App

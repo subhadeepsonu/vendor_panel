@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client'
-import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 const prisma = new PrismaClient()
  export async function GET(req:NextRequest){
@@ -111,7 +110,6 @@ const prisma = new PrismaClient()
                     "message":"something went wrong"
                 })
             }
-
         }   
         else{
            try {
