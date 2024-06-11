@@ -12,6 +12,7 @@ export default function Ordercard(props: any) {
     mutationFn:()=>  updateOrder(value, props.orderid),
     onSettled:()=>{
       queryClient.invalidateQueries({queryKey:["order"]})
+      queryClient.invalidateQueries({queryKey:["feworders"]})
       toast.success("Update Succesful")
     },
     onError:()=>{
