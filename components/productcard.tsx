@@ -7,6 +7,7 @@
     import { useState } from "react";
     import { useRecoilState } from "recoil";
     import { checkProductAtom } from "@/store/atoms/checkatom";
+import { TrashIcon } from "@radix-ui/react-icons";
     export default function ProductCard(props:any){
         const [value,setValue] = useState(0)
         const [check,setCheck] =  useRecoilState(checkProductAtom)
@@ -21,35 +22,45 @@
             }
         };
 
-        return <Fade duration={500} delay={0}  className="w-96 h-28  rounded-sm border-2 border-gray-100 shadow-sm  duration-150">
-            <div className="h-full w-full flex justify-center items-center">
-                <div className="h-full w-1/2">
-                <div className="h-1/2 w-full font-semibold flex justify-center items-center">
-                    {props.name}
+        return <Fade duration={500} delay={0}  className="w-80 h-80  rounded-md border-2 border-gray-200 shadow-md  duration-150">
+            <div className="h-full w-full flex flex-col justify-center items-center">
+                <div className="h-2/3 w-full border-b-2 border-gray-300 border-dotted">
+                    <div className="h-5/6 bg-gray-50  flex justify-center rounded-t-md items-center">
+                        <img src={props.imgurl} className="h-full  "></img>
+                        
+                    </div>
+                    <div className="h-1/6 w-full font-semibold flex justify-evenly items-center">
+                        {props.name}
+                    </div>
                 </div>
-                <div className="flex justify-center items-center font-semibold">
-                Stock: {props.stock}
-                </div>
-                </div>
-                <div className="h-full w-1/2">
-                <div className="h-1/2 w-full font-semibold flex justify-center items-center">
-                    <Input type="number"
-                    value={value === 0 ? '' : value} 
-                    onChange={(e)=>{
-                        setValue(parseInt(e.target.value))
-                    }} className="w-2/3"></Input>
-                </div>
-                <div className="flex justify-center items-center font-semibold">
-                <Button onClick={()=>{
-                    setValue(0)
-                    handleUpdateStock(value)
-                }} >Update stock</Button>
-                <Button onClick={()=>{
-                    handleUpdateStock(0)
-                }}>
-                    Out Of stock
-                </Button>
-                </div>
+                <div className="h-1/3 w-full">
+                    <div className="h-1/2 w-full font-semibold flex justify-around items-center">
+                    <div className="flex w-2/3 justify-around items-center font-semibold">
+                        <div className="">
+                            Price:{props.price} 
+                        </div>
+                        <div>
+                            Stock: {props.stock}
+                        </div>                       
+                    </div>
+                        <Input type="number"
+                            value={value === 0 ? '' : value} 
+                            onChange={(e)=>{
+                                setValue(parseInt(e.target.value))
+                            }} className="w-1/3 mr-1 border-2 border-gray-200"></Input>
+                        
+                    </div>
+                    <div className="flex justify-around items-center font-semibold">
+                        <Button onClick={()=>{
+                            setValue(0)
+                            handleUpdateStock(value)
+                             }} >Update stock</Button>
+                        <Button onClick={()=>{
+                            handleUpdateStock(0)
+                        }}>
+                            Out Of stock
+                        </Button>
+                    </div>
                 </div>
             </div>
         

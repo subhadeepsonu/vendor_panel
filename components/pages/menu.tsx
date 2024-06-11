@@ -32,9 +32,8 @@ export default function Menu() {
   }
   else{
     return (
-      <div className="w-full">
-        <div className="flex justify-center items-center w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 min-h-screen w-10/12">
+        <div className="flex justify-center items-center w-full ">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 min-h-screen w-10/12">
             { value.map((product: any) => (
                 <ProductCard key={product.id} imgurl={product.imgurl} name={product.name} price={product.price} description={product.description} stock={product.stock} id={product.id} />
               ))}
@@ -43,7 +42,7 @@ export default function Menu() {
           <Button className="fixed right-5 bottom-5" size={"lg"}>Add Product</Button>
           </Link>
         </div>
-      </div>
+      
     );
   }
 }
