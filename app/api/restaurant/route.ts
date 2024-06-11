@@ -17,9 +17,9 @@ export async function GET(req:NextRequest){
             })
         }
         if(data){
-            const response = await prisma.brand.findUnique({
+            const response = await prisma.brand.findMany({
                 where:{
-                    adminName:data
+                    
                 }
             })
             return NextResponse.json({
@@ -49,7 +49,7 @@ export async function POST(req:NextRequest){
         const responce = await prisma.brand.create({
             data:{
                 name:data.name,
-                adminName:data.adminname
+                
             }
         });
         console.log(responce)
