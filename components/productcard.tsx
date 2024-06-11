@@ -1,17 +1,17 @@
-    'use client'
-    import { Button } from "./ui/button";
-    import { Fade } from "react-awesome-reveal";
-    import { Input } from "./ui/input";
-    import { toast } from "sonner";
-    import { updateStock } from "./actions/updatestock";
-    import { useState } from "react";
-    import { useRecoilState } from "recoil";
-    import { checkProductAtom } from "@/store/atoms/checkatom";
+'use client'
+import { Button } from "./ui/button";
+import { Fade } from "react-awesome-reveal";
+import { Input } from "./ui/input";
+import { toast } from "sonner";
+import { updateStock } from "./actions/updatestock";
+import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { checkProductAtom } from "@/store/atoms/checkatom";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { DeleteProduct } from "./actions/deleteProduct";
 import { AlertDialog } from "@radix-ui/react-alert-dialog";
 import { AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogTitle, AlertDialogTrigger } from "./ui/alert-dialog";
-    export default function ProductCard(props:any){
+export default function ProductCard(props:any){
         const [value,setValue] = useState(0)
         const [check,setCheck] =  useRecoilState(checkProductAtom)
         const handleUpdateStock = async (stock: number) => {
@@ -34,8 +34,6 @@ import { AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogTi
             toast.error('Unable to delete product');
             }
         };
-
-
         return <Fade duration={500} delay={0}  className="w-72 h-80  rounded-lg border-2 border-gray-100 shadow-sm  duration-150 hover:shadow-lg">
             <div className="h-full w-full flex flex-col justify-center items-center">
                 <div className="h-2/3 w-full border-b-2 border-gray-300 border-dotted">
@@ -75,9 +73,6 @@ import { AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogTi
                             setValue(0)
                             handleUpdateStock(value)
                              }} >Update stock</Button>
-                        {/* <Button onClick={()=>{
-                        handleDeleteProduct()
-                        }}><TrashIcon></TrashIcon></Button> */}
                         <AlertDialog>
                             <AlertDialogTrigger><Button><TrashIcon></TrashIcon></Button></AlertDialogTrigger>
                             <AlertDialogContent>

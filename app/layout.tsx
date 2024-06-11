@@ -28,7 +28,9 @@ export default function RootLayout({
           <RecoilContextProvider>
           <SessionProvider> 
             <ReactQuearyProvider>
+              <div className='pt-20'>
         {children}
+        </div>
         <ReactQueryDevtools />
         {/* </ReactQueryDevtools> */}
         </ReactQuearyProvider>

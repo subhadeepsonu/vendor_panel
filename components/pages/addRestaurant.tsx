@@ -6,7 +6,6 @@ import * as z from "zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { useState } from "react"
 import { UploadButton } from "@/utils/uploadthing"
-import Image from "next/image"
 import { Input } from "../ui/input"
 import { Textarea } from "../ui/textarea"
 import { Button } from "../ui/button"
@@ -39,8 +38,7 @@ export default function AddRestaurant(){
         <div className="h-5/6 w-2/3 flex border-2 border-gray-300 rounded-md shadow-md ">
         <div className="h-full w-2/3 border-r-2 border-gray-200 ">
         <div className="h-5/6 w-full flex justify-center items-center">
-            {imgurl.length ? (<Image className="border-2 border-gray-200" src={imgurl} alt="image" width={400} height={400} quality={50} ></Image> ) : null}
-            
+            {imgurl.length ? (<img className="border-2 border-gray-200 h-full w-full object-cover" src={imgurl} alt="image" ></img> ) : null}
         </div>
             <UploadButton endpoint="imageUploader"
             onClientUploadComplete={(res) => {

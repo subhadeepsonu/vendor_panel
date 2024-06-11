@@ -1,7 +1,6 @@
 "use client";
 import { UploadButton } from "@/utils/uploadthing";
 import { useState } from "react";
-import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, FormProvider } from "react-hook-form";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
@@ -48,15 +47,7 @@ const onSubmit = async (data: any) => {
         <div className="w-2/3 h-full p-5 border-r-2 border-gray-200">
           <div className="w-full h-5/6 flex justify-center items-center m-2">
             {imgurl.length ? (
-              <Image
-                className="border-2 border-gray-300 rounded-md quality={50}"
-                src={imgurl}
-                alt="image"
-                width={400}
-                height={400}
-                
-                quality={50}
-              />
+              <img className="border-2 border-gray-200 h-full w-full object-cover" src={imgurl} alt="image" ></img>
             ) : null}
           </div>
           <UploadButton

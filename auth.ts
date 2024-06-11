@@ -1,10 +1,7 @@
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
-import { PrismaClient } from '@prisma/client'
-import { cookies } from "next/headers";
 import { PrismaAdapter } from "@auth/prisma-adapter"
-import { use } from "react";
-const prisma = new PrismaClient()
+import prisma from "./db";
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter:PrismaAdapter(prisma),
   secret: process.env.AUTH_SECRET,
@@ -32,6 +29,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       })
       user.role=response?.role
       user.brandId=response?.brandId
+      
     return true
     },
     jwt({token,user}){
@@ -44,5 +42,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       session.user.brandId = user.brandId
       return session
     }
+  },
+  pages:{
+    signIn:"/login"
   }
 });
