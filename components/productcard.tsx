@@ -9,6 +9,8 @@
     import { checkProductAtom } from "@/store/atoms/checkatom";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { DeleteProduct } from "./actions/deleteProduct";
+import { AlertDialog } from "@radix-ui/react-alert-dialog";
+import { AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogTitle, AlertDialogTrigger } from "./ui/alert-dialog";
     export default function ProductCard(props:any){
         const [value,setValue] = useState(0)
         const [check,setCheck] =  useRecoilState(checkProductAtom)
@@ -73,9 +75,19 @@ import { DeleteProduct } from "./actions/deleteProduct";
                             setValue(0)
                             handleUpdateStock(value)
                              }} >Update stock</Button>
-                               <Button onClick={()=>{
+                        {/* <Button onClick={()=>{
                         handleDeleteProduct()
-                    }}><TrashIcon></TrashIcon></Button>
+                        }}><TrashIcon></TrashIcon></Button> */}
+                        <AlertDialog>
+                            <AlertDialogTrigger><Button><TrashIcon></TrashIcon></Button></AlertDialogTrigger>
+                            <AlertDialogContent>
+                            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                                <AlertDialogCancel>cancel</AlertDialogCancel>
+                                <AlertDialogAction onClick={()=>{
+                                    handleDeleteProduct()
+                                }}>Delete</AlertDialogAction>
+                            </AlertDialogContent>
+                        </AlertDialog>
                     </div>
                 </div>
             </div>
