@@ -1,26 +1,23 @@
 "use client"
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Fade } from "react-awesome-reveal";
 import {  toast } from 'sonner';
 import { updateOrder } from "@/components/actions/updateorder";
-import { useRecoilState } from "recoil";
-import { checkOrderAtom } from "@/store/atoms/checkatom";
-import { QueryClient } from "@tanstack/react-query";
-
+import {  useMutation, useQueryClient } from "@tanstack/react-query";
 export default function Ordercard(props: any) {
-  const [check,setCheck] = useRecoilState(checkOrderAtom)
-  const queryClient = new QueryClient()
-  const handleUpdateOrder = async (status: string) => {
-    try {
-      await updateOrder(status, props.orderid);
-      setCheck(check=>check+1)
-      toast.success('Updated successfully');
-    } catch (error) {
-      toast.error('Failed to update order status');
+  const [value,setValue]= useState("")
+  const queryClient = useQueryClient()
+  const MutateUpdateOrder = useMutation({
+    mutationFn:()=>  updateOrder(value, props.orderid),
+    onSettled:()=>{
+      queryClient.invalidateQueries({queryKey:["order"]})
+      toast.success("Update Succesful")
+    },
+    onError:()=>{
+      toast.error("Could not update")
     }
-  };
-
+  })
   return (
     <Fade>
       <div className="min-h-64 w-96 rounded-lg shadow-sm border-2 border-gray-100 flex justify-around items-center bg-white hover:shadow-lg duration-150">
@@ -48,14 +45,22 @@ export default function Ordercard(props: any) {
             })}
           </div>
           <div className="flex justify-around items-center h-16 pl-2 font-bold border-t-2 border-gray-200 border-dashed">
-            <Button variant={"delivered"} onClick={() => handleUpdateOrder("DELIVERED")}>
+            <Button disabled={MutateUpdateOrder.isPending} variant={"delivered"} onClick={() => 
+              {
+                setValue("DELIVERED")
+                MutateUpdateOrder.mutate()
+              }
+              }>
               Delivered
             </Button>
-            <Button variant={"ready"} onClick={() => handleUpdateOrder("READY")}>
+            <Button disabled={MutateUpdateOrder.isPending} variant={"ready"} onClick={() =>{ 
+              setValue("READY")
+              MutateUpdateOrder.mutate()}}>
               Ready
             </Button>
-            <Button variant={"outline"}onClick={()=>{
-              handleUpdateOrder("COOKING")
+            <Button disabled={MutateUpdateOrder.isPending} variant={"outline"}onClick={()=>{
+              setValue("COOKING")
+              MutateUpdateOrder.mutate()
             }}>Cooking</Button>
           </div>
         </div>

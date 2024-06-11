@@ -4,7 +4,7 @@ import HomePageOrders from "./homePageOrders";
 
 export default function Homedash(props: any) {
   return (
-    <div className="w-full flex flex-col bg-gray-50 min-h-screen">
+    <div className="w-full flex flex-col bg-white min-h-screen">
       <div className="flex justify-around items-center pt-12 gap-10 px-16 my-16">
         <div className="w-80 h-52 bg-white border-2 border-gray-200 shadow-sm rounded-lg transition transform hover:shadow-lg">
           <div className="w-full h-1/2 rounded-t-lg flex flex-col justify-around items-center bg-gradient-to-r from-purple-400 to-red-500 text-white p-4">

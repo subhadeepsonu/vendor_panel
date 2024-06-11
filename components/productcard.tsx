@@ -5,36 +5,46 @@ import { Input } from "./ui/input";
 import { toast } from "sonner";
 import { updateStock } from "./actions/updatestock";
 import { useState } from "react";
-import { useRecoilState } from "recoil";
-import { checkProductAtom } from "@/store/atoms/checkatom";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { DeleteProduct } from "./actions/deleteProduct";
 import { AlertDialog } from "@radix-ui/react-alert-dialog";
 import { AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogTitle, AlertDialogTrigger } from "./ui/alert-dialog";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 export default function ProductCard(props:any){
-        const [value,setValue] = useState(0)
-        const [check,setCheck] =  useRecoilState(checkProductAtom)
-        const handleUpdateStock = async (stock: number) => {
-            try {
-            await updateStock(stock,props.id)
-            setCheck(check=>check+1)
-            toast.success('Updated successfully');
-            
-            } catch (error) {
-            toast.error('Failed to update stock');
+        const [ava,setava] = useState(0)
+        const queryClient = useQueryClient()
+        const MutateUpdateStock = useMutation({
+            mutationFn:()=> updateStock(ava,props.id),
+            onSuccess:()=>{
+                queryClient.invalidateQueries({queryKey:["menu"]})
+                toast.success('Updated successfully');
+                setava(0)
+            },
+            onError:()=>{
+                toast.error("Could not update")
             }
-        };
-        const handleDeleteProduct = async () => {
-            try {
-            await DeleteProduct(parseInt(props.id))
-            setCheck(check=>check+1)
-            toast.success('Product Deleted')
-            } catch (error) {
-                console.log(error)
-            toast.error('Unable to delete product');
+        })
+        const MutateZeroStock = useMutation({
+            mutationFn:()=> updateStock(0,props.id),
+            onSuccess:()=>{
+                queryClient.invalidateQueries({queryKey:["menu"]})
+                toast.success('Updated successfully');
+            },
+            onError:()=>{
+                toast.error("Could not update")
             }
-        };
-        return <Fade duration={500} delay={0}  className="w-72 h-80  rounded-lg border-2 border-gray-100 shadow-sm  duration-150 hover:shadow-lg">
+        })
+        const MutateDeleteProduct = useMutation({
+            mutationFn:()=> DeleteProduct(parseInt(props.id)),
+            onSuccess:()=>{
+                queryClient.invalidateQueries({queryKey:["menu"]})
+                toast.success('Deleted successfully');
+            },
+            onError:()=>{
+                toast.error("Could not delete")
+            }
+        })
+        return <Fade duration={500} delay={0}  className="w-72 h-80 bg-white  rounded-lg border-2 border-gray-100 shadow-sm  duration-150 hover:shadow-lg">
             <div className="h-full w-full flex flex-col justify-center items-center">
                 <div className="h-2/3 w-full border-b-2 border-gray-300 border-dotted">
                     <div className="h-5/6   flex justify-center rounded-t-lg items-center">
@@ -56,30 +66,29 @@ export default function ProductCard(props:any){
                         </div>                       
                     </div>
                         <Input type="number"
-                            value={value === 0 ? '' : value} 
+                            value={ava === 0 ? '' : ava} 
                             onChange={(e)=>{
-                                setValue(parseInt(e.target.value))
+                                setava(parseInt(e.target.value))
                             }} className="w-1/3 mr-1 border-2 border-gray-200"></Input>
                         
                     </div>
                     <div className="flex justify-around items-center font-semibold">
-                  
-                        <Button onClick={()=>{
-                            handleUpdateStock(0)
+                        <Button disabled={MutateZeroStock.isPending} onClick={()=>{
+                            MutateZeroStock.mutate()
                         }}>
                             0 stock
                         </Button>                
-                        <Button onClick={()=>{
-                            setValue(0)
-                            handleUpdateStock(value)
+                        <Button disabled={MutateUpdateStock.isPending} onClick={()=>{
+                                MutateUpdateStock.mutate()
+                                
                              }} >Update stock</Button>
                         <AlertDialog>
                             <AlertDialogTrigger><Button><TrashIcon></TrashIcon></Button></AlertDialogTrigger>
                             <AlertDialogContent>
                             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                                 <AlertDialogCancel>cancel</AlertDialogCancel>
-                                <AlertDialogAction onClick={()=>{
-                                    handleDeleteProduct()
+                                <AlertDialogAction disabled={MutateDeleteProduct.isPending} onClick={()=>{
+                                    MutateDeleteProduct.mutate()
                                 }}>Delete</AlertDialogAction>
                             </AlertDialogContent>
                         </AlertDialog>

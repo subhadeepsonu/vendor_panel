@@ -10,9 +10,8 @@ import Loading from "@/app/menu/loading";
 export default function Orders(){
   const session = useSession()
   const [category,setCategory] = useRecoilState(categoryAtom)
-  const check = useRecoilValue(checkOrderAtom)
   const {data,error,isLoading}= useQuery({
-    queryKey:["orders",category,check],
+    queryKey:["order"],
     queryFn:()=>GetAllOrders(session.data?.user.brandId!)
   })
   console.log(data)

@@ -10,12 +10,17 @@ import { Input } from "../ui/input"
 import { Textarea } from "../ui/textarea"
 import { Button } from "../ui/button"
 import { toast } from "sonner"
-import { useRouter } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 import { AddRestaurantt } from "../actions/addRestaurant"
+import {  useMutation, useQueryClient } from "@tanstack/react-query"
+import { useRecoilValue } from "recoil"
+import { checkProductAtom } from "@/store/atoms/checkatom"
 export default function AddRestaurant(){
+  const check = useRecoilValue(checkProductAtom)
     type AddRestaurantFormValues = z.infer<typeof AddRestaurantSchema>;
     const [imgurl,setimgurl]= useState("")
     const router = useRouter()
+    const queryClient = useQueryClient()
     const form = useForm<AddRestaurantFormValues>({
         resolver: zodResolver(AddRestaurantSchema) ,
         mode:"onChange",
@@ -24,16 +29,15 @@ export default function AddRestaurant(){
             name:""
         }
     })
-    const onSubmit = async (data:any)=>{
-        try {
-            await AddRestaurantt(data.name,data.address,imgurl)
-            form.reset()
-            toast.success('Added successfully');
-            router.replace('/menu')
-          } catch (error) {
-            toast.error('Failed to add restaurant');
-          }
-    }
+    const values = form.getValues()
+    const data = useMutation({
+      mutationFn: ()=> AddRestaurantt(values.name,values.address,imgurl),
+      onSuccess: ()=>{
+        queryClient.invalidateQueries({queryKey:["menu"]})
+        toast.success("Added restaurant")
+        router.replace('/')
+      }
+    })
     return <div className="h-screen w-full flex justify-center items-start">
         <div className="h-5/6 w-2/3 flex border-2 border-gray-300 rounded-md shadow-md ">
         <div className="h-full w-2/3 border-r-2 border-gray-200 ">
@@ -54,7 +58,9 @@ export default function AddRestaurant(){
         <div className="h-full w-1/3 flex justify-center items-center">
         <div className="h-1/2 flex flex-col justify-around items-center">
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)}>
+                <form onSubmit={form.handleSubmit(()=>{
+                  data.mutate()
+                })}>
              <FormField
           control={form.control}
           name="name"

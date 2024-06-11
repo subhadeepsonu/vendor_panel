@@ -2,15 +2,12 @@
 import ProductCard from "@/components/productcard";
 import {useQuery} from "@tanstack/react-query"
 import {getProductBrandId} from  "@/components/actions/getProductBrandid"
-import { useRecoilValue } from "recoil";
-import { checkProductAtom } from "@/store/atoms/checkatom";
 import Loading from "@/app/feedbacks/loading";
 import { Button } from "../ui/button";
 import Link from "next/link";
 export default function Menu() {
-  const check = useRecoilValue(checkProductAtom)
   const {data: value,error,isLoading} = useQuery({
-    queryKey:["menu",check],
+    queryKey:["menu"],
     queryFn: ()=>getProductBrandId(),
     staleTime:2000
   })

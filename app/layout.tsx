@@ -32,7 +32,6 @@ export default function RootLayout({
         {children}
         </div>
         <ReactQueryDevtools />
-        {/* </ReactQueryDevtools> */}
         </ReactQuearyProvider>
         </SessionProvider>
         </RecoilContextProvider>

@@ -12,8 +12,7 @@ import { addProductSchema } from "../schema/schemas";
 import { toast } from "sonner";
 import { Addproduct } from "../actions/addProduct";
 import { useRouter } from "next/navigation";
-
-
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 export default function AddProduct() {
   const [imgurl, setimgurl] = useState("");
   const router =  useRouter()
@@ -29,18 +28,16 @@ export default function AddProduct() {
     }
   }
 ,);
-
-const onSubmit = async (data: any) => {
-    try {
-      await Addproduct(imgurl,data.name,parseInt(data.price),parseInt(data.salePrice),data.nonVeg,data.category)
-      formMethods.reset()
-      toast.success('Added successfully');
-      router.replace('/menu')
-    } catch (error) {
-      toast.error('Failed to add product');
-    }
-  };
-
+const values = formMethods.getValues()
+const queryClient = useQueryClient()
+const AddProductMutation= useMutation({
+  mutationFn:()=>Addproduct(imgurl,values.name,parseInt(values.price),parseInt(values.salePrice),values.nonVeg,values.category),
+  onSuccess:()=>{
+    queryClient.invalidateQueries({queryKey:["menu"]})
+    toast.success("Added Product")
+    router.replace('/menu')
+  }
+})
   return (
     <div className="h-screen w-full flex justify-center">
       <div className="h-5/6 w-1/2 flex justify-around items-center border-2 border-gray-300 rounded-md shadow-md">
@@ -65,7 +62,9 @@ const onSubmit = async (data: any) => {
         <div className="w-1/3 h-full p-5 flex justify-around items-center ">
         
           <FormProvider {...formMethods} >
-            <form  onSubmit={formMethods.handleSubmit(onSubmit)} className="flex flex-col justify-around items-center h-full">
+            <form  onSubmit={formMethods.handleSubmit(()=>{
+                AddProductMutation.mutate()
+            })} className="flex flex-col justify-around items-center h-full">
               <FormField
                 control={formMethods.control}
                 name="name"
