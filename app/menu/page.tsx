@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import AddRestaurantButton from "@/components/addRestaurantButton";
 import Menu from "@/components/pages/menu";
 import SignOutButton from "@/components/signoutButton";
 import { redirect } from "next/navigation";
@@ -11,7 +12,7 @@ export default async function Home() {
     if(!session.user.brandId){
       return <div className="h-screen flex justify-center flex-col items-center">
         <p className="m-5 text-xl">looks like u dont have restaurant to ur name 🥺 login with currect mail id</p>
-        <SignOutButton></SignOutButton>
+        <AddRestaurantButton></AddRestaurantButton>
       </div>
     }
   }

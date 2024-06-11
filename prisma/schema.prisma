@@ -120,7 +120,6 @@ model Brand {
   products   Product[]
   orders     Order[]
   feedbacks  Feedback[]
-  adminName  String     @unique @default("ha")
   User       User?
 }
 

@@ -25,6 +25,9 @@ export default function Menu() {
   if(value?.length==0){
     return <div className="flex justify-center  items-center h-screen text-2xl font-bold">
       You currently have no products 😔
+      <Link href={"/menu/addProduct"}>
+          <Button className="fixed right-5 bottom-5" size={"lg"}>Add Product</Button>
+          </Link>
     </div>
   }
   else{
