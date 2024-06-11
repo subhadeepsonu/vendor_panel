@@ -1,7 +1,6 @@
 "use server"
 import { auth } from '@/auth'
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
+import prisma from '@/db'
 export default async function GetFeedback(){
     try {
         const data = await auth()

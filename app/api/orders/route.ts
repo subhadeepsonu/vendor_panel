@@ -1,7 +1,6 @@
-import { PrismaClient } from '@prisma/client'
+import prisma from '@/db'
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
-const prisma = new PrismaClient()
 export async function GET(req:NextRequest){
     try {
         const status:any = await req.nextUrl.searchParams.get('status')

@@ -1,7 +1,5 @@
-import { PrismaClient } from '@prisma/client'
-import { signIn } from 'next-auth/react'
 import { NextRequest, NextResponse } from 'next/server'
-const prisma = new PrismaClient()
+import prisma from '@/db'
 export  async function GET(){
     try {
         const responce = await prisma.user.findMany({

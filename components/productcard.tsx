@@ -22,10 +22,10 @@ import { TrashIcon } from "@radix-ui/react-icons";
             }
         };
 
-        return <Fade duration={500} delay={0}  className="w-80 h-80  rounded-md border-2 border-gray-200 shadow-md  duration-150">
+        return <Fade duration={500} delay={0}  className="w-72 h-80  rounded-md border-2 border-gray-200 shadow-sm  duration-150">
             <div className="h-full w-full flex flex-col justify-center items-center">
                 <div className="h-2/3 w-full border-b-2 border-gray-300 border-dotted">
-                    <div className="h-5/6 bg-gray-50  flex justify-center rounded-t-md items-center">
+                    <div className="h-5/6   flex justify-center rounded-t-md items-center">
                         <img src={props.imgurl} className="h-full  "></img>
                         
                     </div>

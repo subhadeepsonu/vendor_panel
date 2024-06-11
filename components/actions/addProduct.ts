@@ -1,7 +1,6 @@
 "use server"
 import { auth } from '@/auth'
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
+import prisma from '@/db'
 export async function Addproduct(imgurl:string,name:string,price:number,salePrice:number,nonVeg:boolean
     ,category:any
 ){

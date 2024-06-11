@@ -1,6 +1,5 @@
-import { PrismaClient } from '@prisma/client'
+import prisma from '@/db'
 import { NextRequest, NextResponse } from 'next/server'
-const prisma = new PrismaClient()
 export  async function GET(req:NextRequest){
     try {
         const data = await req.nextUrl.searchParams.get('brandId')

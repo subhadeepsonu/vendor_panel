@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
-
-
+import prisma from '@/db'
 export async function PATCH(req:NextRequest){
     try {
         const data = await req.json()

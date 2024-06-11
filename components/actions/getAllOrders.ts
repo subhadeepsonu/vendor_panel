@@ -1,6 +1,5 @@
 "use server"
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
+import prisma from '@/db'
 export default async function GetAllOrders(id:number){
     try {
         const response = await prisma.order.findMany({
