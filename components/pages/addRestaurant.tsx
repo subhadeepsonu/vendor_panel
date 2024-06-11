@@ -32,7 +32,7 @@ export default function AddRestaurant(){
             toast.success('Added successfully');
             router.replace('/menu')
           } catch (error) {
-            toast.error('Failed to update order status');
+            toast.error('Failed to add restaurant');
           }
     }
     return <div className="h-screen w-full flex justify-center items-start">

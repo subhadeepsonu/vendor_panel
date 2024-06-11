@@ -38,7 +38,7 @@ const onSubmit = async (data: any) => {
       toast.success('Added successfully');
       router.replace('/menu')
     } catch (error) {
-      toast.error('Failed to update order status');
+      toast.error('Failed to add product');
     }
   };
 

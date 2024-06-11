@@ -23,9 +23,9 @@ export default function Ordercard(props: any) {
 
   return (
     <Fade>
-      <div className="min-h-64 w-96 rounded-sm shadow-sm border-2 border-gray-100 flex justify-around items-center bg-white">
+      <div className="min-h-64 w-96 rounded-lg shadow-sm border-2 border-gray-100 flex justify-around items-center bg-white hover:shadow-lg duration-150">
         <div className="h-full w-full py-2">
-          <div className="h-16 w-full flex justify-around items-start pl-2">
+          <div className="h-16 w-full flex justify-around items-start pl-2 border-b-2 border-gray-200 border-dashed">
             <div className="h-full w-1/2 flex items-center justify-center flex-col">
               <div className="font-semibold">Order No: {props.orderid}</div>
               <div className="font-semibold">Rs. {props.price}</div>
@@ -47,7 +47,7 @@ export default function Ordercard(props: any) {
               </div>
             })}
           </div>
-          <div className="flex justify-around items-center h-16 pl-2 font-bold">
+          <div className="flex justify-around items-center h-16 pl-2 font-bold border-t-2 border-gray-200 border-dashed">
             <Button variant={"delivered"} onClick={() => handleUpdateOrder("DELIVERED")}>
               Delivered
             </Button>

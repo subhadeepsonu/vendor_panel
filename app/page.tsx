@@ -1,7 +1,6 @@
 import { auth } from "@/auth";
 import Homedash from "@/components/HomeDash";
 import AddRestaurantButton from "@/components/addRestaurantButton";
-import SignOutButton from "@/components/signoutButton";
 import { redirect } from "next/navigation";
 export default async function Home() {
   const session = await auth()
