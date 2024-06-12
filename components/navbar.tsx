@@ -36,7 +36,7 @@ export default async function Navbar(){
                 <Link href={'/feedbacks'}>Feedbacks</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem >
-                    <SignOutButton>S</SignOutButton>
+                    <SignOutButton></SignOutButton>
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
