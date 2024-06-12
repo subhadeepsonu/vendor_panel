@@ -27,7 +27,7 @@ export default function Orders(){
     }
     else{
       return <div className=" flex flex-col justify-start items-center w-full min-h-screen ">
-      <div className="lg:w-1/2 h-20 flex items-center justify-around">
+      <div className="lg:w-1/2 w-full h-20 flex items-center justify-around">
     <Button onClick={()=>{
       setCategory("all")
     }}>All</Button>

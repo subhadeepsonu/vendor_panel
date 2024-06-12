@@ -22,7 +22,7 @@ export default function Feedbacks(brandId:any){
       }
       else{
         return <div className="flex justify-center items-start min-h-screen w-full">
-        <div className="grid grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
         {data!.map((feedback:any,index:number)=>{
             return <FeedbackCard key={index} name={feedback.user.name} rating={feedback.rating} description={feedback.review}  ></FeedbackCard>
         })}
