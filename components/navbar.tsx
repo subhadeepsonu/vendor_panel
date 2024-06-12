@@ -18,6 +18,7 @@ export default async function Navbar(){
         </div>
         </div>
         <div className="lg:hidden p-5">
+            <ModeToggle></ModeToggle>
         <DropdownMenu >
             <DropdownMenuTrigger>
                 <HamburgerMenuIcon></HamburgerMenuIcon>
