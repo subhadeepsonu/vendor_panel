@@ -20,7 +20,7 @@ export default function Menu() {
   }
   if(value){
   if(value?.length==0){
-    return <div className="flex justify-center   items-center h-screen g:text-2xl font-bold text-center">
+    return <div className="flex justify-center   items-center h-screen lg:text-2xl font-bold text-center">
       You currently have no products 😔
       <Link href={"/menu/addProduct"}>
           <Button className="fixed right-5 bottom-5" size={"lg"}>Add Product</Button>
@@ -30,7 +30,7 @@ export default function Menu() {
   else{
     return (
         <div className="flex justify-center items-center  ">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 min-h-screen ">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 min-h-screen ">
             { value.map((product: any) => (
                 <ProductCard key={product.id} imgurl={product.imgurl} name={product.name} price={product.price} description={product.description} stock={product.stock} id={product.id} />
               ))}

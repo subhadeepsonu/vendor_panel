@@ -5,7 +5,6 @@ import { auth } from "@/auth";
 import { ModeToggle } from "./themeChangeButton";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 export default async function Navbar(){
     const session = await  auth()
@@ -17,8 +16,10 @@ export default async function Navbar(){
             Cheez E Choice
         </div>
         </div>
-        <div className="lg:hidden p-5">
-            <ModeToggle></ModeToggle>
+        <div className="lg:hidden p-5 flex">
+            <div className="p-2">
+            <ModeToggle ></ModeToggle>
+            </div>
         <DropdownMenu >
             <DropdownMenuTrigger>
                 <HamburgerMenuIcon></HamburgerMenuIcon>

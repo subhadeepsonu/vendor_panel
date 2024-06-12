@@ -18,7 +18,7 @@ export default function Feedbacks(brandId:any){
     }
     if(data){
       if(data.length===0){
-        return <div className="h-screen flex justify-center items-center text-2xl font-bold">You currently have no Feedbacks 😟</div>
+        return <div className="h-screen flex justify-center items-center lg:text-2xl font-bold">You currently have no Feedbacks 😟</div>
       }
       else{
         return <div className="flex justify-center items-start min-h-screen w-full">

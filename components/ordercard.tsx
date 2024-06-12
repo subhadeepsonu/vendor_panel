@@ -1,11 +1,30 @@
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Fade } from "react-awesome-reveal";
 import {  toast } from 'sonner';
 import { updateOrder } from "@/components/actions/updateorder";
 import {  useMutation, useQueryClient } from "@tanstack/react-query";
 export default function Ordercard(props: any) {
+  const [color,setColor]= useState("")
+  const [bgColor,setBgColor]=useState("")
+  useEffect(()=>{
+    if(props.orderstatus=="Cooking"){
+      setColor('text-red-900')
+      setBgColor('bg-red-100')
+      console.log(color)
+    }
+    if(props.orderstatus=="Ready"){
+      setColor('text-yellow-900')
+      setBgColor('bg-yellow-100')
+      console.log(color)
+    }
+    if(props.orderstatus=="Delivered"){
+      setColor('text-green-900')
+      setBgColor('bg-green-100')
+      console.log(color)
+    }
+  },[props.orderstatus])
   const [value,setValue]= useState("")
   const queryClient = useQueryClient()
   const MutateUpdateOrder = useMutation({
@@ -21,19 +40,22 @@ export default function Ordercard(props: any) {
   })
   return (
     <Fade>
-      <div className="min-h-64 w-96 rounded-lg shadow-sm border-2 border-gray-100 flex justify-around items-center bg-white hover:shadow-lg duration-150 dark:bg-zinc-900 dark:border-gray-600">
+      <div className="min-h-72 w-96 rounded-lg shadow-sm border-2 border-gray-200 dark:shadow-gray-700 flex justify-around items-center bg-white hover:shadow-lg duration-150 dark:bg-zinc-900 dark:border-gray-600">
         <div className="h-full w-full py-2">
-          <div className="h-16 w-full flex justify-around items-start pl-2 border-b-2 border-gray-200 border-dashed dark:border-gray-600">
-            <div className="h-full w-1/2 flex items-center justify-center flex-col">
+          <div className="h-20 w-full flex justify-around items-start pl-2 border-b-2 border-gray-200 border-dashed dark:border-gray-600">
+            <div className="h-full w-1/2 flex items-center justify-around flex-col">
               <div className="font-semibold">Order No: {props.orderid}</div>
-              <div className="font-semibold">Rs. {props.price}</div>
+              <div className="font-semibold ">Rs. {props.price}</div>
             </div>
-            <div className="w-1/2 h-full font-semibold flex justify-center items-center flex-col">
+            <div className={`w-1/2 h-full  font-semibold flex justify-around items-center flex-col`}>
               <div>Order Status:</div>
+              <div className={`${color} ${bgColor} rounded-lg px-2`}>
               {props.orderstatus}
+              </div>
+              
             </div>
           </div>
-          <div className="w-full min-h-32 flex flex-col justify-around items-center">
+          <div className="w-full min-h-36 flex flex-col justify-around items-center">
             {props.orderproduct.map((orderproduct:any,index:number)=>{
               return <div key={index} className="flex  w-full justify-between  px-10 items-center ">
                 <div>

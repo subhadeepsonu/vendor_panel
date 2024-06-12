@@ -38,9 +38,9 @@ export default function AddRestaurant(){
         router.replace('/')
       }
     })
-    return <div className="h-screen w-full flex justify-center items-start">
-        <div className="h-5/6 w-2/3 flex border-2 border-gray-300 rounded-md shadow-md dark:bg-zinc-900 dark:border-gray-600 ">
-        <div className="h-full w-2/3 border-r-2 border-gray-200 dark:border-gray-600">
+    return <div className="h-screen w-full flex  justify-center items-start">
+        <div className="h-5/6 w-2/3  flex border-2 border-gray-300 rounded-md shadow-md dark:bg-zinc-900 dark:border-gray-600 ">
+        <div className="h-full w-2/3 hidden  lg:flex lg:flex-col  border-r-2 border-gray-200 dark:border-gray-600">
         <div className="h-5/6 w-full flex justify-center items-center">
             {imgurl.length ? (<img className="border-2 border-gray-200  dark:border-gray-600 h-2/3 w-2/3 object-cover" src={imgurl} alt="image" ></img> ) : null}
         </div>
@@ -55,10 +55,10 @@ export default function AddRestaurant(){
             ></UploadButton>
             {!imgurl.length ? (<p className="flex justify-center items-center text-red-400"> Please upload image first</p>) : null}
         </div>
-        <div className="h-full w-1/3 flex justify-center items-center">
-        <div className="h-1/2 flex flex-col justify-around items-center">
+        <div className="h-full w-full lg:w-1/3 flex justify-center items-center">
+        <div className="h-full  flex flex-col justify-around items-center">
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(()=>{
+                <form className="h-1/2 flex flex-col justify-around items-center" onSubmit={form.handleSubmit(()=>{
                   data.mutate()
                 })}>
              <FormField
@@ -90,7 +90,18 @@ export default function AddRestaurant(){
         <Button disabled={!imgurl.length} type="submit">Submit</Button>
                 </form>
               </Form>
+              <UploadButton endpoint="imageUploader" className="lg:hidden"
+            onClientUploadComplete={(res) => {
+                setimgurl(res[0].url);
+                console.log("Files: ", res);
+              }}
+              onUploadError={(error: Error) => {
+                alert(`ERROR! ${error.message}`);
+              }}
+            ></UploadButton>
+            {!imgurl.length ? (<p className=" lg:hidden flex justify-center items-center text-red-400"> Please upload image first</p>) : null}
               </div>
+             
         </div>
         </div>
     </div>

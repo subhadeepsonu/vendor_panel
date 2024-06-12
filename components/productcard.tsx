@@ -45,7 +45,7 @@ export default function ProductCard(props:any){
                 toast.error("Could not delete")
             }
         })
-        return <Fade duration={500} delay={0}  className="w-72 h-80 bg-white  dark:border-gray-600 dark:bg-zinc-900  rounded-lg border-2 border-gray-100  shadow-sm  duration-150 hover:shadow-lg">
+        return <Fade duration={500} delay={0}  className="w-72 h-80 bg-white dark:hover:shadow-gray-600 dark:hover:shadow-lg dark:shadow-sm  dark:border-gray-600 dark:bg-zinc-900  rounded-lg border-2 border-gray-100  shadow-sm  duration-150 hover:shadow-lg">
             <div className="h-full w-full flex flex-col justify-center items-center ">
                 <div className="h-2/3 w-full border-b-2 border-gray-300 border-dotted dark:border-gray-600">
                     <div className="h-5/6   flex justify-center rounded-t-lg items-center">
