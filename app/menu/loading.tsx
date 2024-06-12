@@ -1,7 +1,16 @@
-
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function(){
-    return <div className="flex justify-center bg-white dark:text-gray-200 items-center h-screen w-full text-5xl font-bold dark:bg-zinc-800">
-        fetching your data...
+    return  <div className="flex justify-center items-center  ">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 min-h-screen ">
+      <Skeleton className="w-72 h-80"></Skeleton>
+      <Skeleton className="w-72 h-80"></Skeleton>
+      <Skeleton className="w-72 h-80"></Skeleton>
+      <Skeleton className="w-72 h-80"></Skeleton>
+      <Skeleton className="w-72 h-80"></Skeleton>
+      <Skeleton className="w-72 h-80"></Skeleton>
+      <Skeleton className="w-72 h-80"></Skeleton>
+      <Skeleton className="w-72 h-80"></Skeleton>
     </div>
+  </div>
 }

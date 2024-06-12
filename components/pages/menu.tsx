@@ -2,7 +2,7 @@
 import ProductCard from "@/components/productcard";
 import {useQuery} from "@tanstack/react-query"
 import {getProductBrandId} from  "@/components/actions/getProductBrandid"
-import Loading from "@/app/feedbacks/loading";
+import Loading from "@/app/menu/loading";
 import { Button } from "../ui/button";
 import Link from "next/link";
 export default function Menu() {

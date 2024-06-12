@@ -12,7 +12,7 @@ export default function HomePageOrders(){
       if(error){
         return <div className="h-screen flex justify-center items-center">Error: {error.message}</div>
       }
-        if(data){
+      if(data){
         if(data.length===0){
           return <div className="min-h-96 flex justify-center items-center text-2xl font-bold">You currently have no orders 🥺</div>
         }

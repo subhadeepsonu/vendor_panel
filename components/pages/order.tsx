@@ -6,7 +6,7 @@ import { categoryAtom,  } from "@/store/atoms/checkatom"
 import {  useQuery } from "@tanstack/react-query";
 import GetAllOrders from "@/components/actions/getAllOrders";
 import { useSession } from "next-auth/react";
-import Loading from "@/app/menu/loading";
+import Loading from "@/app/orders/loading";
 export default function Orders(){
   const session = useSession()
   const [category,setCategory] = useRecoilState(categoryAtom)
