@@ -25,18 +25,26 @@ export default async function Navbar(){
                 <HamburgerMenuIcon></HamburgerMenuIcon>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
+            <Link href={'/'}>
                 <DropdownMenuItem >
-                    <Link href={'/'}>Home</Link>
+                    Home
                 </DropdownMenuItem>
+                </Link>
+                <Link href={'/menu'}>
                 <DropdownMenuItem >
-                <Link href={'/menu'}>Menu</Link>
+                Menu
                 </DropdownMenuItem>
+                </Link>
+                <Link href={'/orders'}>
                 <DropdownMenuItem >
-                <Link href={'/orders'}>Orders</Link>
+                Orders
                 </DropdownMenuItem>
+                </Link>
+                <Link href={'/feedbacks'}>
                 <DropdownMenuItem >
-                <Link href={'/feedbacks'}>Feedbacks</Link>
+                Feedbacks
                 </DropdownMenuItem>
+                </Link>
                 <DropdownMenuItem >
                     <SignOutButton></SignOutButton>
                 </DropdownMenuItem>

@@ -87,7 +87,7 @@ export default function AddRestaurant(){
             </FormItem>
           )}
         />
-        <Button disabled={!imgurl.length} type="submit">Submit</Button>
+        <Button disabled={!imgurl.length || data.isPending} type="submit">Submit</Button>
                 </form>
               </Form>
               <UploadButton endpoint="imageUploader" className="lg:hidden"

@@ -140,7 +140,7 @@ const AddProductMutation= useMutation({
                   </FormItem>
                 )}
               />
-              <Button disabled={!imgurl.length} type="submit">Submit</Button>
+              <Button disabled={!imgurl.length || AddProductMutation.isPending} type="submit">Submit</Button>
             </form>
           </FormProvider>
           
