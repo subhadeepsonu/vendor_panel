@@ -29,6 +29,7 @@ export default function ProductCard(props:any){
             onSuccess:()=>{
                 queryClient.invalidateQueries({queryKey:["menu"]})
                 toast.success('Updated successfully');
+                setava(0)
             },
             onError:()=>{
                 toast.error("Could not update")
@@ -44,9 +45,9 @@ export default function ProductCard(props:any){
                 toast.error("Could not delete")
             }
         })
-        return <Fade duration={500} delay={0}  className="w-72 h-80 bg-white  rounded-lg border-2 border-gray-100 shadow-sm  duration-150 hover:shadow-lg">
-            <div className="h-full w-full flex flex-col justify-center items-center">
-                <div className="h-2/3 w-full border-b-2 border-gray-300 border-dotted">
+        return <Fade duration={500} delay={0}  className="w-72 h-80 bg-white  dark:border-gray-600 dark:bg-zinc-900  rounded-lg border-2 border-gray-100  shadow-sm  duration-150 hover:shadow-lg">
+            <div className="h-full w-full flex flex-col justify-center items-center ">
+                <div className="h-2/3 w-full border-b-2 border-gray-300 border-dotted dark:border-gray-600">
                     <div className="h-5/6   flex justify-center rounded-t-lg items-center">
                         <img src={props.imgurl} className="h-full w-full object-cover rounded-t-lg"></img>
                         
@@ -58,10 +59,10 @@ export default function ProductCard(props:any){
                 <div className="h-1/3 w-full">
                     <div className="h-1/2 w-full font-semibold flex justify-around items-center">
                     <div className="flex w-2/3 justify-around items-center font-semibold">
-                        <div className="font-medium">
+                        <div className="font-medium  ">
                             Price:{props.price} 
                         </div>
-                        <div className="font-medium">
+                        <div className="font-medium ">
                             Stock: {props.stock}
                         </div>                       
                     </div>
@@ -69,7 +70,7 @@ export default function ProductCard(props:any){
                             value={ava === 0 ? '' : ava} 
                             onChange={(e)=>{
                                 setava(parseInt(e.target.value))
-                            }} className="w-1/3 mr-1 border-2 border-gray-200"></Input>
+                            }} className="w-1/3 mr-1  border-2 border-gray-200 dark:border-gray-600"></Input>
                         
                     </div>
                     <div className="flex justify-around items-center font-semibold">

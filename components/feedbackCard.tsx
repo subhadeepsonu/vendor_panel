@@ -4,7 +4,7 @@ import { Fade } from "react-awesome-reveal"
 
 export default function FeedbackCard(props:any){
     return <Fade duration={500}>
-    <div className="h-40 w-96  rounded-sm shadow-sm border-2 border-gray-100 flex flex-col justify-between items-center ">
+    <div className="h-40 w-96  rounded-sm shadow-sm border-2 border-gray-100 flex flex-col justify-between items-center dark:bg-zinc-900 dark:border-gray-600 ">
         <div className="flex h-1/3 justify-between w-full items-center px-4 font-bold">
             <div>
             {props.name}

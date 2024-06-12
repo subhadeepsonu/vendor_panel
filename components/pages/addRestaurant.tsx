@@ -39,10 +39,10 @@ export default function AddRestaurant(){
       }
     })
     return <div className="h-screen w-full flex justify-center items-start">
-        <div className="h-5/6 w-2/3 flex border-2 border-gray-300 rounded-md shadow-md ">
-        <div className="h-full w-2/3 border-r-2 border-gray-200 ">
+        <div className="h-5/6 w-2/3 flex border-2 border-gray-300 rounded-md shadow-md dark:bg-zinc-900 dark:border-gray-600 ">
+        <div className="h-full w-2/3 border-r-2 border-gray-200 dark:border-gray-600">
         <div className="h-5/6 w-full flex justify-center items-center">
-            {imgurl.length ? (<img className="border-2 border-gray-200 h-full w-full object-cover" src={imgurl} alt="image" ></img> ) : null}
+            {imgurl.length ? (<img className="border-2 border-gray-200  dark:border-gray-600 h-2/3 w-2/3 object-cover" src={imgurl} alt="image" ></img> ) : null}
         </div>
             <UploadButton endpoint="imageUploader"
             onClientUploadComplete={(res) => {

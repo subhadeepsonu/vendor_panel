@@ -21,9 +21,9 @@ export default function Ordercard(props: any) {
   })
   return (
     <Fade>
-      <div className="min-h-64 w-96 rounded-lg shadow-sm border-2 border-gray-100 flex justify-around items-center bg-white hover:shadow-lg duration-150">
+      <div className="min-h-64 w-96 rounded-lg shadow-sm border-2 border-gray-100 flex justify-around items-center bg-white hover:shadow-lg duration-150 dark:bg-zinc-900 dark:border-gray-600">
         <div className="h-full w-full py-2">
-          <div className="h-16 w-full flex justify-around items-start pl-2 border-b-2 border-gray-200 border-dashed">
+          <div className="h-16 w-full flex justify-around items-start pl-2 border-b-2 border-gray-200 border-dashed dark:border-gray-600">
             <div className="h-full w-1/2 flex items-center justify-center flex-col">
               <div className="font-semibold">Order No: {props.orderid}</div>
               <div className="font-semibold">Rs. {props.price}</div>
@@ -35,7 +35,7 @@ export default function Ordercard(props: any) {
           </div>
           <div className="w-full min-h-32 flex flex-col justify-around items-center">
             {props.orderproduct.map((orderproduct:any,index:number)=>{
-              return <div key={index} className="flex  w-full justify-between  px-10 items-center">
+              return <div key={index} className="flex  w-full justify-between  px-10 items-center ">
                 <div>
                 {orderproduct.product.name}
                 </div>
@@ -45,22 +45,22 @@ export default function Ordercard(props: any) {
               </div>
             })}
           </div>
-          <div className="flex justify-around items-center h-16 pl-2 font-bold border-t-2 border-gray-200 border-dashed">
+          <div className="flex justify-around items-center h-16 pl-2 font-bold border-t-2 border-gray-200 border-dashed dark:border-gray-600">
             <Button disabled={MutateUpdateOrder.isPending} variant={"delivered"} onClick={() => 
               {
-                setValue("DELIVERED")
+                setValue("Delivered")
                 MutateUpdateOrder.mutate()
               }
               }>
               Delivered
             </Button>
             <Button disabled={MutateUpdateOrder.isPending} variant={"ready"} onClick={() =>{ 
-              setValue("READY")
+              setValue("Ready")
               MutateUpdateOrder.mutate()}}>
               Ready
             </Button>
             <Button disabled={MutateUpdateOrder.isPending} variant={"outline"}onClick={()=>{
-              setValue("COOKING")
+              setValue("Cooking")
               MutateUpdateOrder.mutate()
             }}>Cooking</Button>
           </div>

@@ -1,8 +1,8 @@
 "use client"
 import Ordercard from "@/components/ordercard";
-import { useRecoilState, useRecoilValue} from "recoil"
+import { useRecoilState} from "recoil"
 import { Button } from "@/components/ui/button"
-import { categoryAtom, checkOrderAtom } from "@/store/atoms/checkatom"
+import { categoryAtom,  } from "@/store/atoms/checkatom"
 import {  useQuery } from "@tanstack/react-query";
 import GetAllOrders from "@/components/actions/getAllOrders";
 import { useSession } from "next-auth/react";

@@ -10,7 +10,7 @@ export default function Navbarcomp({ href, name }: NavbarcompProps) {
   const isPageActive = href === pathname;
   return (
     <Link href={href}>
-      <div className={`text-zinc-400 hover:text-zinc-950 font-semibold ${isPageActive ? 'text-gray-900 font-bold' : ''} transition-all`}>
+      <div className={`text-zinc-400 dark:text-zinc-200 dark:hover:text-white hover:text-zinc-950 font-semibold ${isPageActive ? 'text-gray-900 font-bold' : ''} transition-all`}>
         {name}
       </div>
     </Link>

@@ -125,7 +125,7 @@ model Brand {
 
 model Order {
   orderId       Int            @id @default(autoincrement())
-  orderStatus   String         @default("COOKING")
+  orderStatus   String         @default("Cooking")
   totalAmount   Int
   orderedAt     DateTime       @default(now())
   address       String
