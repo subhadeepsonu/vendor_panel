@@ -29,8 +29,8 @@ export default function Menu() {
   }
   else{
     return (
-        <div className="flex justify-center items-center w-full ">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 min-h-screen w-10/12">
+        <div className="flex justify-center items-center  ">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-5 min-h-screen ">
             { value.map((product: any) => (
                 <ProductCard key={product.id} imgurl={product.imgurl} name={product.name} price={product.price} description={product.description} stock={product.stock} id={product.id} />
               ))}

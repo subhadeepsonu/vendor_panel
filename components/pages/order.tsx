@@ -27,7 +27,7 @@ export default function Orders(){
     }
     else{
       return <div className=" flex flex-col justify-start items-center w-full min-h-screen ">
-      <div className="w-1/2 h-20 flex items-center justify-around">
+      <div className="lg:w-1/2 h-20 flex items-center justify-around">
     <Button onClick={()=>{
       setCategory("all")
     }}>All</Button>
@@ -41,16 +41,18 @@ export default function Orders(){
       setCategory("delivered")
     }}>Delivered</Button>
     </div>
-     <div className="grid grid-cols-3 gap-5 ">
+    <div className="flex justify-center items-center">  
+     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 ">
      {data.map((order:any, index:number) => (
             <Ordercard 
               key={index} 
               orderstatus={order.orderStatus} 
               orderid={order.orderId} 
-              price={order.totalamount} 
+              price={order.totalAmount} 
               orderproduct={order.orderProducts}
             />
           ))}
+    </div>
     </div>
     </div>
     }
