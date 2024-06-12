@@ -4,8 +4,8 @@ import HomePageOrders from "./homePageOrders";
 
 export default function Homedash(props: any) {
   return (
-    <div className="w-full flex flex-col bg-white min-h-screen dark:bg-zinc-800">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:gird-cols-3 xl:grid-cols-4 justify-around items-center  gap-10 px-16 my-16">
+    <div className="w-full flex flex-col items-center justify-center bg-white min-h-screen dark:bg-zinc-800">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-around items-center  gap-10  ">
         <div className="w-80 h-52 bg-white border-2 dark:bg-zinc-900 border-gray-200 dark:border-gray-700 rounded-xl shadow-sm  transition transform hover:shadow-lg">
           <div className="w-full h-1/2 rounded-t-lg flex flex-col justify-around items-center bg-gradient-to-r from-purple-400 to-red-500 text-white p-4">
             <div className="text-2xl font-bold">Total Orders</div>
@@ -55,14 +55,14 @@ export default function Homedash(props: any) {
         </div>
       </div>
 
-      <div className="flex justify-between items-center px-16 py-8">
-        <div className="text-3xl font-bold">Recent Orders</div>
+      <div className="flex justify-around w-full items-center  py-8">
+        <div className="lg:text-3xl text-xl font-bold">Recent Orders</div>
         <Link href="/orders" className="text-blue-600 hover:underline">
           View All
         </Link>
       </div>
 
-      <div className="flex justify-around items-center w-full px-16">
+      <div className="flex justify-center items-center w-full ">
         <HomePageOrders />
       </div>
     </div>

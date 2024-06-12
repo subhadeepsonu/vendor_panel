@@ -40,7 +40,7 @@ export default function Ordercard(props: any) {
   })
   return (
     <Fade>
-      <div className="min-h-72 w-96 rounded-lg shadow-sm border-2 border-gray-200 dark:shadow-gray-700 flex justify-around items-center bg-white hover:shadow-lg duration-150 dark:bg-zinc-900 dark:border-gray-600">
+      <div className="min-h-72 w-80 rounded-lg shadow-sm border-2 border-gray-200 dark:shadow-gray-700 flex justify-around items-center bg-white hover:shadow-lg duration-150 dark:bg-zinc-900 dark:border-gray-600">
         <div className="h-full w-full py-2">
           <div className="h-20 w-full flex justify-around items-start pl-2 border-b-2 border-gray-200 border-dashed dark:border-gray-600">
             <div className="h-full w-1/2 flex items-center justify-around flex-col">
