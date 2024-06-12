@@ -39,9 +39,9 @@ const AddProductMutation= useMutation({
   }
 })
   return (
-    <div className="h-screen w-full flex justify-center ">
-      <div className="h-5/6 w-1/2 flex justify-around items-center border-2 border-gray-300 rounded-md shadow-md dark:bg-zinc-900 dark:border-gray-600">
-        <div className="w-2/3 h-full p-5 border-r-2 border-gray-200 dark:border-gray-600">
+    <div className="h-screen w-full flex  justify-center ">
+      <div className="h-5/6 w-1/2 flex  justify-around items-center border-2 border-gray-300 rounded-md shadow-md dark:bg-zinc-900 dark:border-gray-600">
+        <div className="w-1/2 h-full p-5 border-r-2 border-gray-200 dark:border-gray-600">
           <div className="w-full h-5/6 flex justify-center items-center m-2">
             {imgurl.length ? (
               <img className="border-2 border-gray-200 dark:border-gray-600 h-full w-full object-cover" src={imgurl} alt="image" ></img>
@@ -59,7 +59,7 @@ const AddProductMutation= useMutation({
           />
           {!imgurl.length ? (<p className="flex justify-center items-center text-red-400"> Please upload image first</p>  ) : null}
         </div>
-        <div className="w-1/3 h-full p-5 flex justify-around items-center ">
+        <div className="w-1/2 h-full p-5 flex justify-around items-center ">
         
           <FormProvider {...formMethods} >
             <form  onSubmit={formMethods.handleSubmit(()=>{

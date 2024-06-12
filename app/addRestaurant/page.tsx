@@ -8,7 +8,7 @@ export default async function Home() {
     redirect('/api/auth/signin')
   }
   if(session.user.brandId){
-    return <div className="h-screen w-full flex justify-center items-center text-2xl font-bold">
+    return <div className="h-screen w-full flex justify-center items-center lg:text-2xl font-bold">
         looks like u  already have a restaurant 😁
     </div>
   }

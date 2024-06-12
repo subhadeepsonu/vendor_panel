@@ -3,6 +3,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import SignOutButton from "./signoutButton";
 import { auth } from "@/auth";
 import { ModeToggle } from "./themeChangeButton";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import { HamburgerMenuIcon } from "@radix-ui/react-icons";
+import { redirect } from "next/navigation";
+import Link from "next/link";
 export default async function Navbar(){
     const session = await  auth()
     if(session){
@@ -13,7 +17,31 @@ export default async function Navbar(){
             Cheez E Choice
         </div>
         </div>
-        <div className="w-1/2 flex justify-around items-center">
+        <div className="lg:hidden p-5">
+        <DropdownMenu >
+            <DropdownMenuTrigger>
+                <HamburgerMenuIcon></HamburgerMenuIcon>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+                <DropdownMenuItem >
+                    <Link href={'/'}>Home</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem >
+                <Link href={'/menu'}>Menu</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem >
+                <Link href={'/orders'}>Orders</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem >
+                <Link href={'/feedbacks'}>Feedbacks</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem >
+                    <SignOutButton>S</SignOutButton>
+                </DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
+        </div>
+        <div className="w-1/2 lg:flex hidden justify-around items-center">
             <ModeToggle></ModeToggle>
             <Navbarcomp name="Home" href="/" ></Navbarcomp>
             <Navbarcomp name="Menu" href="/menu" ></Navbarcomp>

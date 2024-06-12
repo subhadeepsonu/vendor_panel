@@ -11,7 +11,7 @@ export default async function Home() {
   else{
     if(!session.user.brandId){
       return <div className="h-screen flex justify-center flex-col items-center">
-        <p className="m-5 text-xl">looks like u dont have restaurant to ur name 🥺 login with currect mail id</p>
+        <p className="m-5 text-xl ">looks like u dont have restaurant to ur name 🥺 login with currect mail id</p>
         <AddRestaurantButton></AddRestaurantButton>
       </div>
     }

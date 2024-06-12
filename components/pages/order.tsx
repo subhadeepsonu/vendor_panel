@@ -23,7 +23,7 @@ export default function Orders(){
   }
     if(data){
     if(data.length===0){
-      return <div className="h-screen flex justify-center items-center text-2xl font-bold">You currently have no orders 🥺</div>
+      return <div className="h-screen flex justify-center items-center lg:text-2xl font-bold">You currently have no orders 🥺</div>
     }
     else{
       return <div className=" flex flex-col justify-start items-center w-full min-h-screen ">
