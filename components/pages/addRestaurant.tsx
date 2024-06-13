@@ -14,9 +14,7 @@ import { redirect, useRouter } from "next/navigation"
 import { AddRestaurantt } from "../actions/addRestaurant"
 import {  useMutation, useQueryClient } from "@tanstack/react-query"
 import { useRecoilValue } from "recoil"
-import { checkProductAtom } from "@/store/atoms/checkatom"
 export default function AddRestaurant(){
-  const check = useRecoilValue(checkProductAtom)
     type AddRestaurantFormValues = z.infer<typeof AddRestaurantSchema>;
     const [imgurl,setimgurl]= useState("")
     const router = useRouter()
