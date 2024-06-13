@@ -1,9 +1,7 @@
-import axios from "axios";
 import { atom, selector } from "recoil";
-import { any } from "zod";
 export const category = atom({
     key:"categoryAtom",
-    default:""
+    default:"all"
 })
 export  const filterOrderListAtom = atom({
     key:"filterOrderListAtom",
