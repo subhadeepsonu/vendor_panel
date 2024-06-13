@@ -1,18 +1,20 @@
 "use client"
 import Ordercard from "@/components/ordercard";
-import { useRecoilState, useRecoilValue} from "recoil"
+import { useRecoilState, useRecoilValue, useSetRecoilState} from "recoil"
 import { Button } from "@/components/ui/button"
 import {  useQuery } from "@tanstack/react-query";
 import GetAllOrders from "@/components/actions/getAllOrders";
 import { useSession } from "next-auth/react";
 import Loading from "@/app/orders/loading";
-import { category, filterOrderListAtom, orderListAtom } from "@/store/atoms/checkatom";
+import { category, filterOrderListAtom, orderIdAtom, orderListAtom } from "@/store/atoms/checkatom";
 import { any } from "zod";
+import { Input } from "../ui/input";
 export default function Orders(){
   const session = useSession()
-  const [Category,setCategory] = useRecoilState(category)
-  const [orderList,setOrderList] = useRecoilState(orderListAtom)
+  const setCategory = useSetRecoilState(category)
+  const setOrderList = useSetRecoilState(orderListAtom)
   const FilterList = useRecoilValue(filterOrderListAtom)
+  const setOrderId = useSetRecoilState(orderIdAtom)
   const {data,error,isLoading} :any = useQuery({
     queryKey:["order"],
     queryFn:()=>GetAllOrders(session.data?.user.brandId!)
@@ -41,6 +43,10 @@ export default function Orders(){
     <Button onClick={()=>{
       setCategory("Delivered")
     }}>Delivered</Button>
+    <Input onChange={(e)=>{
+      setOrderId(e.target.value)
+    }} type="number" placeholder="OrderId" className="w-20 dark:border-2 dark:border-gray-600">
+    </Input>
     </div>
       <div className="h-screen flex justify-center items-center lg:text-2xl font-bold">You currently have no orders 🥺</div>
       </div>
@@ -48,18 +54,22 @@ export default function Orders(){
     else{
       return <div className=" flex flex-col justify-start items-center w-full min-h-screen ">
       <div className="lg:w-1/2 w-full h-20 flex items-center justify-around">
-    <Button onClick={()=>{
+    <Button size={"sm"} onClick={()=>{
       setCategory("all")
     }}>All</Button>
-    <Button onClick={()=>{
+    <Button size={"sm"} onClick={()=>{
       setCategory("Cooking")
     }}>Cooking</Button>
-    <Button onClick={()=>{
+    <Button size={"sm"} onClick={()=>{
       setCategory("Ready")
     }}>Ready</Button>
-    <Button onClick={()=>{
+    <Button size={"sm"} onClick={()=>{
       setCategory("Delivered")
     }}>Delivered</Button>
+    <Input onChange={(e)=>{
+      setOrderId(e.target.value)
+    }} type="number" placeholder="OrderId" className="w-20 dark:border-2 dark:border-gray-600">
+    </Input>
     </div>
     <div className="flex justify-center items-center">  
      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 ">
