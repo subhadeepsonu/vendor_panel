@@ -6,10 +6,14 @@ import Loading from "@/app/menu/loading";
 import { Button } from "../ui/button";
 import Link from "next/link";
 export default function Menu() {
+  
   const {data: value,error,isLoading} = useQuery({
     queryKey:["menu"],
-    queryFn: ()=>getProductBrandId(),
-    staleTime:2000
+    queryFn: ()=>{
+      return getProductBrandId()
+
+    },
+    staleTime:2000,
   })
   console.log("usequery",value)
   if(isLoading){
