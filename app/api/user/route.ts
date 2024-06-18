@@ -14,13 +14,13 @@ export  async function GET(){
             message:"something went wrong"
         })
     }
-
 }
 export  async function POST(req:NextRequest){
     try {
         const body = await req.json()
         const responce = await  prisma.user.create({
             data:{
+                id:body.id,
                 email:body.email,
                 name:body.name,
                 image:body.image

@@ -19,7 +19,7 @@ export async function GET(req:NextRequest){
         else if(userId){
             const responce = await prisma.feedback.findMany({
                 where:{
-                    userId:parseInt(userId)
+                    userId:userId
                 }
             })
             return NextResponse.json({

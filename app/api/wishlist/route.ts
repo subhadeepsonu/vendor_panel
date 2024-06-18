@@ -5,7 +5,14 @@ export async function GET(req:NextRequest){
         const userId = await req.nextUrl.searchParams.get('id')
         const responce = await prisma.wishlist.findMany({
             where:{
-                userId:parseInt(userId!)
+                userId:userId!
+            },
+            include:{
+                products:{
+                    include:{
+                        
+                    }
+                }
             }
         })
         return NextResponse.json({
@@ -24,10 +31,11 @@ export async function POST(req:NextRequest){
         const data = await req.json()
         const check = await prisma.wishlist.findMany({
             where:{
-                productId:data.productid
+                productId:data.productid,
+                userId:data.userid
             }
         })
-        if(check){
+        if(check.length!=0){
             return NextResponse.json({
                 status:201,
                 message:"already exists"
