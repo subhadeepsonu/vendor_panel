@@ -41,7 +41,7 @@ const {data: value,error,isLoading} :any = useQuery({
   else{
     return (
         <div className="flex flex-col justify-center items-center  ">
-          <Input onChange={(e)=>{
+          <Input  onChange={(e)=>{
             console.log(e.target.value)
             setProductNameAtom(e.target.value)
           }} placeholder="Product Name" className=" w-1/2 lg:w-1/4 m-5 dark:border-2 dark:border-gray-600"></Input>

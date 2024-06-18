@@ -1,10 +1,13 @@
-import NextAuth from "next-auth"
+import NextAuth, { CredentialsSignin } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import prisma from "./db";
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter:PrismaAdapter(prisma),
   secret: process.env.AUTH_SECRET,
+  session:{
+    strategy:"database"
+  },
   providers: [
     GoogleProvider({
       clientId: process.env.Google_client_Id,
@@ -18,32 +21,34 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
       }
     },
-  )
+  ),
+  
   ],
   callbacks: {
-    async signIn({ user }) {
+    async signIn({ user ,credentials,account}) {
+      
       const response = await prisma.user.findUnique({
         where:{
           email:user.email!
         }
       })
-      user.role=response?.role
+      user.role=response?.role 
       user.brandId=response?.brandId
       
     return true
     },
     jwt({token,user}){
-      token.role = user.role
-      token.brandId = user.brandId
+      token.role = user.role ?? null
+      token.brandId = user.brandId ?? null
         return token
     },
     session({ session,user}) {
-      session.user.role= user.role
-      session.user.brandId = user.brandId
+      session.user.role= user.role ?? null
+      session.user.brandId = user.brandId ?? null
       return session
     }
   },
   pages:{
-    signIn:"/login"
+    
   }
 });
