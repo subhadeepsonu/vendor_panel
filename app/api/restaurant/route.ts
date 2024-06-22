@@ -2,7 +2,7 @@ import prisma from '@/db'
 import { NextRequest, NextResponse } from 'next/server'
 export async function GET(req:NextRequest){
     try {
-        const data = await req.nextUrl.searchParams.get('name')
+        const brandId = await req.nextUrl.searchParams.get('brandId')
         const uni = await req.nextUrl.searchParams.get('uniname')
         if(uni){
             const responce = await prisma.brand.findMany({
@@ -15,15 +15,15 @@ export async function GET(req:NextRequest){
                 data: responce
             })
         }
-        if(data){
-            const response = await prisma.brand.findMany({
+        if(brandId){
+            const response = await prisma.brand.findFirst({
                 where:{
-                    
+                    id = parseInt(brandId)
                 }
             })
             return NextResponse.json({
                 status:200,
-                ha:data,
+                ha:brandId,
                 data:response
             })
         }
