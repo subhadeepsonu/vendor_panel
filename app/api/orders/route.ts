@@ -1,106 +1,119 @@
 import prisma from '@/db'
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
-export async function GET(req:NextRequest){
+export async function GET(req: NextRequest) {
     try {
-        const status:any = await req.nextUrl.searchParams.get('status')
+        const status: any = await req.nextUrl.searchParams.get('status')
         const orderId = await req.nextUrl.searchParams.get('id')
         const brandId = await req.nextUrl.searchParams.get('brandId')
-        if(brandId){
+        const userId = await req.nextUrl.searchParams.get('userId')
+        if (userId) {
             const response = await prisma.order.findMany({
-                where:{
-                    brandId:parseInt(brandId)
+                where: {
+                    userId: userId
+                }
+            })
+            return NextResponse.json({
+                status: 200,
+                userId: userId,
+                data: response
+            })
+        }
+        if (brandId) {
+            const response = await prisma.order.findMany({
+                where: {
+                    brandId: parseInt(brandId)
                 },
-                include:{
-                    orderProducts:{
-                        include:{
-                            product:{
-                                
+                include: {
+                    orderProducts: {
+                        include: {
+                            product: {
+
                             }
                         }
                     }
                 }
             })
             return NextResponse.json({
-                status:200,
-                h:brandId,
-                data:response
+                status: 200,
+                h: brandId,
+                data: response
             })
         }
-        if(orderId){
-            const responce =  await prisma.order.findMany({
-                where:{
-                    orderId:parseInt(orderId)
+        if (orderId) {
+            const responce = await prisma.order.findMany({
+                where: {
+                    orderId: parseInt(orderId)
                 },
-                include:{
-                    orderProducts:{
-                        include:{
-                            product:{
-                                
+                include: {
+                    orderProducts: {
+                        include: {
+                            product: {
+
                             }
                         }
                     }
                 }
             },
-            
-        )
+
+            )
             return NextResponse.json({
-                status:200,
-                data:responce,
-                
+                status: 200,
+                data: responce,
+
             })
 
         }
-        else if(status){
-                const responce =  await prisma.order.findMany({
-                    where:{
-                        orderStatus:status!
-                    },
-                    include:{
-                        orderProducts:{
-                            include:{
-                                product:{
-                                    
-                                }
+        else if (status) {
+            const responce = await prisma.order.findMany({
+                where: {
+                    orderStatus: status!
+                },
+                include: {
+                    orderProducts: {
+                        include: {
+                            product: {
+
                             }
                         }
                     }
-                },
+                }
+            },
             )
             return NextResponse.json({
-                status:200,
-                data:responce
+                status: 200,
+                data: responce
             })
-            
+
         }
-        else{
-        const responce =  await prisma.order.findMany({
-            orderBy:[
-                {
-                    orderId:'desc'
-                }
-            ],
-            include:{
-                orderProducts:{
-                    include:{
-                        product:{
-                            
+        else {
+            const responce = await prisma.order.findMany({
+                orderBy: [
+                    {
+                        orderId: 'desc'
+                    }
+                ],
+                include: {
+                    orderProducts: {
+                        include: {
+                            product: {
+
+                            }
                         }
                     }
                 }
-            }
-        },
-        
-    )
-        return NextResponse.json({
-            status:200,
-            data:responce
-        })
-    }
+            },
+
+            )
+            return NextResponse.json({
+                status: 200,
+                data: responce
+            })
+        }
     } catch (error) {
         return NextResponse.json({
-            status:404,
-            message:"something went wrong"
+            status: 404,
+            message: "something went wrong"
         })
     }
 }
@@ -157,25 +170,25 @@ export async function POST(req: NextRequest) {
         });
     }
 }
-export async function PATCH(req:NextRequest){
+export async function PATCH(req: NextRequest) {
     try {
         const data = await req.json()
         const responce = await prisma.order.update({
-            where:{
-                orderId:data.orderid
+            where: {
+                orderId: data.orderid
             },
-            data:{
-                orderStatus:data.status
+            data: {
+                orderStatus: data.status
             }
         })
         return NextResponse.json({
-            status:200,
-            data:responce
+            status: 200,
+            data: responce
         })
     } catch (error) {
         return NextResponse.json({
-            status:404,
-            message:error
+            status: 404,
+            message: error
         })
     }
 }
