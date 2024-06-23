@@ -18,7 +18,7 @@ export async function GET(req:NextRequest){
         if(brandId){
             const response = await prisma.brand.findFirst({
                 where:{
-                    id = parseInt(brandId)
+                    id: parseInt(brandId)
                 }
             })
             return NextResponse.json({
