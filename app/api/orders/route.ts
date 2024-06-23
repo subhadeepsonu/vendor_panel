@@ -28,7 +28,7 @@ export async function GET(req:NextRequest){
             })
         }
         if(orderId){
-            const responce =  await prisma.order.findMany({
+            const responce =  await prisma.order.findUnique({
                 where:{
                     orderId:parseInt(orderId)
                 },
