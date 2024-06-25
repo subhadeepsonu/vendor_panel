@@ -44,17 +44,30 @@ export  async function GET(req:NextRequest){
             rating:true
         },
         orderBy:{
-            _avg:{
-                rating:'desc'
-            }
+            productId:"desc"
         },
     })
+    const resp = await prisma.product.findMany({
+        where:{
+            ratings:{
+                some:{
+
+                }
+            }
+        },
+        orderBy:{
+            id:"desc"
+        }
+    })
+    const withrating=resp.map((prod:any,index:number)=>({
+        ...prod,
+        rating:response[index]._avg
+    }))
+    const sorted = withrating.sort((a,b)=> b.rating.rating-a.rating.rating)
     return NextResponse.json({
         status:200,
-        data:response
+        data:sorted
     })
-    
-
     } catch (error) {
         return NextResponse.json({
             status:404,

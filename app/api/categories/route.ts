@@ -75,6 +75,5 @@ export function GET(){
             status:404,
             message:error
         })
-    }
-    
+    }   
 }

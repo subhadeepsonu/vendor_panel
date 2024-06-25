@@ -1,5 +1,4 @@
 import prisma from '@/db'
-import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 export async function GET(req: NextRequest) {
     try {
@@ -11,6 +10,15 @@ export async function GET(req: NextRequest) {
             const response = await prisma.order.findMany({
                 where: {
                     userId: userId
+                },
+                include:{
+                    orderProducts:{
+                        include:{
+                            product:{
+
+                            }
+                        }
+                    }
                 }
             })
             return NextResponse.json({
@@ -64,7 +72,7 @@ export async function GET(req: NextRequest) {
             })
 
         }
-        else if (status) {
+        if (status) {
             const responce = await prisma.order.findMany({
                 where: {
                     orderStatus: status!
@@ -86,7 +94,7 @@ export async function GET(req: NextRequest) {
             })
 
         }
-        else {
+        
             const responce = await prisma.order.findMany({
                 orderBy: [
                     {
@@ -109,11 +117,11 @@ export async function GET(req: NextRequest) {
                 status: 200,
                 data: responce
             })
-        }
+        
     } catch (error) {
         return NextResponse.json({
             status: 404,
-            message: "something went wrong"
+            message: `${error}`
         })
     }
 }
