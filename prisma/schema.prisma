@@ -16,6 +16,7 @@ model User {
   image              String?
   phoneno            String?             @unique
   role               String?             @default("user")
+  address            String?
   brand              Brand?              @relation(fields: [brandId], references: [id])
   brandId            Int?                @unique
   orders             Order[]
