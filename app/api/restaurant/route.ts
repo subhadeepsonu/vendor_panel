@@ -48,7 +48,7 @@ export async function POST(req:NextRequest){
         const responce = await prisma.brand.create({
             data:{
                 name:data.name,
-                
+               
             }
         });
         console.log(responce)

@@ -150,6 +150,7 @@ export async function POST(req: NextRequest) {
                     totalAmount: data.totalamount,
                     userId: data.userId,
                     brandId: data.brandId,
+                    type:data.type,
                     orderProducts: {
                         create: data.products.map((item: { productId: number, quantity: number }) => ({
                             quantity: item.quantity,
