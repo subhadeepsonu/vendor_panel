@@ -46,8 +46,9 @@ export  async function GET(req:NextRequest){
         orderBy:{
             _avg:{
                 rating:'desc'
-            }
+            },
         },
+ 
     })
     return NextResponse.json({
         status:200,
