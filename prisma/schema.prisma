@@ -16,6 +16,7 @@ model User {
   image              String?
   phoneno            String?             @unique
   role               String?             @default("user")
+  address            String?
   brand              Brand?              @relation(fields: [brandId], references: [id])
   brandId            Int?                @unique
   orders             Order[]
@@ -111,16 +112,23 @@ enum ProductType {
 }
 
 model Brand {
-  id         Int        @id @default(autoincrement())
-  name       String     @unique
-  isOpen     Boolean    @default(false)
-  imgurl     String?
-  isFeatured Boolean    @default(false)
-  address    String?    @default("")
-  products   Product[]
-  orders     Order[]
-  feedbacks  Feedback[]
-  User       User?
+  id            Int        @id @default(autoincrement())
+  name          String     @unique
+  isOpen        Boolean    @default(false)
+  imgurl        String?
+  isFeatured    Boolean    @default(false)
+  address       String?    @default("")
+  parcelCharge  Int        @default(5)
+  parcelPerItem Boolean    @default(false)
+  products      Product[]
+  orders        Order[]
+  feedbacks     Feedback[]
+  User          User?
+}
+
+enum orderType {
+  DineIn
+  TakeAway
 }
 
 model Order {
@@ -130,6 +138,7 @@ model Order {
   orderedAt     DateTime       @default(now())
   address       String
   feedbackId    Int?           @unique
+  type          orderType      @default(DineIn)
   feedback      Feedback[]
   user          User           @relation(fields: [userId], references: [id])
   userId        String
