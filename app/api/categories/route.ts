@@ -7,65 +7,24 @@ export function GET(){
             data:[
                 {
                     id:1,
-                    category:"MilkShakes",
-                    imgurl:"https://sai.madhuram.xyz/wp-content/uploads/2024/06/milk-shake.png"
+                    category:"BIRYANI",
+                    imgurl:"https://sai.madhuram.xyz/wp-content/uploads/2024/06/Biryani-1.png"
                 },
                 {
                     id:2,
-                    category:"Chicken",
-                    imgurl:"https://sai.madhuram.xyz/wp-content/uploads/2024/06/Chicken-starter_-No-bg-min-1-1.png"
+                    category:"CURRY",
+                    imgurl:"https://sai.madhuram.xyz/wp-content/uploads/2024/06/curry.png"
                 },
                 {
                     id:3,
-                    category:"Ice Creams",
-                   imgurl:"https://sai.madhuram.xyz/wp-content/uploads/2024/06/ice-cream.png"
+                    category:"BREADS",
+                   imgurl:"https://sai.madhuram.xyz/wp-content/uploads/2024/06/sandwich.png"
                 },
                 {
                     id:4,
-                    category:"Fries",
-                    imgurl:"https://sai.madhuram.xyz/wp-content/uploads/2024/06/pasta.png"
+                    category:"CHINESE",
+                    imgurl:"https://sai.madhuram.xyz/wp-content/uploads/2024/06/chienese.png"
                 },
-                // {
-                //     id:5,
-                //     category:"PaniPuri",
-                //     imgurl:"https://images.herzindagi.info/image/2020/Oct/chole-bhature-calories-one-plate.jpg"
-                // },
-                {
-                    id:6,
-                    category:"Tiffins",
-                    imgurl:"https://sai.madhuram.xyz/wp-content/uploads/2024/06/breakfast.png"
-                },
-                // {
-                //     id:7,
-                //     category:"IceCream",
-                //     imgurl:"https://images.herzindagi.info/image/2020/Oct/chole-bhature-calories-one-plate.jpg"
-                // },
-                // {
-                //     id:8,
-                //     category:"MilkShakes",
-                //     imgurl:"https://images.herzindagi.info/image/2020/Oct/chole-bhature-calories-one-plate.jpg"
-                // },
-                // {
-                //     id:9,
-                //     category:"Pasta",
-                //     imgurl:"https://images.herzindagi.info/image/2020/Oct/chole-bhature-calories-one-plate.jpg"
-                // },
-                // {
-                //     id:10,
-                //     category:"Hot Beverages",
-                //     imgurl:"https://images.herzindagi.info/image/2020/Oct/chole-bhature-calories-one-plate.jpg"
-                // },
-                // {
-                //     id:11,
-                //     category:"Momo's",
-                //     imgurl:"https://images.herzindagi.info/image/2020/Oct/chole-bhature-calories-one-plate.jpg"
-                // },
-                // {
-                //     id:12,
-                //     category:"Sandwiche's",
-                //     imgurl:"https://sai.madhuram.xyz/wp-content/uploads/2024/06/chicken-sandwich.png"
-                // },
-                // },
             ]
                 
             
