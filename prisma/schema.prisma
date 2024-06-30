@@ -73,6 +73,7 @@ model Product {
   brandId            Int
   nonVeg             Boolean
   description        String?
+  takeaway           Boolean             @default(true)
   category           Category
   productType        ProductType?
   brand              Brand               @relation(fields: [brandId], references: [id])

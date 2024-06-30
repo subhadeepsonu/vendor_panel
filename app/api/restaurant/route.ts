@@ -7,7 +7,7 @@ export async function GET(req:NextRequest){
         if(uni){
             const responce = await prisma.brand.findMany({
                 where:{
-                    
+                    address:uni
                 }
             })
             return NextResponse.json({

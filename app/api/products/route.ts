@@ -18,7 +18,7 @@ import { NextRequest, NextResponse } from 'next/server'
                     },
                     where:{
                         productId:parseInt(productId!)
-                    }
+                    },
                 })
                 return NextResponse.json({
                     status:200,
@@ -44,6 +44,10 @@ import { NextRequest, NextResponse } from 'next/server'
                     where:{
                         brandId:parseInt(BrandId),
                         category:Category
+                    }, include:{
+                        brand:{
+                            
+                        }
                     }
                 }) 
                 return NextResponse.json({
@@ -68,6 +72,10 @@ import { NextRequest, NextResponse } from 'next/server'
                     ],
                     where:{
                         brandId:parseInt(BrandId)
+                    }, include:{
+                        brand:{
+                            
+                        }
                     }
                 })
                 return NextResponse.json({
@@ -96,6 +104,10 @@ import { NextRequest, NextResponse } from 'next/server'
                     ],
                     where:{
                         category:Category
+                    }, include:{
+                        brand:{
+                            
+                        }
                     }
                 })
                 return NextResponse.json({
@@ -118,6 +130,11 @@ import { NextRequest, NextResponse } from 'next/server'
                         id:'asc'
                     }
                 ],
+                include:{
+                    brand:{
+
+                    }
+                }
             })
             return NextResponse.json({
                 status:200,
