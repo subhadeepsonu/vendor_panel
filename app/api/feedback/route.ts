@@ -74,5 +74,4 @@ export async function POST(req:NextRequest){
             message:"something went wrong"
         })
     }
-    
 }
