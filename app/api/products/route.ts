@@ -104,8 +104,11 @@ import { NextRequest, NextResponse } from 'next/server'
                     ],
                     where:{
                         category:Category,
+                        
                         brand:{
-                            isOpen:true
+                            isOpen:true,
+                            isFeatured:true,
+
                         }
                     }, include:{
                         brand:{
