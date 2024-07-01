@@ -103,7 +103,10 @@ import { NextRequest, NextResponse } from 'next/server'
                         }
                     ],
                     where:{
-                        category:Category
+                        category:Category,
+                        brand:{
+                            isOpen:true
+                        }
                     }, include:{
                         brand:{
                             
