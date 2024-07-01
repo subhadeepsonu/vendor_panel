@@ -1,6 +1,6 @@
 import prisma from '@/db'
 import { NextRequest, NextResponse } from 'next/server'
-export async function GET(req: NextRequest) {
+export async function GET(req: NextRequest){
     try {
         const status: any = await req.nextUrl.searchParams.get('status')
         const orderId = await req.nextUrl.searchParams.get('id')
@@ -152,16 +152,17 @@ export async function POST(req: NextRequest) {
                     brandId: data.brandId,
                     type:data.type,
                     orderProducts: {
-                        create: data.products.map((item: { productId: number, quantity: number }) => ({
+                        create: data.products.map((item: { takeaway:boolean, productId: number, quantity: number }) => ({
                             quantity: item.quantity,
+                            takeaway:item.takeaway,
                             product: {
                                 connect: { id: item.productId }
-                            }
+                            },
+
                         }))
                     }
                 }
             });
-
             return NextResponse.json({
                 status: 200,
                 data: response

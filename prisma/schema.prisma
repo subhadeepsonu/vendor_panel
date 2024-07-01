@@ -96,6 +96,7 @@ model OrderProduct {
   orderId   Int
   productId Int
   quantity  Int
+  takeaway  Boolean @default(true)
   product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
   order     Order   @relation(fields: [orderId], references: [orderId])
 }
